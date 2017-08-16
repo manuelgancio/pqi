@@ -3,6 +3,7 @@
 ?>
 
 <html>
+
 <body>
 <div class="row">
     <div class="col-md-3">
@@ -11,13 +12,16 @@
     <div class="col-md-6">
     <img src="logo.png" style="width:100%;height:200px;">
     </div>
-    <div class="col-md-3">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalLogin" style="margin-top:80px;" align="left">
-            <span class="glyphicon glyphicon-log-in"> Ingresar
+            <span class="glyphicon glyphicon-log-in"> Ingresar</span>
         </button>
     </div>
-
 </div>
+
+<!-- BARRA DE NAVEGACION -->
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -35,5 +39,26 @@
   </div>
 </nav>
 
+<!-- MODAL REGISTRO -->
+<div id="modalLogin" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Ingresar</h4>
+      </div>
+      <div class="modal-body">
+        <p>form log in</p>
+      </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>-->
+    </div>
+
+  </div>
 </div>
+
+
 
