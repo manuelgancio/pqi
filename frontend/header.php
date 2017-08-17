@@ -19,7 +19,7 @@
         </button>
     </div>
 </div>
-<!-- asdasd-->
+<!-- hola-->
 <!-- BARRA DE NAVEGACION -->
 
 <nav class="navbar navbar-inverse">
