@@ -19,7 +19,7 @@
         </button>
     </div>
 </div>
-<!-- hola-->
+<!-- hola hola hola-->
 <!-- BARRA DE NAVEGACION -->
 
 <nav class="navbar navbar-inverse">
