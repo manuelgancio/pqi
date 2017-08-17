@@ -50,8 +50,14 @@
         <h4 class="modal-title">Ingresar</h4>
       </div>
       <div class="modal-body">
-        <p>form log in</p>
-      </div>
+        <form action="" method="POST" id="formLogin" role="form">
+          <div class="form-group">
+            <label for="correo">Correo</label>
+              <input type="text" id="correo" name="correo" required class="form-control">
+          </div>
+
+        </form>
+      </div><!--modal body-->
       <!--<div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>-->
