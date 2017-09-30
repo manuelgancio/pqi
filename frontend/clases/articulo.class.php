@@ -1,0 +1,92 @@
+<?php 
+
+class usuario{
+    private $id;
+    private $titulo;
+    private $noticia;
+    private $seccion;
+    private $fecha;
+    private $autor;
+    private $destacado; //boolean
+    private $comentario;//string de ids de comentario
+
+function __construct($id='',$titulo='',$noticia='',$seccion='',$fecha='',$autor='',$destacado='',$comentario='')
+{
+    $this->id=$id;
+    $this->titulo=$titulo;
+    $this->noticia=$noticia;
+    $this->seccion=$seccion;
+    $this->fecha=$fecha;
+    $this->autor=$autor;
+    $this->destacado=$destacado;
+
+}
+//SET
+public function setId($id){
+    $this->id=$id;
+}
+public function setTitulo($titulo){
+    $this->titulo=$titulo;
+}
+public function setNoticia($noticia){
+    $this->setNoticia=$noticia;
+}
+public function setSeccion($seccion){
+    $this->setSeccion=$seccion;
+}
+public function setFecha($fecha){
+    $this->fecha=$fecha;
+}
+public function setAutor($autor){
+    $this->autor($autor);
+}
+public function setDestacado($destacado){
+    $this->destacado($destacado);
+}
+public function setComentario($comentario){
+    $this->comentatio($comentario);
+}
+//GET
+public function getId(){
+    return $this->id;
+}
+public function getTitulo(){
+    return $this->titulo;
+}
+public function getNoticia(){
+    return $this->noticia;
+}
+public function getSeccion(){
+    return $this->seccion;
+}
+public function getFecha(){
+    return $this->fecha;
+}
+public function getAutor(){
+    return $this->autor;
+}
+public function getDestacado(){
+    return $this->destacado;
+}
+public function getComentario(){
+    return $this->comentario;
+}
+//OTROS METODOS
+public function comentarArt(){
+
+}
+public function compartirArt(){
+
+}
+public function megustaArt(){
+
+}
+public function busquedaArt(){
+
+}
+public function filtrarXfecha(){
+
+}
+
+
+}
