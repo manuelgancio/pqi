@@ -92,15 +92,76 @@ public function altaSus(){
     $result->bind_param('ii',$id_pago,$id_sus);
     $result->execute();
     
+    //Borro en la tabla gratis en caso que el usuario este registrado ahi
+
+    $sql="DELETE FROM `gratis` WHERE `id_cl`=?";
+    $result = $this->_db->prepare($sql);
+    $result->bind_param('i',$id_usu);
+    $result->execute();
+
     
     return(true);
+}
+public function noSuscribe(){
+//Cuando el usuario se registra pero no se suscribe guardo su id en la tabla gratis
+    $id_usu = $this->getIdUsu();
 
-
+    $sql="INSERT INTO `gratis`(`id_cl`) VALUES (?)";
+    $result = $this->_db->prepare($sql);
+    $result->bind_param('i',$id_usu);
+    $result->execute();
 
 }
 public function bajaSus(){
+//Borra de la tabla suscribe, recibe y pago - agrega a la tabla gratis
 
+    $id_cl= $this->getIdUsu();
+
+    //Averiguo id tabla pago
+    $sql="SELECT `id_cp` FROM `pago` WHERE `id_cl`=?";
+    $result = $this->_db->prepare($sql);
+    $result->bind_param('i',$id_cl);
+    $result->execute();
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
     
+    $id_pago = $row['id_cp'];
+    
+    //Averiguo id tabla suscripcion 
+    $sql="SELECT `id_sus` FROM `recibe` WHERE `id_cp` =?";
+    $result = $this->_db->prepare($sql);
+    $result->bind_param('i',$id_pago);
+    $result->execute();
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+
+    $id_sus = $row['id_sus'];
+       
+    //Borro linea de la tabla recibe
+    $sql="DELETE FROM `recibe` WHERE `id_cp`=?";
+    $result = $this->_db->prepare($sql);
+    $result->bind_param('i',$id_pago);
+    $result->execute();
+
+    //Borro linea de tabla suscripcion
+    $sql="DELETE FROM `suscripcion` WHERE `id_sus`=?";
+    $result = $this->_db->prepare($sql);
+    $result->bind_param('i',$id_sus);
+    $result->execute();
+
+    //Borro linea de la tabla pago
+    $sql="DELETE FROM `pago` WHERE `id_cp`=?";
+    $result = $this->_db->prepare($sql);
+    $result->bind_param('i',$id_cp);
+    $result->execute();
+
+    // Guardo en tabla gratis
+    $sql="INSERT INTO `gratis`(`id_cl`) VALUES (?)";
+    $result = $this->_db->prepare($sql);
+    $result->bind_param('i',$id_cl);
+    $result->execute();
+
+    return (true);
 }
 
 }    

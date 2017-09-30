@@ -13,20 +13,14 @@
 	height: 200px;
 	width: 260px;
 }
+.articulo{
+    margin-top:40px;
+}
 .oculto{
     display:none;
 }
-.mostrar{
+#suscripto{
     display: block;
-    background-color: red;
-}
-.notLogged{
-    display:none;
-    background-color: red;
-}
-.logged{
-    display: block;
-    background-color: blue;
 }
 /** PAGINA NOTICA **/
 .tituloNoti{
@@ -34,7 +28,7 @@
     text-align: left;
     font-weight: bolder;
     font-size: 42px;
-    margin-left: 10%;
+    margin-left: 5%;
     margin-right: 10%;
 }
 .cateNoti{
@@ -42,15 +36,16 @@
     text-align: left;
     font-weight: bold;
     font-size: 20;
-    margin-left: 10%;
+    margin-left: 5%;
     margin-bottom: 0px;
+    text-transform: uppercase;
 }
 .fechaNoti{
     color: #AFAAAA;
     text-align: left;
     font-weight: bold;
     font-size: 20;
-    margin-left: 10%;
+    margin-left: 5%;
     margin-top:0px;
 }
 .imgNoti{
@@ -70,6 +65,61 @@
     font-size: 18px;
     text-align: justify;
     
+}
+/* SECCION */
+.descArt {
+    background-color: lightgrey;
+    word-wrap: break-word;
+}
+.tituloSeccion{
+    margin-top: 40px;
+}
+.articuloD {
+    margin-left:30px;
+}
+.articulo{
+    margin-left:30px;
+    margin-right:0px;
+}
+.articuloD .img{
+    height:300px;
+    width:100%;
+    background-color: red;
+}
+.articulo .img{
+    height:250;
+    width:100%;
+    background-color:yellow;
+}
+.articulo .titulo{
+    font-size: 20px;
+    font-weight: 100;
+
+    position: absolute;
+    bottom: -10;
+
+    color: #0A0505;
+    text-shadow: 0 0 5px #8B8585;
+}
+.articuloD .titulo{
+    font-size: 20px;
+    font-weight: 100;
+
+    position: absolute;
+    bottom: -10;
+
+    color: #0A0505;
+    text-shadow: 0 0 5px #8B8585;
+}
+.articulo .seccion{
+    color: #AFAAAA;
+    text-align: left;
+    text-transform: uppercase;
+}
+.articuloD .seccion{
+    color: #AFAAAA;
+    text-align: left;
+    text-transform: uppercase;
 }
 /** CAROUSEL PORTADA **/
 
@@ -156,3 +206,20 @@
     width: 100%;
 	height:200px;
 }
+
+
+/*COMENTARIOS*/
+.label-info { 
+    float: right; 
+}
+body { padding-top:30px; }
+.widget .panel-body { padding:0px; }
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 11px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }

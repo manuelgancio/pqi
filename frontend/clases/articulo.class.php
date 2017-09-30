@@ -1,6 +1,7 @@
-<?php 
+<?php
+require_once('model.php');
 
-class usuario{
+class articulo extends Model{
     private $id;
     private $titulo;
     private $noticia;
@@ -12,6 +13,9 @@ class usuario{
 
 function __construct($id='',$titulo='',$noticia='',$seccion='',$fecha='',$autor='',$destacado='',$comentario='')
 {
+    //Cargo el constructor de la superclase
+    parent::__construct();
+
     $this->id=$id;
     $this->titulo=$titulo;
     $this->noticia=$noticia;
@@ -19,6 +23,7 @@ function __construct($id='',$titulo='',$noticia='',$seccion='',$fecha='',$autor=
     $this->fecha=$fecha;
     $this->autor=$autor;
     $this->destacado=$destacado;
+    $this->comentario=$comentario;
 
 }
 //SET
@@ -32,7 +37,7 @@ public function setNoticia($noticia){
     $this->setNoticia=$noticia;
 }
 public function setSeccion($seccion){
-    $this->setSeccion=$seccion;
+    $this->seccion=$seccion;
 }
 public function setFecha($fecha){
     $this->fecha=$fecha;
@@ -72,6 +77,51 @@ public function getComentario(){
     return $this->comentario;
 }
 //OTROS METODOS
+public function listarArt(){
+    $id_a = $this->getId();
+
+    $sql="SELECT * FROM articulo where id_a = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_a);
+    $result ->execute();
+    $resultado = $result->get_result();
+    $art = $resultado->fetch_assoc();
+
+    return($art);
+}
+public function listarArtXsec(){
+//Devuelve todas las noticias de la seccion
+
+    $id_s = $this -> getSeccion();
+
+    $sql="SELECT `id_a`, `titulo`, `fecha_a`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_s);
+    $result -> execute();
+    $resultado = $result->get_result();
+    
+    $articulos = array();
+    while ($row = $resultado->fetch_assoc()){
+        $articulos[] = $row;
+    }
+    
+    return ($articulos);
+    
+}
+public function cantArtXListar(){
+    $id_s = $this-> getSeccion();
+
+    $sql="SELECT COUNT(id_a) as cant FROM articulo WHERE id_s = ?";
+    $result = $this->_db->prepare($sql);
+    $result ->bind_param('i',$id_s);
+    $result ->execute();
+    $resultado = $result->get_result();
+    $cant = $resultado->fetch_assoc();
+
+    return($cant);
+
+
+}
 public function comentarArt(){
 
 }

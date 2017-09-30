@@ -49,18 +49,29 @@ $datos = $usu->verPerfil();
         <h3>Mis datos:</h3>
         <div class="row">
             <div class="col-md-6">
-                <p>Nombre: <?php echo ' '.$datos['p_nomb'].' '.$datos['p_ap'];?></p>
-                <p>Correo: <?php echo ' '.$datos['corre_c'];?></p>
+                <h4>Nombre: </h4><p><?php echo ' '.$datos['p_nomb'].' '.$datos['p_ap'];?></p>
+                <h4>Correo: </h4><p><?php echo ' '.$datos['corre_c'];?></p>
             </div>
             <div class="col-md-6">
-                <p>Teléfono de contacto: <?php ' '.$datos['tel'];?></p>
-                <p>Estado suscripción: (SI/NO)(cuando guarde en la tabla suscripcion edito esto)</p>
+                <h4>Teléfono de contacto: </h4><p><?php ' '.$datos['tel'];?></p>
+                <h4>Estado suscripción:</h4>
+                <?php
+                if($_SESSION['Suscripto'] == true){
+                    ?>
+                    <p> Suscripto correctamente! </p>
+                <?php 
+                }else{
+                    ?>
+                    <p> No está suscripto </p>
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </div>
     <div id="modificar" class="tab-pane fade">
         <h3>Editar Perfil.</h3>
-            <form action="" method="POST" class="form-horizontal">
+            <form action="<?php echo '/pqi/frontend' . $LOGICA;?>/procesarRegistro.php" autocomplete="off" id="frmMod" method="POST" class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-md-2" for="correo">Correo:</label>
                     <div class="col-md-3">
@@ -74,35 +85,62 @@ $datos = $usu->verPerfil();
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2" for="t_credito">Tarjeta de Crédito:</label>
+                    <label class="control-label col-md-2" for="pwd">Contraseña:</label>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="t_credito" name="t_credito">
+                        <input type="password" class="form-control" id="pwd" name="pwd">
                     </div>
                 </div>
                 <div class="col-md-2"></div>
                 <div class="form-group col-md-3">
-					<input type="submit" class="form-control btn btn-success" id="btnModificar" name="btnModificar">
+					<input type="submit" class="form-control btn btn-success" form="frmMod"id="btnModificar" name="btnModificar">
 				</div>
             </form>
     </div>
     <?php 
     ?>
     <div id="sus" class="tab-pane fade">
-      <h3>Suscripción</h3>
-      <p>Fruta sobre suscripción</p>
-      <p>if esta suscriptp btn para cancelar suscripción</p>
-      <p>if no esta suscripto opciones para suscribirse como en registro e input para t credito</p>
+        <h3>Suscripción</h3>
+        <p>Fruta sobre suscripción</p>
+        <?php 
+        if($_SESSION['Suscripto'] == true){//esta suscripto
+            ?>
+        <p> Usted ya se encuentra suscripto.</p>
+        <p> Si desea cancelar su suscripcion haga click aqui:</p>
+        <a href="<?php echo '/pqi/frontend' . $LOGICA;?>/procesarSuscripcion.php?f=can_sus" class="btn btn-danger" id="btnCancelarSus" name="btnCancelarSus">Cancelar Suscripción</a>
+        <?php 
+        }else{
+            ?>
+            <h4> ¿Desea suscribirse? </h4>
+            <p> Ingrese sus datos y empezará a recibir nuestro suplemento!</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="<?php echo '/pqi/frontend' . $LOGICA;?>/procesarSuscripcion.php" method='POST' id="frmSus" role='form' class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="t_credito">Tarjeta de Crédito:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="t_credito" name="t_credito">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="tipo">Periodicidad:</label>
+                            <div class="col-sm-5">
+                                <label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="1">Lunes a Domingo</label>
+                                <label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="2">Sábados y Domingos</label>
+                                <label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="3">Lu - Mi - Vi</label>	
+                            </div>
+                        </div>
+                        <div class="col-sm-3"></div>
+                            <div class="form-group col-sm-3">
+                                <input type="submit" class="form-control btn btn-success" id="btnSuscripcion" name="btnSuscripcion" form="frmSus">
+                            </div>
+                    </form>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
 
 </body>

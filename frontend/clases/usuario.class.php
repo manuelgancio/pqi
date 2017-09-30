@@ -137,6 +137,9 @@ public function registroUsu(){
         $result = $this->_db->prepare($sql);
         $result -> bind_param('issi',$id_p,$correo,$pwd_hash,$estado);
         $result -> execute();
+        //id del cliente para usar en el registro de suscripcion
+        $id_cl = $result->insert_id;
+        return($id_cl);
 
     }else{//si se subscribe guardo en la base la tarjeta de credito tambien
 
@@ -161,7 +164,7 @@ public function registroUsu(){
 public function verPerfil(){
 //davuelve datos del perfil
     $correo = $this->getCorreo();
-    $correo = 'manugancio@gmail.com';
+   
     //Datos de la tabla cliente
     $sql ="SELECT `corre_c`, `pass_c`,`id_p`, `t_credito` FROM `cliente` WHERE corre_c = ?";
 
@@ -186,11 +189,56 @@ public function verPerfil(){
     $datos = array_merge($datos_p,$datos_c);
     return ($datos);
 }
-public function modificarDatos(){
+public function modificarCorreo($correo_old){
+//modifica el correo tabla cliente
+    $correo = $this->getCorreo();
 
+    $sql="UPDATE `cliente` SET`corre_c`=? WHERE `corre_c`=?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('ss',$correo,$correo_old);
+    $result ->execute();
+
+    return (true);
 }
-public function bajaSuscripcion(){
+public function modificarTel($id_p){
+//modifica el telefono tabla persona
+    $tel = $this->getTel;
 
+    $sql="UPDATE `persona` SET `tel`=? WHERE `id_p`= ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('ii',$tel,$id_p);
+    $result ->execute();
+
+    return (true);
+}
+public function modificarPass(){
+    $correo = $this->getCorreo();
+    $pwd = $this->getPass();
+    //Hash contraseña
+    $pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
+
+    $sql="UPDATE `cliente` SET `pass_c`=? WHERE `corre_c` =?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('ss',$pwd_hash);
+    $result ->execute();
+
+    return (true);
+}
+public function id_p(){
+//devuelve el id de la tabla persona
+    $correo = $this->getCorreo();
+
+    $sql="SELECT `id_p`FROM `cliente` WHERE `corre_c` =?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('s',$correo);
+    $result->execute();
+
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+    
+    $id_p = $row['id_p'];
+
+    return ($id_p);
 }
 public function login(){
 //log in
@@ -247,5 +295,25 @@ public function id(){
 
     return ($id_cl);
 }
+public function estadoSuscripcion(){
+//devuelve true si el usuario esta suscripto o false si es gratis
+    $correo = $this->getCorreo();
+    $id_cl = $this->id();
+
+    $sql="SELECT * FROM `gratis` WHERE `id_cl` =?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_cl);
+    $result->execute();
+
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+    
+    if ($row != NULL){
+        return false;// el usuario es gratis
+    }else{
+        return true;//el usuario esta suscripto
+    }
+}
+
 
 }

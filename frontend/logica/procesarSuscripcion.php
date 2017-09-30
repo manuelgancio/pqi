@@ -28,11 +28,39 @@ if(isset($_POST['btnSuscripcion'])){
 
     $susOk = $sus->altaSus();
     
-    if($susOk) == true{
+    if($susOk == true){
         ?>
         <script>
             window.location.href = "../presentacion/index.php";
             alert('La suscripción se realizó correctamente!');
+        </script>
+        <?php
+    }
+}
+//cancelar suscripcion
+if (isset($_GET['f'])){
+
+    //Con el correo del usuario averiguo su id
+    require_once($CLASES_DIR . 'usuario.class.php');
+    $usu = New usuario();
+    
+    $correo = $_SESSION['Correo'];
+    $usu->setCorreo($correo);
+    
+    $id_cl = $usu->id();
+
+    //Llamo clase suscripcion
+    require_once($CLASES_DIR . 'suscripcion.class.php');
+    $sus = New suscripcion();
+
+    $sus->setIdUsu($id_cl);
+
+    $baja = $sus->bajaSus();
+    if($baja == true){
+        ?>
+        <script>
+            window.location.href = "../presentacion/index.php";
+            alert('Se cancelo su suscripción!');
         </script>
         <?php
     }

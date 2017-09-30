@@ -43,8 +43,29 @@ public function listarSecciones(){
     $result = $this->_db->prepare($sql);
     $result->execute();
     $resultado = $result->get_result();
-    $row = $resultado->fetch_all();
+    //$row = $resultado->fetch_assoc();
+
+    $secciones = array();
+    while ($row = $resultado->fetch_assoc()) {
+      $secciones[] = $row;
+    }
+
+    return ($secciones);
+}
+public function nombreSeccion(){
+//devuelve el nombre de la seccion segun id
+
+    $id_s = $this->getId();
+
+    $sql="SELECT `nombre`FROM `seccion` WHERE `id_s` =?";
+    
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_s);
+    $result->execute();
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
 
     return ($row);
+
 }
 }

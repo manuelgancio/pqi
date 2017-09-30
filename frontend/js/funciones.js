@@ -3,6 +3,9 @@ function logged(){
 	$("#notlogged").css("display","none");
 	$("#logged").css("display","block");
 }
+function suscripto(){
+	$("#suscripto").css("display","none");
+}
 
 /** Function para ocultar mediante el id cuando el usuario no inicio sesion */
 function mostrarSesion(){

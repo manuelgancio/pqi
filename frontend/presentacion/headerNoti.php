@@ -14,64 +14,10 @@
 <link rel="stylesheet" href="<?php echo "/pqi/frontend" . $CSS;?>/estilos.css">
 <script src="<?php echo '/pqi/frontend'.$JS;?>/funciones.js"></script>
 </head>
-
-
-<!-- FACEBOOK -->
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '141862136411361',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-    FB.AppEvents.logPageView();   
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<script>
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-</script>
-
-<script>
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-</script>
-
-<!-- FACEBOOK -->
-
 <?php 
 session_start();
-//die(var_dump($_SESSION));
-?>
-<body>
-  <div class="row">
-      <div class="col-md-3">
-      
-      ¡CALENDARIO?
-    
-      </div>
-      <div class="col-md-6">
-      <img src="<?php echo '/pqi/frontend' . $IMG?>/logo.png" alt="Logo">
-      </div>
-      <div class="col-md-3">
-      
-      </div>
-  </div><!-- row-->
 
+?>
 <!-- BARRA DE NAVEGACION -->
 <?php
 require($CLASES_DIR . 'seccion.class.php');
@@ -80,43 +26,33 @@ $seccion = New seccion();
 $secciones = $seccion->listarSecciones();
 
 ?>
-  <nav class="navbar navbar-inverse">
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       	<ul class="nav navbar-nav">
-			<?php
-		  	foreach($secciones as $sec){?>
+          <li><a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/index.php"> Inicio</a></li>
+      <?php foreach($secciones as $sec): ?>
 				<li><a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/seccion.php?id=<?php echo $sec['id_s']?>"><?php echo $sec['nombre'];?></a></li>
-			<?php
-			}
-			?>
-			<!--<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">VER TODAS<span class="caret"></span></a>
-			<ul class="dropdown-menu">
-				<li><a href="#">Secciones</a></li>
-				<li><a href="#">Page 1-2</a></li>
-				<li><a href="#">Page 1-3</a></li>
-			</ul>-->
+      <?php endforeach; ?>
 			</li>
       </ul>
-      <div id="notlogged" name="notlogged">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" data-toggle="modal" data-target="#modalLogin"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
-      </div>
-      </ul>
+        <div id="notlogged" name="notlogged">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" data-toggle="modal" data-target="#modalLogin"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
+            </ul>
+        </div>
       <div id="logged" name="notlogged" class="oculto">
-      <ul class="nav navbar-nav navbar-right">
-      	<li><a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> Perfil</a></li>
-        <li><a  id="suscripto"href="#" data-toggle="modal" data-target="#modalSuscripcion"><span class="glyphicon glyphicon-upload"></span> Suscribirme</a></li>
-        <li><a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/logout.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
-      </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> Perfil</a></li>
+            <li><a  id="suscripto"href="#" data-toggle="modal" data-target="#modalSuscripcion"><span class="glyphicon glyphicon-upload"></span> Suscribirme</a></li>
+            <li><a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/logout.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+          </ul>
       </div>
-
-    
     </div>
   </nav>
 
 <!-- MODAL LOGIN -->
-  <div id="modalLogin" class="modal fade" role="dialog">
+<div id="modalLogin" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -142,10 +78,7 @@ $secciones = $seccion->listarSecciones();
           <!-- FACEBOOK LOGIN BUTTON -->
           <div class="fb-login-button" scope="public_profile,email" onlogin="checkLoginState();" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
 
-        </div><!--modal body-->
-        <!--<div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>-->
+        </div>
       </div>
 
     </div>
@@ -169,7 +102,6 @@ $secciones = $seccion->listarSecciones();
 				<h4><span class="glyphicon glyphicon-ok"></span> Utilizar las funciones Me Gusta y Compartir!</h4></p>
 			</article>
 				
-				
 			<form class="form-horizontal" action="<?php echo '/pqi/frontend' . $LOGICA;?>/procesarSuscripcion.php" method="POST" id="formSuscripcion" role="form">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="t_credito">Tarjeta de Crédito:</label>
@@ -192,30 +124,19 @@ $secciones = $seccion->listarSecciones();
 					</div>
 				</div>
 			</form>
-					
 				
 		</div><!--modal body-->
 	</div><!--modal content-->
 	</div><!--dialog-->
 </div><!--modal -->
-
-
 </body>
-<?php
-if(isset($_SESSION["logged"]) && ($_SESSION["logged"] == true)){
-    echo "Bienvenido! " . $_SESSION['Correo'];
-    echo "Bienvenido! " . $_SESSION['Suscripto'];
-?>
+
+<?php if(isset($_SESSION["logged"]) && ($_SESSION["logged"] == true)) : ?> 
 	<script>
      logged();
 	</script>
-<?php
-	if($_SESSION['Suscripto'] == true){
-?>
+<?php elseif (isset($_SESSION['Suscripto']) && ($_SESSION['Suscripto'] == true)) : ?>
 		<script>
-		suscripto();
-	   </script>
-<?php
-	}
-}
-?>
+		  suscripto();
+	  </script>
+<?php endif; ?>

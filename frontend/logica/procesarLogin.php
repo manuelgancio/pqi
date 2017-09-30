@@ -22,10 +22,14 @@ if(isset($_POST['btnIngresar'])){
         </script>
         <?php
     }else{//Login correcto
-        //Verifico si el usuario esta suscripto 
-
-    
         session_start();
+        //Verifico si el usuario esta suscripto 
+        $estadoSus = $usuario->estadoSuscripcion();
+        if($estadoSus == true){//esta suscriptp
+            $_SESSION['Suscripto'] = true;
+        }else{//no esta suscripto
+            $_SESSION['Suscripto'] = false;
+        }
         $_SESSION["Correo"] = $correo;
         $_SESSION["logged"] = true;
         ?>
