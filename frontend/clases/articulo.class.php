@@ -122,6 +122,24 @@ public function cantArtXListar(){
 
 
 }
+public function listarArtDest(){
+//Devuelve array de articulos destacados del día
+    $fecha = $this->getFecha();
+
+    $sql="SELECT `id_a`, `titulo`, `contenido`, `autor`, `id_s` FROM `articulo` WHERE `art_d` = true AND `fecha_a` =?";
+
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('s',$fecha);
+    $result -> execute();
+    $resultado = $result->get_result();
+    
+    $articulos = array();
+    while ($row = $resultado->fetch_assoc()){
+        $articulos[] = $row;
+    }
+    
+    return ($articulos);
+}
 public function comentarArt(){
 
 }

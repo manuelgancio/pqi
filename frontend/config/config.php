@@ -2,9 +2,9 @@
 
     $PATH = $_SERVER["DOCUMENT_ROOT"].'/pqi/frontend';
     
-
+    $RUTA ='/pqi/frontend';
     #PARA LLAMAR DESDE HTML#
-    $PRESENTACION='/presentacion';
+    $PRESENTACION=$RUTA . '/presentacion';
     $CLASES='/clases';
     $CSS='/css';
     $LOGICA='/logica';

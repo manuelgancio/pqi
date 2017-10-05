@@ -30,9 +30,9 @@ $secciones = $seccion->listarSecciones();
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       	<ul class="nav navbar-nav">
-          <li><a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/index.php"> Inicio</a></li>
+          <li><a href="<?= $PRESENTACION;?>/index.php"> Inicio</a></li>
       <?php foreach($secciones as $sec): ?>
-				<li><a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/seccion.php?id=<?php echo $sec['id_s']?>"><?php echo $sec['nombre'];?></a></li>
+				<li><a href="<?= $PRESENTACION;?>/seccion.php?id=<?php echo $sec['id_s']?>"><?php echo $sec['nombre'];?></a></li>
       <?php endforeach; ?>
 			</li>
       </ul>
@@ -43,9 +43,9 @@ $secciones = $seccion->listarSecciones();
         </div>
       <div id="logged" name="notlogged" class="oculto">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> Perfil</a></li>
+            <li><a href="<?= $PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> Perfil</a></li>
             <li><a  id="suscripto"href="#" data-toggle="modal" data-target="#modalSuscripcion"><span class="glyphicon glyphicon-upload"></span> Suscribirme</a></li>
-            <li><a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/logout.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+            <li><a href="<?= $PRESENTACION;?>/logout.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
           </ul>
       </div>
     </div>

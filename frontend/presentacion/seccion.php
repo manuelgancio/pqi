@@ -37,35 +37,39 @@ $articulo = New articulo();
 $articulo->setSeccion($_GET['id']);
 
 $articulos = $articulo->listarArtXsec();
-//die(var_dump($articulos));
-
-//$cant_art = $articulo->cantArtXListar();
-//die(var_dump($cant_art));
 ?>
 
 <div class="well well-sm text-muted tituloSeccion"><h3><?php echo $seccion['nombre'];?></h3></div>
 <div class="row">
-<?php 
-//die(var_dump($articulos));
-foreach ($articulos as $art){
 
-?>
+<?php 
+$i=1;
+foreach ($articulos as $art){
+    while($i <= 3){
+    ?>
     <div class="articulo">
-        <div class="col-md-3">
-        
-            <a href="<?php echo '/pqi/frontend'.$PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>">
+        <div class="col-md-3 art">
+            <a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>">
                 <div class="img"><img alt="" src="http://placehold.it/250x250/dddddd/333333"></div>
             </a>
-            <a class="descArt">
-                <!--<div class="seccion"><?= $seccion['nombre']?></div>-->
-                <div class="titulo"><?= $art['titulo']?></div>
-            </a>
-    
+            <div class="descArt">
+                <!--<div class="seccion"></div>-->
+                <a class="titulo"href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>"><?= $art['titulo']?></a>
+            </div>
         </div>
     </div>
-
-
-<?php 
+<?php
+    if($i == 3){
+        ?> 
+        </div><!--row--><div class="row">
+        <?php
+        $i= 1;
+        break;
+    }else{
+    $i = $i + 1;
+    break;
+    }
+}
 }
 ?>
 </div><!--row-->
