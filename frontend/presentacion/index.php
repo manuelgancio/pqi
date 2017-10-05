@@ -67,67 +67,51 @@ $sec = New seccion();
 $secciones = $sec->listarSecciones();
 
 ?>
-<div class="well well-sm text-muted" id="politica"><h3>POLÍTICA</h3></div>
+<?php foreach ($secciones as $seccion):?>
+<div class="well well-sm text-muted" id="<?=$seccion['nombre']?>"><h3><?=$seccion['nombre']?></h3></div>
 <div class="container">
-  <div class="row">
-  
-    <div class="noticia col-sm-3">
-      <a href="#">
-        <div class="img-noticia"><img alt="" src="http://placehold.it/300x200/dddddd/333333"></div>
-        <div class="titulo">Titulo noticia</div>
-      </a>
-    </div>
+	<div class="row">
+<?php 
+//LLamo a la clase articulo
+require_once($CLASES_DIR . 'articulo.class.php');
 
-    <div class="noticia col-sm-3">
-      <a href="#">
-        <div class="img-noticia"><img alt="" src="../img/bonomi.jpg"></div>
-        <div class="titulo">Ajuste de cuentas</div>
-      </a>
-    </div>
+$articulo = New articulo();
+$articulo->setSeccion($seccion['id_s']);
 
-    <div class="noticia col-sm-3">
-      <a href="#">
-        <div class="img-noticia"><img alt="" src="http://placehold.it/300x200/dddddd/333333"></div>
-        <div class="titulo">Titulo noticia 3</div>
-      </a>
-    </div>
+$articulos = $articulo->listarArtXsec();
+  	
+$i=1;
+$o=1;
+foreach ($articulos as $art){
+    while($i <= 3 && $o <=2){
+    ?>
+		<div class="noticia col-sm-3">
+		<a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>">
+			<div class="img-noticia"><img alt="" src="http://placehold.it/300x200/dddddd/333333"></div>
+			<div class="titulo"><?= $art['titulo'];?></div>
+		</a>
+		</div>
+	<?php
+    	if($i == 3){
+    ?> 
+			<div class="col-sm-3 publicidad"></div>
+			</div><!--row--><div class="row">
+			<?php
+			$i= 1;
+			$o= $o + 1;
+			break;
+    	}else{
+    	$i = $i + 1;
+    	break;
+    }
+}
+}
+?>
+	
     
-    <div class="publicidad col-sm-2">
-
-    </div>
-    
-  </div><!--row-->
-
-  <div class="row">
-	  <div class="noticia col-sm-3">
-      <a href="#">
-        <div class="img-noticia"><img alt="" src="../img/bonomi.jpg"></div>
-        <div class="titulo">Ajuste de cuentas</div>
-      </a>
-    </div>
-
-    <div class="noticia col-sm-3">
-      <a href="#">
-        <div class="img-noticia"><img alt="" src="http://placehold.it/300x200/dddddd/333333"></div>
-        <div class="titulo">Titulo noticia</div>
-      </a>
-    </div>
-
-    <div class="noticia col-sm-3">
-      <a href="#">
-        <div class="img-noticia"><img alt="" src="http://placehold.it/300x200/dddddd/333333"></div>
-        <div class="titulo">Titulo noticia 3</div>
-      </a>
-    </div>
-    
-    <div class="publicidad col-sm-2">
-
-    </div>
-    
-  </div><!--row-->
+  	</div><!--row-->
 </div><!--container-->
-
-<div class="well well-sm text-muted"><h3>DEPORTE</h3></div>
+<?php endforeach;?>
 
 
 </body>

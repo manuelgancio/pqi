@@ -54,7 +54,7 @@ foreach ($articulos as $art){
             </a>
             <div class="descArt">
                 <!--<div class="seccion"></div>-->
-                <a class="titulo"href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>"><?= $art['titulo']?></a>
+                <a class="titulo" href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>"><?= $art['titulo']?></a>
             </div>
         </div>
     </div>

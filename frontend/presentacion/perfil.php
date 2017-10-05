@@ -28,7 +28,7 @@ $datos = $usu->verPerfil();
       <div class="col-md-3">
       </div>
       <div class="col-md-6">
-        <a href="index.php"><img src="../img/logo.png" style="width:100%;height:150px;"></a>
+        <a href="index.php"><img class="header"src="../img/logo.png" style="width:100%;height:150px;"></a>
       </div>
       <div class="col-md-3">
       </div>
