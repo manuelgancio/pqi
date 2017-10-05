@@ -8,15 +8,11 @@
 <meta name="author" content="paqueteinformes">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../css/estilos.css">
-<script src="../js/funciones.js"></script>
 
 <?php
-session_start();
-require($CLASES_DIR . 'usuario.class.php');
+include('headerNoti.php');
+
+require_once($CLASES_DIR . 'usuario.class.php');
 
 $usu = New usuario(); 
 $usu->setCorreo($_SESSION['Correo']);
@@ -28,7 +24,7 @@ $datos = $usu->verPerfil();
       <div class="col-md-3">
       </div>
       <div class="col-md-6">
-        <a href="index.php"><img class="header"src="../img/logo.png" style="width:100%;height:150px;"></a>
+        <a href="index.php"><img class="header"src="../img/logo.png" style="width:100%;height:150px;margin-top:20px;"></a>
       </div>
       <div class="col-md-3">
       </div>

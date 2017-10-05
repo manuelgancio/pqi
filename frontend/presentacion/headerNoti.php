@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="<?php echo "/pqi/frontend" . $CSS;?>/estilos.css">
-<script src="<?php echo '/pqi/frontend'.$JS;?>/funciones.js"></script>
+<link rel="stylesheet" href="<?= $CSS;?>/estilos.css">
+<script src="<?= $JS;?>/funciones.js"></script>
 </head>
 <?php 
 session_start();
@@ -20,7 +20,7 @@ session_start();
 ?>
 <!-- BARRA DE NAVEGACION -->
 <?php
-require($CLASES_DIR . 'seccion.class.php');
+require_once($CLASES_DIR . 'seccion.class.php');
 
 $seccion = New seccion(); 
 $secciones = $seccion->listarSecciones();
@@ -61,7 +61,7 @@ $secciones = $seccion->listarSecciones();
           <h4 class="modal-title">Ingresar</h4>
         </div>
         <div class="modal-body" align="center">
-          <form action="<?php echo '/pqi/frontend' . $LOGICA;?>/procesarLogin.php" method="POST" id="formLogin" role="form">
+          <form action="<?= $LOGICA;?>/procesarLogin.php" method="POST" id="formLogin" role="form">
             <div class="form-group input-group col-xs-6">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
               <input type="mail" id="correo" name="correo" placeholder="Correo" required class="form-control">
@@ -102,7 +102,7 @@ $secciones = $seccion->listarSecciones();
 				<h4><span class="glyphicon glyphicon-ok"></span> Utilizar las funciones Me Gusta y Compartir!</h4></p>
 			</article>
 				
-			<form class="form-horizontal" action="<?php echo '/pqi/frontend' . $LOGICA;?>/procesarSuscripcion.php" method="POST" id="formSuscripcion" role="form">
+			<form class="form-horizontal" action="<?= $LOGICA;?>/procesarSuscripcion.php" method="POST" id="formSuscripcion" role="form">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="t_credito">Tarjeta de Crédito:</label>
 					<div class="col-sm-5">

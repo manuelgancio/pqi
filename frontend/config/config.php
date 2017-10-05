@@ -5,13 +5,13 @@
     $RUTA ='/pqi/frontend';
     #PARA LLAMAR DESDE HTML#
     $PRESENTACION=$RUTA . '/presentacion';
-    $CLASES='/clases';
-    $CSS='/css';
-    $LOGICA='/logica';
-    $PERSISTENCIA='/persistencia';
-    $JS ='/js';
-    $IMG ='/img';
-    $CONFIG ='/config';
+    $CLASES=$RUTA .'/clases';
+    $CSS=$RUTA .'/css';
+    $LOGICA=$RUTA .'/logica';
+    $PERSISTENCIA=$RUTA .'/persistencia';
+    $JS =$RUTA .'/js';
+    $IMG =$RUTA .'/img';
+    $CONFIG =$RUTA .'/config';
     #PARA LLAMAR DESDE PHP#
     $PRESENTACION_DIR = $PATH .'/presentacion/';
     $CLASES_DIR = $PATH .'/clases/';
