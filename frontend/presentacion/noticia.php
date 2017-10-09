@@ -41,7 +41,7 @@ $seccion = $seccion['nombre'];
         </div>
 
         <div>
-            <img class="imgNoti" src="<?php echo '/pqi/frontend' . $IMG?>/bonomi.jpg" alt="Imágen">
+            <img class="imgNoti" src="<?= $IMG?>/bonomi.jpg" alt="Imágen">
         </div>
 
         <div class="txtNoti">
