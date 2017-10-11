@@ -89,14 +89,15 @@ public function listarArt(){
 
     return($art);
 }
-public function listarArtXsec(){
+public function listarArtXsec($offset,$artXPag){
 //Devuelve todas las noticias de la seccion
+    //offset y artXPag paso por la funcion
 
     $id_s = $this -> getSeccion();
-
-    $sql="SELECT `id_a`, `titulo`, `fecha_a`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ?";
+//die(var_dump($offset,$artXPag));
+    $sql="SELECT `id_a`, `titulo`, `fecha_a`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ? LIMIT ?, ?";
     $result = $this->_db->prepare($sql);
-    $result -> bind_param('i',$id_s);
+    $result -> bind_param('iii',$id_s,$offset,$artXPag);
     $result -> execute();
     $resultado = $result->get_result();
     
@@ -106,7 +107,7 @@ public function listarArtXsec(){
     }
     
     return ($articulos);
-    
+   
 }
 public function cantArtXListar(){
     $id_s = $this-> getSeccion();
@@ -120,7 +121,7 @@ public function cantArtXListar(){
 
     return($cant);
 
-
+ 
 }
 public function listarArtDest(){
 //Devuelve array de articulos destacados del día

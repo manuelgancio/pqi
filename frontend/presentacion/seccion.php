@@ -36,13 +36,51 @@ require_once($CLASES_DIR . 'articulo.class.php');
 $articulo = New articulo();
 $articulo->setSeccion($_GET['id']);
 
-$articulos = $articulo->listarArtXsec();
+//$articulos = $articulo->listarArtXsec();
+
+//Cantidad de ariticulos a listar
+$cantArt = $articulo->cantArtXListar();
+$cantArt = $cantArt['cant']; 
+//Cantidad de articulos que muestro en cada pagina
+$artXpag = 10;
+//Calcula cantidad de paginas totales
+$paginasTotales = ceil($cantArt / $artXpag);
+
+// GET pagina actual o pone una como default
+if (isset($_GET['pag']) && is_numeric($_GET['pag'])) {
+    // convierto a int
+    $pagActual = (int) $_GET['pag'];
+ } else {
+    // numero de pag por defecto
+    $pagActual = 1;
+ } // end if
+
+//Verificar que el numero de pagina es valido
+//if es mas grande que la paginas totales
+if ($pagActual > $paginasTotales) {
+    // set current page to last page
+    $pagActual = $paginasTotales;
+ } // end if
+ // if current page is less than first page...
+ if ($pagActual < 1) {
+    // set current page to first page
+    $pagActual = 1;
+ } // end if
+
+ // the offset of the list, based on current page 
+$offset = ($pagActual - 1) * $artXpag;
+
+
+
 ?>
 
 <div class="well well-sm text-muted tituloSeccion"><h3><?php echo $seccion['nombre'];?></h3></div>
 <div class="row">
 
 <?php 
+//LLamo metodo para listar articulos
+$articulos = $articulo->listarArtXsec($offset, $artXpag);
+
 $i=1;
 foreach ($articulos as $art){
     while($i <= 3){
@@ -71,5 +109,52 @@ foreach ($articulos as $art){
     }
 }
 }
+
 ?>
 </div><!--row-->
+<div class="text-center">
+<ul class="pagination pagination-lg">
+<?php 
+/******  build the pagination links ******/
+// range of num links to show
+$range = 3;
+
+// if not on page 1, don't show back links
+if ($pagActual > 1) {
+   // show << link to go back to page 1
+   echo "<li><a href='$PRESENTACION/seccion.php?id=$id_s&pag=1'><<</a></li>";
+   // get previous page num
+   $prevpage = $pagActual - 1;
+   // show < link to go back to 1 page
+   echo "<li><a href='$PRESENTACION/seccion.php?id=$id_s&pag=$prevpage'><</a></li>";
+} // end if 
+
+// loop to show links to range of pages around current page
+for ($x = ($pagActual - $range); $x < (($pagActual + $range) + 1); $x++) {
+   // if it's a valid page number...
+   if (($x > 0) && ($x <= $paginasTotales)) {
+      // if we're on current page...
+      if ($x == $pagActual) {
+         // 'highlight' it but don't make a link
+         echo "<li class='disabled' href='#'><a>$x</a></li>";
+      // if not current page...
+      } else {
+         // make it a link
+         echo "<li><a href='$PRESENTACION/seccion.php?id=$id_s&pag=$x'>$x</a></li>";
+      } // end else
+   } // end if 
+} // end for
+                 
+// if not on last page, show forward and last page links        
+if ($pagActual != $paginasTotales) {
+   // get next page
+   $nextpage = $pagActual + 1;
+    // echo forward link for next page 
+    echo "<li><a href='$PRESENTACION/seccion.php?id=$id_s&pag=$nextpage'>></a></li>";
+   // echo forward link for lastpage
+   echo "<li><a href='$PRESENTACION/seccion.php?id=$id_s&pag=$paginasTotales'>>></a></li>";
+} // end if
+/****** end build pagination links ******/
+?>
+</ul>
+</div>

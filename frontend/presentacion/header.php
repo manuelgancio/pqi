@@ -144,7 +144,7 @@ $secciones = $seccion->listarSecciones();
       	<ul class="nav navbar-nav">
 			<?php
 		  	foreach($secciones as $sec){?>
-				<li><a href="<?=$PRESENTACION;?>/seccion.php?id=<?php echo $sec['id_s']?>"><?php echo $sec['nombre'];?></a></li>
+				<li><a href="<?=$PRESENTACION;?>/seccion.php?id=<?php echo $sec['id_s']?>&pag=1"><?php echo $sec['nombre'];?></a></li>
 			<?php
 			}
 			?>
