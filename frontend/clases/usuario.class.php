@@ -278,7 +278,6 @@ public function login(){
         }
     }
 }
-
 public function id(){
 //devuelve el id del usuario (id tabla cliente)
     $correo = $this->getCorreo();

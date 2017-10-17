@@ -78,7 +78,7 @@ require_once($CLASES_DIR . 'articulo.class.php');
 $articulo = New articulo();
 $articulo->setSeccion($seccion['id_s']);
 
-$articulos = $articulo->listarArtXsec();
+$articulos = $articulo->listartArtXSecPortada();
   	
 $i=1;
 $o=1;

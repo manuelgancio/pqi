@@ -89,8 +89,25 @@ public function listarArt(){
 
     return($art);
 }
+public function listartArtXSecPortada(){
+//Devuelve todas las noticias de la seccion sin limite
+    $id_s = $this -> getSeccion();
+
+    $sql="SELECT `id_a`, `titulo`, `fecha_a`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_s);
+    $result -> execute();
+    $resultado = $result->get_result();
+    
+    $articulos = array();
+    while ($row = $resultado->fetch_assoc()){
+        $articulos[] = $row;
+    }
+    
+    return ($articulos);
+}
 public function listarArtXsec($offset,$artXPag){
-//Devuelve todas las noticias de la seccion
+//Devuelve todas las noticias de la seccion con limite para paginacion
     //offset y artXPag paso por la funcion
 
     $id_s = $this -> getSeccion();

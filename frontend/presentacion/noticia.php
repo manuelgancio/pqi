@@ -16,9 +16,10 @@
 <?php
 include('headerNoti.php');
 
+$id_art = (int) $_GET['art'];
 require_once($CLASES_DIR . 'articulo.class.php');
 $articulo = New articulo();
-$articulo->setId($_GET['art']);
+$articulo->setId($id_art);
 
 $art = $articulo->listarArt();
 
