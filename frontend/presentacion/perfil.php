@@ -49,7 +49,7 @@ $datos = $usu->verPerfil();
                 <h4>Correo: </h4><p><?php echo ' '.$datos['corre_c'];?></p>
             </div>
             <div class="col-md-6">
-                <h4>Teléfono de contacto: </h4><p><?php ' '.$datos['tel'];?></p>
+                <h4>Teléfono de contacto: </h4><p><?php echo ' '.$datos['tel'];?></p>
                 <h4>Estado suscripción:</h4>
                 <?php
                 if($_SESSION['Suscripto'] == true){
@@ -66,29 +66,29 @@ $datos = $usu->verPerfil();
         </div>
     </div>
     <div id="modificar" class="tab-pane fade">
-        <h3>Editar Perfil.</h3>
-            <form action="<?php echo '/pqi/frontend' . $LOGICA;?>/procesarRegistro.php" autocomplete="off" id="frmMod" method="POST" class="form-horizontal">
+        <h3>Actualizar datos.</h3>
+            <form action="<?= $LOGICA;?>/procesarRegistro.php" autocomplete="off" id="frmMod" method="POST" class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-md-2" for="correo">Correo:</label>
                     <div class="col-md-3">
-                        <input type="email" class="form-control" id="correo" name="correo">
+                        <input type="email" class="form-control" id="correo" name="correo" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2" for="tel">Teléfono:</label>
+                    <label class="control-label col-md-2" for="tel" required>Teléfono:</label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" id="tel" name="tel">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2" for="pwd">Contraseña:</label>
+                    <label class="control-label col-md-2" for="pwd" required>Contraseña:</label>
                     <div class="col-md-3">
                         <input type="password" class="form-control" id="pwd" name="pwd">
                     </div>
                 </div>
                 <div class="col-md-2"></div>
                 <div class="form-group col-md-3">
-					<input type="submit" class="form-control btn btn-success" form="frmMod"id="btnModificar" name="btnModificar">
+					<input type="submit" class="form-control btn btn-success" form="frmMod"id="btnModificar" name="btnModificar" value="Actualizar">
 				</div>
             </form>
     </div>
@@ -102,7 +102,7 @@ $datos = $usu->verPerfil();
             ?>
         <p> Usted ya se encuentra suscripto.</p>
         <p> Si desea cancelar su suscripcion haga click aqui:</p>
-        <a href="<?php echo '/pqi/frontend' . $LOGICA;?>/procesarSuscripcion.php?f=can_sus" class="btn btn-danger" id="btnCancelarSus" name="btnCancelarSus">Cancelar Suscripción</a>
+        <a href="<?= $LOGICA;?>/procesarSuscripcion.php?f=can_sus" class="btn btn-danger" id="btnCancelarSus" name="btnCancelarSus">Cancelar Suscripción</a>
         <?php 
         }else{
             ?>
@@ -110,7 +110,7 @@ $datos = $usu->verPerfil();
             <p> Ingrese sus datos y empezará a recibir nuestro suplemento!</p>
             <div class="row">
                 <div class="col-md-6">
-                    <form action="<?php echo '/pqi/frontend' . $LOGICA;?>/procesarSuscripcion.php" method='POST' id="frmSus" role='form' class="form-horizontal">
+                    <form action="<?= $LOGICA;?>/procesarSuscripcion.php" method='POST' id="frmSus" role='form' class="form-horizontal">
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="t_credito">Tarjeta de Crédito:</label>
                             <div class="col-sm-5">

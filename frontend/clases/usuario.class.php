@@ -189,6 +189,40 @@ public function verPerfil(){
     $datos = array_merge($datos_p,$datos_c);
     return ($datos);
 }
+public function actualizarPerfil($correo_old){
+//Actualiza correo tel y pass
+    //datos nuevos
+    $correo = $this->getCorreo();
+    $pass = $this->getPass();
+    $tel = $this->getTel();
+
+    //Hash contraseña
+    $pwd_hash = password_hash($pass, PASSWORD_DEFAULT);
+
+    //update correo y pass 
+    $sql="UPDATE `cliente` SET `corre_c`= ?, `pass_c`= ? WHERE `corre_c` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('sss',$correo,$pwd_hash,$correo_old);
+    $result ->execute();
+
+    //Averiguo id_p
+    $sql="SELECT `id_p` FROM `cliente` WHERE `corre_c` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('s',$correo);
+    $result ->execute();
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+    
+    $id_p = $row['id_p'];
+
+    //update tel
+    $sql="UPDATE `persona` SET `tel`= ? WHERE `id_p` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('ii',$tel,$id_p);
+    $result ->execute();
+
+    return (true);
+}
 public function modificarCorreo($correo_old){
 //modifica el correo tabla cliente
     $correo = $this->getCorreo();

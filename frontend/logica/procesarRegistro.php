@@ -76,55 +76,48 @@ if(isset($_POST['btnRegistro'])){
     }
 }
 if(isset($_POST['btnModificar'])){
-//Modificar datos perfil
+
     $correo_old = $_SESSION['Correo'];
-    if(isset($_POST['correo'])){
-        $correo = strip_tags($_POST['correo']);
 
-        //Llamo clase usuario
+    $correo = strip_tags(trim($_POST['correo']));
+    $pass = strip_tags(trim($_POST['pwd']));
+    $tel = strip_tags(trim($_POST['tel']));
+
+    //Verifico que el correo no este ingresado
+    if($correo != $correo_old){
         require_once($CLASES_DIR . 'usuario.class.php');
-        $usu = New usuario();
-
-        $usu->setCorreo($correo);
-        $mod = $usu->modificarCorreo($correo_old);
-
-    }
-    if(isset($_POST['tel'])){
-        $tel = strip_tags($_POST['tel']);
+        $usu = New usuario();  
     
-        //Llamo clase usuario
-        require_once($CLASES_DIR . 'usuario.class.php');
-        $usu = New usuario();
-
-        $usu->setCorreo($correo_old);
-        
-        $id_p = $usu->id_p();
-
-        $usu->setTel($tel);
-        $mod = $usu->modificarTel($id_p);
-    
-    }
-    if(isset($_POST['pwd'])){
-        $pwd = strip_tags($_POST['pwd']);
-        $correo = $_SESSION['Correo'];
-
-        //Llamo clase usuario
-        require_once($CLASES_DIR . 'usuario.class.php');
-        $usu = New usuario();
-
         $usu->setCorreo($correo);
-        $usu->setPass($pwd);
+        //Verifico que el correo no exista en la base
+        $correoOk = $usu->correoExistente();
 
-        $mod = $usu->modificarPass();
+            if($correoOk == true){//el correo esta registrado y no es el anterior de este usuario
+                ?>
+                <script>
+                    window.location.href = "../presentacion/perfil.php";
+                    alert('El correo pertenece a otra persona!');
+                </script>
+                <?php 
+            }
     }
+    require_once($CLASES_DIR . 'usuario.class.php');
+    $usu = New usuario();
+
+    $usu->setCorreo($correo);
+    $usu->setTel($tel);
+    $usu->setPass($pass);
+
+    $mod = $usu->actualizarPerfil($correo_old);
+    
+    if ($mod == true){
     ?>
     <script>
         window.location.href = "../presentacion/perfil.php";
         alert('Datos modificados correctamente!');
-    </script>
+    </script>0
     <?php 
-
-
+    }
 
 
 }
