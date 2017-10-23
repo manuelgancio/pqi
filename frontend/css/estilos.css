@@ -16,8 +16,12 @@
 	height: 200px;
 	width: 260px;
 }
-.articulo{
-    margin-top:40px;
+.publiBanner{
+    background-color: red;
+    margin-bottom: 20px;
+    margin-left: 10%;
+    margin-right:10%;
+    align-self:center;
 }
 .oculto{
     display:none;
@@ -188,12 +192,10 @@
 }
 .noticia{
     position: relative;
-
     overflow: hidden;
-
     width: 300px;
-
     cursor: pointer;
+    margin-bottom:15px; 
 }
 .noticia:hover .img-noticia:before{
     opacity: 0;

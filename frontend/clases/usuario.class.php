@@ -105,7 +105,6 @@ public function correoExistente(){
         return true;//si devuelve algo, el correo ya esta registrado (MAL; NO PUEDE REGISTRARSE)
     }
 }
-
 public function registroUsu(){
 //Registro usuario
     $correo = $this -> getCorreo();
@@ -164,9 +163,9 @@ public function registroUsu(){
 public function verPerfil(){
 //davuelve datos del perfil
     $correo = $this->getCorreo();
-   
+
     //Datos de la tabla cliente
-    $sql ="SELECT `corre_c`, `pass_c`,`id_p`, `t_credito` FROM `cliente` WHERE corre_c = ?";
+    $sql ="SELECT `corre_c`, `pass_c`,`id_p` FROM `cliente` WHERE corre_c = ?";
 
     $result = $this->_db->prepare($sql);
     $result -> bind_param('s',$correo);
@@ -219,41 +218,6 @@ public function actualizarPerfil($correo_old){
     $sql="UPDATE `persona` SET `tel`= ? WHERE `id_p` = ?";
     $result = $this->_db->prepare($sql);
     $result -> bind_param('ii',$tel,$id_p);
-    $result ->execute();
-
-    return (true);
-}
-public function modificarCorreo($correo_old){
-//modifica el correo tabla cliente
-    $correo = $this->getCorreo();
-
-    $sql="UPDATE `cliente` SET`corre_c`=? WHERE `corre_c`=?";
-    $result = $this->_db->prepare($sql);
-    $result -> bind_param('ss',$correo,$correo_old);
-    $result ->execute();
-
-    return (true);
-}
-public function modificarTel($id_p){
-//modifica el telefono tabla persona
-    $tel = $this->getTel;
-
-    $sql="UPDATE `persona` SET `tel`=? WHERE `id_p`= ?";
-    $result = $this->_db->prepare($sql);
-    $result -> bind_param('ii',$tel,$id_p);
-    $result ->execute();
-
-    return (true);
-}
-public function modificarPass(){
-    $correo = $this->getCorreo();
-    $pwd = $this->getPass();
-    //Hash contraseña
-    $pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
-
-    $sql="UPDATE `cliente` SET `pass_c`=? WHERE `corre_c` =?";
-    $result = $this->_db->prepare($sql);
-    $result -> bind_param('ss',$pwd_hash);
     $result ->execute();
 
     return (true);

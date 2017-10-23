@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+
 <html>
 <head>
 <title>Paqueteinformes.com - Bienvenidos!</title>
-<meta charset="UTF-8"> 
+<meta charset="ISO-8859-1"> 
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="paqueteinformes">

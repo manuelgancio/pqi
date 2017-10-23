@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Paqueteinformes.com - Bienvenidos!</title>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="paqueteinformes">
@@ -53,10 +53,25 @@ $seccion = $seccion['nombre'];
     </div><!--container-->
     </div>
     <div class="col-md-3">
- 
+
     </div>
     
 </div> <!--row-->
+<div class="row">
+    
+    <div class="publiBanner">
+    <?php 
+    //LLamo a la clase publicidad
+    require_once($CLASES_DIR . 'publicidad.class.php');
+    $publicidad= New publicidad();
+
+    $banner = $publicidad->listarPubNoticia();
+    //die(var_dump($banner['publicacion']));
+
+    ?>
+    <img class="" src="<?php echo $banner['publicacion'];?>">
+    </div>
+</div>
 <?php
 include('comentarios.php');
 

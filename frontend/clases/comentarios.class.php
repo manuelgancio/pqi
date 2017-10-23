@@ -78,7 +78,7 @@ public function altaComentario(){
     $estado = $this->getEstado();
 
     //Guardo en la tabla Comentario 
-    $sql ="INSERT INTO `comentario`(`comentario`, `estado`, `fecha`) VALUES (?,?,?)";
+    $sql ="INSERT INTO `comentario`(`comentario`, `estado`, `fecha_c`) VALUES (?,?,?)";
     $result = $this->_db->prepare($sql);
     $result -> bind_param('sis',$comentario,$estado,$fecha);
     $result -> execute();

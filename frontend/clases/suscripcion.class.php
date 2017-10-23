@@ -76,22 +76,22 @@ public function altaSus(){
     //$resultado = $result->get_result();
     //$row = $resultado->fetch_assoc();
     //id tabla pago
-    $id_pago = $result->insert_id;
+    $id_pago = $result->insert_id; //id:pago = id_cp
 
     //inerto los datos de la suscripcion en la tabla suscribe
-    $sql="INSERT INTO `suscripcion`(`plan`, `fecha_d`) VALUES (?,?)";
+    $sql="INSERT INTO `suscripcion`(`plan`, `fecha_d`,`id_cp`) VALUES (?,?,?)";
     $result = $this->_db->prepare($sql);
-    $result->bind_param('is',$tipo,$fecha_i);
+    $result->bind_param('isi',$tipo,$fecha_i,$id_pago);
     $result->execute();
 
     $id_sus= $result->insert_id;
 
-    //inserto los id en la tabla relacion recive
+    /*inserto los id en la tabla relacion recibe
     $sql="INSERT INTO `recibe`(`id_cp`, `id_sus`) VALUES (?,?)";
     $result = $this->_db->prepare($sql);
     $result->bind_param('ii',$id_pago,$id_sus);
     $result->execute();
-    
+    */
     //Borro en la tabla gratis en caso que el usuario este registrado ahi
 
     $sql="DELETE FROM `gratis` WHERE `id_cl`=?";
@@ -127,7 +127,17 @@ public function bajaSus(){
     
     $id_pago = $row['id_cp'];
     
-    //Averiguo id tabla suscripcion 
+    //Averiguo el id_sus de la tabla suscripcio con id_cp
+    $sql="SELECT `id_sus` FROM `suscripcion` WHERE `id_cp` = ?";
+    $result = $this->_db->prepare($sql);
+    $result->bind_param('i',$id_pago);
+    $result->execute();
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+
+    $id_sus = $row['id_sus'];
+
+    /*Averiguo id tabla suscripcion 
     $sql="SELECT `id_sus` FROM `recibe` WHERE `id_cp` =?";
     $result = $this->_db->prepare($sql);
     $result->bind_param('i',$id_pago);
@@ -142,7 +152,7 @@ public function bajaSus(){
     $result = $this->_db->prepare($sql);
     $result->bind_param('i',$id_pago);
     $result->execute();
-
+*/
     //Borro linea de tabla suscripcion
     $sql="DELETE FROM `suscripcion` WHERE `id_sus`=?";
     $result = $this->_db->prepare($sql);
