@@ -63,8 +63,31 @@ public function getTipo(){
 }
 /// otros metodos
 public function listarPubIndex(){
-//Devuelve array con las publicidades
+    $espacio = 1; //index
+    $fecha_hoy = date('Y-m-d');
 
+    $sql="SELECT publicidad.publicacion AS p FROM publicidad, espacio, hay WHERE espacio.ubicacion = ? 
+    AND publicidad.fecha_h > ? AND hay.id_pub = publicidad.id_pub AND hay.id_esp = espacio.id_esp";
+    $result=$this->_db->prepare($sql);
+    $result ->bind_param('ss',$espacio,$fecha_hoy);
+    $result ->execute();
+    $resultado = $result->get_result();
+
+    $publicidades = array();
+    while ($row = $resultado->fetch_assoc()){
+        $publicidades[] = $row;
+    }
+
+    //Si no hay publicidades en esa publicacion...
+    if ($publicidades == null){
+        return (false); //Devuelve false
+    }else{
+        $i = array();
+        foreach($publicidades as $p){//paso de array multi a simple
+            $i[] = $p['p'];
+        }
+    return ($publicidades);
+}
 }
 public function listarPubNoticia(){
 //Devuelve la ruta a la img de una publicidad que este en fecha valida
@@ -99,7 +122,7 @@ public function listarPubNoticia(){
        
         $sql="SELECT `publicacion` FROM `publicidad` WHERE `fecha_h` > ? AND (`id_pub` = ?)";
         $result = $this->_db->prepare($sql);
-        $result -> bind_param('si',$fecha_hoy,$publicidad);
+        $result -> bind_param('ss',$fecha_hoy,$publicidad);
         $result -> execute();
         $resultado = $result->get_result();
 

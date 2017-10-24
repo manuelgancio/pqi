@@ -79,7 +79,13 @@ $articulo = New articulo();
 $articulo->setSeccion($seccion['id_s']);
 
 $articulos = $articulo->listartArtXSecPortada();
-  	
+
+//Lamo a la clase publicidad
+require_once($CLASES_DIR . 'publicidad.class.php');
+
+$p = New publicidad();
+$publicidad = $p->listarPubIndex();
+//die(var_dump($publicidad));
 $i=1;
 $o=1;
 foreach ($articulos as $art){
@@ -94,7 +100,17 @@ foreach ($articulos as $art){
 	<?php
     	if($i == 3){
     ?> 
-			<div class="col-sm-3 publicidad"></div>
+			<div class="col-sm-3 publicidadIndex">
+			<?php if($publicidad != false){//Si hay publicidad contratada...Selecciono una aleatoriamente
+				$p = array_rand($publicidad);
+				$p = $publicidad[$p];//Ruta img
+				//die(var_dump($p));
+			?>
+			<img src="<?php echo $p['p'];?>" alt='pub'>
+			<?php 
+			}
+			?>
+			</div>
 			</div><!--row--><div class="row">
 			<?php
 			$i= 1;
