@@ -13,22 +13,29 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<?= $CSS;?>/estilos.css">
 <script src="<?= $JS;?>/funciones.js"></script>
+<!--FACEBOOK-->
 <script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
+<!--CALENDARIO-->
+<script src="<?= $JS;?>/calendario.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+
+
 </head>
 
 
 <!-- FACEBOOK -->
-<div id="fb-root"></div>
-<script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=141862136411361";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-<script>
+	<div id="fb-root"></div>
+	<script>
+	(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=141862136411361";
+	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<script>
 
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -117,19 +124,34 @@ session_start();
 //die(var_dump($_SESSION));
 ?>
 <body>
-  <div class="row">
-      <div class="col-md-3">
-      
-      ¡CALENDARIO?
-    
-      </div>
-      <div class="col-md-6">
-      <img class="header"src="<?= $IMG?>/logo.png" alt="Logo">
-      </div>
-      <div class="col-md-3">
-      
-      </div>
-  </div><!-- row-->
+	<div class="row">
+		<div class="col-md-3">
+			<!--CALENDARIO-->
+			<form action="<?= $LOGICA;?>/procesarEdicion.php" method="GET" id="frmEdicion">
+			<div class="row">
+				<div class="form-group">
+					<!--<label class="col-xs-3 control-label"for="embeddingDatePicker">Edición</label>-->
+					<div class="col-xs-5 date">
+						<div id="embeddingDatePicker"></div>
+						<input type="hidden" id="selectedDate" name="selectedDate" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-5 col-xs-offset-3">
+						<button type="submit" class="btn btn-primary" id="btnEdicion" name="btnEdicion"><span class="glyphicon glyphicon-search"></span></button>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>
+		<div class="col-md-6">
+		<img class="header"src="<?= $IMG?>/logo.png" alt="Logo">
+		</div>
+		<div class="col-md-3">
+		
+		</div>
+	</div><!-- row-->
 
 <!-- BARRA DE NAVEGACION -->
 <?php
@@ -148,14 +170,7 @@ $secciones = $seccion->listarSecciones();
 			<?php
 			}
 			?>
-			<!--<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">VER TODAS<span class="caret"></span></a>
-			<ul class="dropdown-menu">
-				<li><a href="#">Secciones</a></li>
-				<li><a href="#">Page 1-2</a></li>
-				<li><a href="#">Page 1-3</a></li>
-			</ul>-->
-			</li>
+				</li>
       </ul>
       <div id="notlogged" name="notlogged">
       <ul class="nav navbar-nav navbar-right">

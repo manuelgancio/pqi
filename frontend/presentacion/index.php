@@ -5,12 +5,22 @@
     <!-- PORTADA -->
     <div class="well well-sm text-muted" id="portada"><h3>PORTADA</h3></div>
 
-<?php 
+<?php
+/*Fecha del dia
+  Si paso fecha de edicion por get cargo articulos de esa fecha
+  Si no esta la fecha por get uso la fecha del dia actual
+*/
+	if(isset($_GET['fecha'])){
+		$fecha = $_GET['fecha'];
+	}else{
+		$fecha = date('Y-m-d');
+	}
+
 //LLamo a la clase articulo
 	require_once($CLASES_DIR . 'articulo.class.php');
 
 	$articulo = New articulo();
-	$articulo->setFecha(date('y-m-d'));
+	$articulo->setFecha($fecha);
 	
 	$articulos_d = $articulo->listarArtDest();
 
@@ -77,6 +87,7 @@ require_once($CLASES_DIR . 'articulo.class.php');
 
 $articulo = New articulo();
 $articulo->setSeccion($seccion['id_s']);
+$articulo->setFecha($fecha);
 
 $articulos = $articulo->listartArtXSecPortada();
 
@@ -104,7 +115,6 @@ foreach ($articulos as $art){
 			<?php if($publicidad != false){//Si hay publicidad contratada...Selecciono una aleatoriamente
 				$p = array_rand($publicidad);
 				$p = $publicidad[$p];//Ruta img
-				//die(var_dump($p));
 			?>
 			<img src="<?php echo $p['p'];?>" alt='pub'>
 			<?php 

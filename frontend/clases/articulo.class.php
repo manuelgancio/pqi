@@ -92,10 +92,11 @@ public function listarArt(){
 public function listartArtXSecPortada(){
 //Devuelve todas las noticias de la seccion sin limite
     $id_s = $this -> getSeccion();
+    $fecha = $this-> getFecha();
 
-    $sql="SELECT `id_a`, `titulo`, `fecha_a`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ?";
+    $sql="SELECT `id_a`, `titulo`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ? AND  `fecha_a` = ?";
     $result = $this->_db->prepare($sql);
-    $result -> bind_param('i',$id_s);
+    $result -> bind_param('is',$id_s,$fecha);
     $result -> execute();
     $resultado = $result->get_result();
     
@@ -157,6 +158,29 @@ public function listarArtDest(){
     }
     
     return ($articulos);
+}
+public function verificarFecha(){
+/*Verifica que en esa fecha de edicion haya algun articulo publicado 
+/  Devuelve true si hay y false en caso de que no haya nada
+*/
+    $fecha = $this->getFecha();
+
+    $sql="SELECT `id_a` FROM `articulo` WHERE `fecha_a` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('s',$fecha);
+    $result -> execute();
+    $resultado = $result->get_result();
+
+    $a = array();
+    while ($row = $resultado->fetch_assoc()){
+        $a[]= $row;
+    }
+    if($a == null){//No hay articulos
+        return (false);
+    }else{//hay articulos
+        return (true);
+    }
+
 }
 public function comentarArt(){
 
