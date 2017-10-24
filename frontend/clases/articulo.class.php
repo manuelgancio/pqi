@@ -78,6 +78,7 @@ public function getComentario(){
 }
 //OTROS METODOS
 public function listarArt(){
+/* Devuelve la informacion de un articulo segun su id */
     $id_a = $this->getId();
 
     $sql="SELECT * FROM articulo where id_a = ?";
@@ -90,11 +91,13 @@ public function listarArt(){
     return($art);
 }
 public function listartArtXSecPortada(){
-//Devuelve todas las noticias de la seccion sin limite
+/* Devuelve las 6 ULTIMAS noticias en una seccion determida
+   y en una fecha determinada
+*/
     $id_s = $this -> getSeccion();
     $fecha = $this-> getFecha();
 
-    $sql="SELECT `id_a`, `titulo`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ? AND  `fecha_a` = ?";
+    $sql="SELECT `id_a`,`fecha_a`, `titulo`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ? AND  `fecha_a` = ? ORDER BY `fecha_a` DESC LIMIT 6";
     $result = $this->_db->prepare($sql);
     $result -> bind_param('is',$id_s,$fecha);
     $result -> execute();
@@ -108,12 +111,12 @@ public function listartArtXSecPortada(){
     return ($articulos);
 }
 public function listarArtXsec($offset,$artXPag){
-//Devuelve todas las noticias de la seccion con limite para paginacion
-    //offset y artXPag paso por la funcion
-
+/* Devuelve todas las noticias de la seccion con limite para paginacion.
+   offset y artXPag paso por la funcion
+*/
     $id_s = $this -> getSeccion();
-//die(var_dump($offset,$artXPag));
-    $sql="SELECT `id_a`, `titulo`, `fecha_a`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ? LIMIT ?, ?";
+
+    $sql="SELECT `id_a`, `titulo`, `fecha_a`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ? ORDER BY fecha_a DESC LIMIT ?, ?";
     $result = $this->_db->prepare($sql);
     $result -> bind_param('iii',$id_s,$offset,$artXPag);
     $result -> execute();
@@ -128,6 +131,10 @@ public function listarArtXsec($offset,$artXPag){
    
 }
 public function cantArtXListar(){
+/* Devuelve cantidad de ariticulos para listar en una categoria
+   Usado para calcular cantidad de paginas al listar todos los art
+   de una categoria
+*/
     $id_s = $this-> getSeccion();
 
     $sql="SELECT COUNT(id_a) as cant FROM articulo WHERE id_s = ?";
