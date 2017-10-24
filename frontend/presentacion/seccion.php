@@ -28,6 +28,10 @@ require_once($CLASES_DIR . 'seccion.class.php');
 $sec = New seccion();
 $sec->setId($id_s);
 
+/*LLamo al metodo visita para guardar en la base que se visito esta seccion*/
+$visita = $sec->visita();
+
+//Averiguo el nombre de la seccion
 $seccion = $sec->nombreSeccion();
 
 //LLamo a la clase articulo

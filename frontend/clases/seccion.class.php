@@ -27,6 +27,9 @@ public function setId($id){
 public function setNombre($nombre){
     $this->nombre=$nombre;
 }
+public function setVisitas($visitas){
+    $this->visitas=$visitas;
+}
 //GET
 public function getId(){
     return $this->id;
@@ -34,10 +37,13 @@ public function getId(){
 public function getNombre(){
     return $this->nombre;
 }
-//otros metodos
+public function getVisitas(){
+    return $this->visitas;
+}
+//OTROS METODOS
 
 public function listarSecciones(){
-    //devuelve id y nombre de las secciones en la base
+//Devuelve id y nombre de todas las secciones
     $sql="SELECT `id_s`, `nombre` FROM `seccion`";
     
     $result = $this->_db->prepare($sql);
@@ -67,5 +73,29 @@ public function nombreSeccion(){
 
     return ($row);
 
+}
+public function visita(){
+/* Suma una visita al contador de visitas de cada seccion en la base de datos*/
+    $id_seccion = $this->getId();
+    //Averiguo cantidad de visitas actuales
+    $sql="SELECT `contador` FROM `seccion` WHERE `id_s` =?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_seccion);
+    $result->execute();
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+
+    $visitas = $row['contador'];
+   
+    //Sumo una visita
+    $visitas = $visitas + 1;
+    //Guardo la nueva cant de visitas en la base
+    $sql="UPDATE `seccion` SET `contador`= ? WHERE `id_s` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('ii',$visitas,$id_seccion);
+    $result->execute();
+
+    return (true);
+    
 }
 }
