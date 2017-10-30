@@ -6,6 +6,15 @@ function logged(){
 function suscripto(){
 	$("#suscripto").css("display","none");
 }
+function loggedFb(){
+	$("#notlogged").css("display","none");
+	$("#logged").css("display","block");
+	$("#perfil").css("display","none");
+}
+function loggedNoticia(){
+	$('#btnLike').removeAttr('disabled');
+	$('#btnShare').attr('disabled',false);
+}
 
 /** Function para ocultar mediante el id cuando el usuario no inicio sesion */
 function mostrarSesion(){
@@ -60,4 +69,7 @@ $(window).load(function() {
 
 
 //FIN CAROUSEL//
+
+
+
 

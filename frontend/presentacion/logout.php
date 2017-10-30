@@ -7,5 +7,7 @@ session_destroy();
 //header ('Location: ' . $PRESENTACION_DIR .'/index.php');
 ?>
 <script>
+
+
 window.location.replace ("../presentacion/index.php");
 </script>

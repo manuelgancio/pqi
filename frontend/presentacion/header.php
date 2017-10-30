@@ -15,113 +15,18 @@
 <script src="<?= $JS;?>/funciones.js"></script>
 <!--FACEBOOK-->
 <script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
+<script src="<?= $JS;?>/fb.js"></script>
 <!--CALENDARIO-->
 <script src="<?= $JS;?>/calendario.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
-
-
 </head>
+<?php session_start();?>
+<script>
 
-
-<!-- FACEBOOK -->
-	<div id="fb-root"></div>
-	<script>
-	(function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) return;
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=141862136411361";
-	fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-	</script>
-	<script>
-
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else {
-      // The person is not logged into your app or we are unable to tell.
-      alert('no logeo');
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '141862136411361',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-    FB.AppEvents.logPageView();   
-  };
-
-  // Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-
-
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name + ' id: 'response.id);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
 </script>
-
-
-<div id="status">
-</div>
-<!-- FACEBOOK -->
-
 <?php 
-session_start();
-//die(var_dump($_SESSION));
+//session_start();
 ?>
 <body>
 	<div class="row">
@@ -145,10 +50,13 @@ session_start();
 			</div>
 			</form>
 		</div>
-		<div class="col-md-6">
-		<img class="header"src="<?= $IMG?>/logo.png" alt="Logo">
+
+		<div class="col-md-6 col-sm-3">
+		  <img class="header"src="<?= $IMG?>/logo.png" alt="Logo">
 		</div>
-		<div class="col-md-3">
+    <div id="status">
+    </div>
+		<div class="col-md-3 col-sm-1">
 		
 		</div>
 	</div><!-- row-->
@@ -172,14 +80,14 @@ $secciones = $seccion->listarSecciones();
 			?>
 				</li>
       </ul>
-      <div id="notlogged" name="notlogged">
+      <div id="notlogged">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" data-toggle="modal" data-target="#modalLogin"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
       </div>
       </ul>
-      <div id="logged" name="notlogged" class="oculto">
+      <div id="logged" class="oculto">
       <ul class="nav navbar-nav navbar-right">
-      	<li><a href="<?= $PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> Perfil</a></li>
+      	<li><a id="perfil" href="<?= $PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> Perfil</a></li>
         <li><a  id="suscripto"href="#" data-toggle="modal" data-target="#modalSuscripcion"><span class="glyphicon glyphicon-upload"></span> Suscribirme</a></li>
         <li><a href="<?= $PRESENTACION;?>/logout.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
       </ul>
@@ -214,9 +122,7 @@ $secciones = $seccion->listarSecciones();
             </div>
           </form>
           <!-- FACEBOOK LOGIN BUTTON -->
-          <div class="fb-login-button" scope="public_profile,email" onlogin="checkLoginState();" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
-          
-          <!--<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>-->
+          <div class="fb-login-button" scope="email,public_profile" onlogin="checkLoginState();" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
         </div><!--modal body-->
         <!--<div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

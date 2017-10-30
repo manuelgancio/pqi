@@ -100,6 +100,31 @@ public function altaComentario(){
     return (true);
 }
 public function listarComentarios(){
+/*  Devuelve los comentarios de una publicacion
+*/
+    $id_noticia = $this->getIdNoticia();
+    
+    //Consulto a la base
+    $sql="SELECT comentario.id_cm, comentario.comentario, comentario.fecha_c FROM comentario, hace, tiene 
+    WHERE (comentario.estado = 1) AND (tiene.id_a = ?) AND (hace.id_cm = comentario.id_cm) AND (tiene.id_cm = hace.id_cm)";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_noticia);
+    $result -> execute();
+    $resultado = $result->get_result();
+
+    $comentarios = array();
+    while ($row = $resultado->fetch_assoc()){
+        $comentarios[] = $row;
+    }
+
+    //Si no hay comentarios devuelvo false
+    if ($comentarios == null){
+        return (false); 
+    }else{
+        return ($comentarios);//Devuelvo los comentarios
+    }
+}
+public function listarComentariosold(){
 //Devuelve array con los comentarios de una publicacion 
 
     $id_noticia = $this->getIdNoticia();
@@ -125,7 +150,7 @@ public function listarComentarios(){
         }
         $c = implode(' OR ',$i); //convierto array a strig separado por 'OR' para consultar a la base
         //Traigo los datos de los comentarios
-        $sql="SELECT * FROM `comentario` WHERE `estado` = 1 AND(?)";
+        $sql="SELECT * FROM `comentario` WHERE `estado` = 1 AND (?)";
         $result = $this->_db->prepare($sql);
         $result -> bind_param('s',$c);
         $result -> execute();

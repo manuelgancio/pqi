@@ -10,8 +10,9 @@ class articulo extends Model{
     private $autor;
     private $destacado; //boolean
     private $comentario;//string de ids de comentario
+    private $visita;
 
-function __construct($id='',$titulo='',$noticia='',$seccion='',$fecha='',$autor='',$destacado='',$comentario='')
+function __construct($id='',$titulo='',$noticia='',$seccion='',$fecha='',$autor='',$destacado='',$comentario='',$visita='')
 {
     //Cargo el constructor de la superclase
     parent::__construct();
@@ -24,6 +25,7 @@ function __construct($id='',$titulo='',$noticia='',$seccion='',$fecha='',$autor=
     $this->autor=$autor;
     $this->destacado=$destacado;
     $this->comentario=$comentario;
+    $this->visita=$visita;
 
 }
 //SET
@@ -51,6 +53,9 @@ public function setDestacado($destacado){
 public function setComentario($comentario){
     $this->comentatio($comentario);
 }
+public function setVisita($visita){
+    $this->visita($visita);
+}
 //GET
 public function getId(){
     return $this->id;
@@ -75,6 +80,9 @@ public function getDestacado(){
 }
 public function getComentario(){
     return $this->comentario;
+}
+public function getVisita(){
+    return $this->visita();
 }
 //OTROS METODOS
 public function listarArt(){
@@ -189,14 +197,56 @@ public function verificarFecha(){
     }
 
 }
-public function comentarArt(){
-
+public function visita(){
+/* Suma una visita al contador de visitas de cada articulo en la base de datos*/
+    $id_art = $this->getId();
+    //Averiguo cantidad de visitas actuales
+    $sql="SELECT `contador_a` FROM `articulo` WHERE `id_a` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_art);
+    $result->execute();
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+    
+    $visitas = $row['contador_a'];
+       
+    //Sumo una visita
+    $visitas = $visitas + 1;
+    //Guardo la nueva cant de visitas en la base
+    $sql="UPDATE `articulo` SET `contador_a`= ? WHERE `id_a` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('ii',$visitas,$id_art);
+    $result->execute();
+    
+    return (true);
+        
 }
-public function compartirArt(){
+public function like(){
+/*  Dar me gusta a un articulo, guardar en la base
+    Bloquear icono luego de que se da mg
+*/
+    $id_art = $this->getId();
 
-}
-public function megustaArt(){
+    //Averiguo la cantidad de likes
+    $sql="SELECT `likes` FROM `articulo` WHERE id_a = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_art);
+    $result->execute();
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+    
+    $likes = $row['likes'];
+    //sumo 1 like
+    $likes = $likes + 1;
 
+    //Guardo nuevo like en la base
+    $sql="UPDATE `articulo` SET `likes`= ? WHERE id_a = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('ii',$likes,$id_art);
+    $result->execute();
+
+    return (true);
+    
 }
 public function busquedaArt(){
 

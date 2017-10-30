@@ -24,7 +24,6 @@
 	
 	$articulos_d = $articulo->listarArtDest();
 
-	//die(var_dump($articulos_d));
 ?>
 <!--PORTADA carousel-->
 <div class="container" id="carouselPortada">

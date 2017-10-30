@@ -54,7 +54,7 @@
                 <?php if(isset($_SESSION['logged']) && ($_SESSION['logged']== true)):?>
                     <li class="col-xs-10 col-md-12 list-group-item">
                         <div>
-                            <form action="<?= $LOGICA;?>/procesarComentarios.php" method="POST">
+                            <form action="<?= $LOGICA;?>/procesarComentarios.php" method="POST" id="frmComentario" name="frmComentario">
                             <input type="hidden" value="<?php echo $art['id_a']?>" name="id_noticia" id="id_noticia">
                             <div class="comment-text form-group">
                                 <input type="text" class="form-control" id="comentario" name="comentario"  maxlength="150" required>
@@ -71,5 +71,25 @@
         </div>
     </div>
 </div>
+<script>
+    /* attach a submit handler to the form */
+    $("#frmComentario").submit(function(event) {
 
+    /* stop form from submitting normally */
+    event.preventDefault();
+
+    /* get the action attribute from the <form action=""> element */
+    var $form = $( this ),
+    url = $form.attr( 'action' );
+    
+    /* Send the data using post with element id name and name2*/
+    var posting = $.post( url, { id_noticia: $('#id_noticia').val(),comentario: $('#comentario').val(),btnComentar: $('#btnComentar').val()} );
+
+    /* Alerts the results */
+    posting.done(function( data ) {
+        alert('Gracias por su comentario!');
+        comentario.value ='';
+    });
+    });
+</script>
 </body>

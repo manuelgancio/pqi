@@ -311,6 +311,54 @@ public function estadoSuscripcion(){
         return true;//el usuario esta suscripto
     }
 }
+public function fbUsuExiste(){
+/*  Devuelve id_p id_c y correo_c  si el id_fb ya esta registrado en la tabla,
+    False si el usuario todavia no esta registrado
+*/
+    $id_fb = $this->getId();
+
+    $sql="SELECT `id_cl`,`id_p`,`corre_c` FROM `cliente` WHERE `id_fb` = ?";
+    //$sql="INSERT INTO `edicion`(`titulo`) VALUES (?)";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_fb);
+    $result->execute();
+
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+
+    if($row != null){//Si devuelve algo
+        return ($row);//Datos del usuario
+    }else{
+        return (false);//No hay datos usuario no registrado
+    }
+}
+public function fbRegistro(){
+/*  Guardo datos del usuario que entra con fb por primera vez.
+    Datos: id_fb, Nombre, Apellido ,Correo
+*/
+    $id_fb = $this->getId();
+    $nombre = $this->getNombre();
+    $apellido = $this->getApellido();
+    $correo = $this->getCorreo();
+    $estado = 1;
+
+    //Guardo en tabla persona
+    $sql="INSERT INTO `persona`(`p_nomb`, `p_ap`) VALUES (?,?)";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('ss',$nombre,$apellido);
+    $result -> execute();
+    //id_p es el id auto increment generado
+    $id_p = $result->insert_id;
+    
+    //Guardo en la tabla cliente
+    $sql="INSERT INTO `cliente`(`corre_c`, `edo_cl`, `id_p`, `id_fb`) VALUES (?,?,?,?)";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('siii',$correo,$estado,$id_p,$id_fb);
+    $result -> execute();
+
+    return (true);
+
+}
 
 
 }
