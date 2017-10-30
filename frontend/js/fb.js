@@ -1,11 +1,4 @@
-function dump(response) {
-    var out = '';
-    for (var i in response) {
-        out += i + ": " + response[i] + "\n";
-    }
 
-    alert(out);
-}
 
 
 // This is called with the results from from FB.getLoginStatus().

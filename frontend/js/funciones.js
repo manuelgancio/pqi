@@ -1,11 +1,11 @@
 
-function logged(){
+window.onload(function logged(){
 	$("#notlogged").css("display","none");
 	$("#logged").css("display","block");
-}
-function suscripto(){
+})
+window.onload(function suscripto(){
 	$("#suscripto").css("display","none");
-}
+})
 function loggedFb(){
 	$("#notlogged").css("display","none");
 	$("#logged").css("display","block");
@@ -15,7 +15,14 @@ function loggedNoticia(){
 	$('#btnLike').removeAttr('disabled');
 	$('#btnShare').attr('disabled',false);
 }
+function dump(response) {
+    var out = '';
+    for (var i in response) {
+        out += i + ": " + response[i] + "\n";
+    }
 
+    alert(out);
+}
 /** Function para ocultar mediante el id cuando el usuario no inicio sesion */
 function mostrarSesion(){
 	//document.getElementById('oculto').style.display = 'block';

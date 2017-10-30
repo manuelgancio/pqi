@@ -43,100 +43,105 @@ if(isset($_SESSION['logged']) && ($_SESSION['logged'] == true)){
     <?php
     
 }
+if(isset($_GET['art'])){//Si recibo por get el id del articulo
 
-$id_art = (int) $_GET['art'];
-//Llamo a la clase articulo
-require_once($CLASES_DIR . 'articulo.class.php');
-$articulo = New articulo();
+    $id_art = (int) $_GET['art'];
+    //Llamo a la clase articulo
+    require_once($CLASES_DIR . 'articulo.class.php');
+    $articulo = New articulo();
 
-$articulo->setId($id_art);
-//Traigo datos del articulo
-$art = $articulo->listarArt();
-//Agrego una visita al contador de la base
-$visita = $articulo->visita();
-//Llamo a la clase seccion 
-require_once ($CLASES_DIR . 'seccion.class.php');
-$sec = New seccion();
-$sec->setId($art['id_s']);
+    $articulo->setId($id_art);
+    //Traigo datos del articulo
+    $art = $articulo->listarArt();
+    //Agrego una visita al contador de la base
+    $visita = $articulo->visita();
+    //Llamo a la clase seccion 
+    require_once ($CLASES_DIR . 'seccion.class.php');
+    $sec = New seccion();
+    $sec->setId($art['id_s']);
 
-$seccion = $sec->nombreSeccion();
-$seccion = $seccion['nombre'];
-?>
-<body>
-<div class="row" >
-    <div class="col-md-9">
-    
-    <div class="container articulo">
-        <div>
-            <p class="tituloNoti"><?= $art['titulo']?></p>
-            <p class="cateNoti"><?= $seccion?></p>
-            <p class="fechaNoti"><?= $art['fecha_a'];?></p>
-        </div>
-
-        <div>
-            <img class="imgNoti" src="<?= $IMG?>/bonomi.jpg" alt="Imágen">
-        </div>
-
-        <div class="form-group">
-            <form id="frmLike" name="frmLike" action="<?= $LOGICA;?>/procesarLike.php">
-                <input type="hidden" id="id_art" name="id_art" value="<?php echo $id_art;?>">
-                <button type="submit" id="btnLike" name="btnLike" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-            </form>
-
-            <div class="fb-share-button" data-href="http://localhost/pqi/frontend/presentacion/index.php" data-layout="button" data-size="small" data-mobile-iframe="true">
-            <a class="fb-xfbml-parse-ignore" target="_blank" href="href="http://www.facebook.com/sharer.php?u=http://localhost/pqi/frontend/presentacion&t=paqueteinformes>Compartir</a></div></div>
-        </div>
-        <script>
-            /* attach a submit handler to the form */
-            $("#frmLike").submit(function(event) {
-
-            /* stop form from submitting normally */
-            event.preventDefault();
-
-            /* get the action attribute from the <form action=""> element */
-            var $form = $( this ),
-                url = $form.attr( 'action' );
-
-            /* Send the data using post with element id name and name2*/
-            var posting = $.post( url, { id_art: $('#id_art').val()} );
-
-            /* Alerts the results */
-            posting.done(function( data ) {
-                $('#btnLike').attr('disabled','-1')
-            });
-            });
-        </script>
-        <div class="txtNoti">
-            <p>
-            <?= $art['contenido'];?>
-            </p>
-        </div>
-    </div><!--container-->
-    </div>
-    <div class="col-md-3">
-
-    </div>
-    
-</div> <!--row-->
-
-<div class="row">
-    
-    <div class="publiBanner">
-    <?php 
-    //LLamo a la clase publicidad
-    require_once($CLASES_DIR . 'publicidad.class.php');
-    $publicidad= New publicidad();
-
-    $banner = $publicidad->listarPubNoticia();
+    $seccion = $sec->nombreSeccion();
+    $seccion = $seccion['nombre'];
     ?>
-    <img class="" src="<?php echo $banner['publicacion'];?>">
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-2">
-    </div>
-    
-    
-<?php
-include('comentarios.php');
+    <body>
+    <div class="row" >
+        <div class="col-md-9">
+        
+        <div class="container articulo">
+            <div>
+                <p class="tituloNoti"><?= $art['titulo']?></p>
+                <p class="cateNoti"><?= $seccion?></p>
+                <p class="fechaNoti"><?= $art['fecha_a'];?></p>
+            </div>
 
+            <div>
+                <img class="imgNoti" src="<?= $IMG?>/bonomi.jpg" alt="Imágen">
+            </div>
+
+            <div class="form-group">
+                <form id="frmLike" name="frmLike" action="<?= $LOGICA;?>/procesarLike.php">
+                    <input type="hidden" id="id_art" name="id_art" value="<?php echo $id_art;?>">
+                    <button type="submit" id="btnLike" name="btnLike" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                </form>
+
+                <div class="fb-share-button" data-href="http://localhost/pqi/frontend/presentacion/index.php" data-layout="button" data-size="small" data-mobile-iframe="true">
+                <a class="fb-xfbml-parse-ignore" target="_blank" href="href="http://www.facebook.com/sharer.php?u=http://localhost/pqi/frontend/presentacion&t=paqueteinformes>Compartir</a></div></div>
+            </div>
+            <script>
+                /* attach a submit handler to the form */
+                $("#frmLike").submit(function(event) {
+
+                /* stop form from submitting normally */
+                event.preventDefault();
+
+                /* get the action attribute from the <form action=""> element */
+                var $form = $( this ),
+                    url = $form.attr( 'action' );
+
+                /* Send the data using post with element id name and name2*/
+                var posting = $.post( url, { id_art: $('#id_art').val()} );
+
+                /* Alerts the results */
+                posting.done(function( data ) {
+                    $('#btnLike').attr('disabled','-1')
+                });
+                });
+            </script>
+            <div class="txtNoti">
+                <p>
+                <?= $art['contenido'];?>
+                </p>
+            </div>
+        </div><!--container-->
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        
+    </div> <!--row-->
+
+    <div class="row">
+        
+        <div class="publiBanner">
+        <?php 
+        //LLamo a la clase publicidad
+        require_once($CLASES_DIR . 'publicidad.class.php');
+        $publicidad= New publicidad();
+
+        $banner = $publicidad->listarPubNoticia();
+        ?>
+        <img class="" src="<?php echo $banner['publicacion'];?>">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        
+        
+    <?php
+    include('comentarios.php');
+}else{//Si no recibi ningun id de articulo...
+    ?>
+    <script>window.location.replace('../presentacion/index.php');</script>
+    <?php
+}

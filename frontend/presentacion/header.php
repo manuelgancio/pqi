@@ -21,12 +21,23 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 </head>
-<?php session_start();?>
-<script>
 
-</script>
-<?php 
-//session_start();
+<?php
+session_start();
+if(isset($_SESSION["logged"]) && ($_SESSION["logged"] == true)){
+?>
+	<script>
+     logged();
+	</script>
+<?php
+	if($_SESSION['Suscripto'] == true){
+?>
+		<script>
+		suscripto();
+	   </script>
+<?php
+	}
+}
 ?>
 <body>
 	<div class="row">
@@ -182,21 +193,5 @@ $secciones = $seccion->listarSecciones();
 
 
 </body>
+
 <?php
-if(isset($_SESSION["logged"]) && ($_SESSION["logged"] == true)){
-    echo "Bienvenido! " . $_SESSION['Correo'];
-    echo "Bienvenido! " . $_SESSION['Suscripto'];
-?>
-	<script>
-     logged();
-	</script>
-<?php
-	if($_SESSION['Suscripto'] == true){
-?>
-		<script>
-		suscripto();
-	   </script>
-<?php
-	}
-}
-?>

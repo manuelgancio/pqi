@@ -43,7 +43,7 @@ if(isset($_GET['nombre'])){
         <script>
             console.log('Registro correcto');
             //Redirect Index
-            window.location.replace('../presentacion/index.php?fb=true');
+            window.location.replace('../presentacion/index.php');
         </script>
         <?php
         }else{
@@ -60,7 +60,7 @@ if(isset($_GET['nombre'])){
         //Redirect index
         ?>
         <script>
-        window.location.replace('../presentacion/index.php?fb=true');
+        window.location.replace('../presentacion/index.php');
         console.log('usu registrado');
         </script>
         <?php

@@ -2,7 +2,7 @@
     <?php 
         include $PRESENTACION_DIR ."header.php";
     ?>
-    <!-- PORTADA -->
+    <!-- PORTADA --> 
     <div class="well well-sm text-muted" id="portada"><h3>PORTADA</h3></div>
 
 <?php
