@@ -1,12 +1,10 @@
 <?php 
 
-//if(isset($_GET['btnEdicion'])){
-if(isset($_GET['selectedDate'])){
-    $fecha_e = $_GET['selectedDate'];
+if(isset($_GET['btnEdicion'])){
+    if(isset($_GET['selectedDate'])){
+        $fecha_e = $_GET['selectedDate'];
     
-    echo $fecha_e;
-    echo 1;
-    die();
+  
     //Verifico que sea menor o igual a la fecha de hoy
 
     $fecha_hoy = date('Y-m-d');
@@ -46,4 +44,5 @@ if(isset($_GET['selectedDate'])){
     }
     
 
+}
 }

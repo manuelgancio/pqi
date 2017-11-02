@@ -49,7 +49,7 @@
 				<div class="form-group">
 					<div class="col-xs-5 col-xs-offset-3">
 						<button type="submit" class="btn btn-primary" id="btnEdicion" name="btnEdicion"><span class="glyphicon glyphicon-search"></span></button>
-					</div>
+						</div>
 				</div>
 			</div>
 			</form>
