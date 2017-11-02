@@ -20,8 +20,7 @@
 .publiBanner{
     background-color: red;
     margin-bottom: 20px;
-    margin-left: 10%;
-    margin-right:10%;
+   
     align-self:center;
 }
 .oculto{
@@ -74,6 +73,18 @@
     text-align: justify;
     
 }
+.like{
+    margin-left:15%;
+    margin-top:15px;
+}
+#likeNoticia {
+    
+    
+}
+#compartirNoticia{
+
+}   
+
 /*texto articulos destacados en index*/
 .item-txt{
     white-space: nowrap;

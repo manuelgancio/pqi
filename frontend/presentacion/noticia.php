@@ -64,83 +64,88 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
     $seccion = $seccion['nombre'];
     ?>
     <body>
-    <div class="row" >
-        <div class="col-md-9">
-        
-        <div class="container articulo">
-            <div>
-                <p class="tituloNoti"><?= $art['titulo']?></p>
-                <p class="cateNoti"><?= $seccion?></p>
-                <p class="fechaNoti"><?= $art['fecha_a'];?></p>
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-9">
+                <div class="articulo">
+                    <div>
+                        <p class="tituloNoti"><?= $art['titulo']?></p>
+                        <p class="cateNoti"><?= $seccion?></p>
+                        <p class="fechaNoti"><?= $art['fecha_a'];?></p>
+                    </div>
+                </div>  
             </div>
+        </div>
 
-            <div>
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
                 <img class="imgNoti" src="<?= $IMG?>/bonomi.jpg" alt="Imágen">
             </div>
+        </div>
+            
+        <div class="row">
+            <div class="like">
+                <div class="form-group likeNoticia col-md-1">
+                        <form id="frmLike" name="frmLike" action="<?= $LOGICA;?>/procesarLike.php">
+                            <input type="hidden" id="id_art" name="id_art" value="<?php echo $id_art;?>">
+                            <button type="submit" id="btnLike" name="btnLike" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                        </form>
+                </div>
+                <div class="compartirNoticia col-md-1">
+                    <div class="fb-share-button" data-href="http://localhost/pqi/frontend/presentacion/index.php" data-layout="button" data-size="small" data-mobile-iframe="true">
+                        <a class="fb-xfbml-parse-ignore" target="_blank" href="href="http://www.facebook.com/sharer.php?u=http://localhost/pqi/frontend/presentacion&t=paqueteinformes>Compartir</a></div></div>
+                </div>
+            </div>  
+                <script>
+                    /* attach a submit handler to the form */
+                    $("#frmLike").submit(function(event) {
 
-            <div class="form-group">
-                <form id="frmLike" name="frmLike" action="<?= $LOGICA;?>/procesarLike.php">
-                    <input type="hidden" id="id_art" name="id_art" value="<?php echo $id_art;?>">
-                    <button type="submit" id="btnLike" name="btnLike" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-                </form>
+                    /* stop form from submitting normally */
+                    event.preventDefault();
 
-                <div class="fb-share-button" data-href="http://localhost/pqi/frontend/presentacion/index.php" data-layout="button" data-size="small" data-mobile-iframe="true">
-                <a class="fb-xfbml-parse-ignore" target="_blank" href="href="http://www.facebook.com/sharer.php?u=http://localhost/pqi/frontend/presentacion&t=paqueteinformes>Compartir</a></div></div>
-            </div>
-            <script>
-                /* attach a submit handler to the form */
-                $("#frmLike").submit(function(event) {
+                    /* get the action attribute from the <form action=""> element */
+                    var $form = $( this ),
+                        url = $form.attr( 'action' );
 
-                /* stop form from submitting normally */
-                event.preventDefault();
+                    /* Send the data using post with element id name and name2*/
+                    var posting = $.post( url, { id_art: $('#id_art').val()} );
 
-                /* get the action attribute from the <form action=""> element */
-                var $form = $( this ),
-                    url = $form.attr( 'action' );
-
-                /* Send the data using post with element id name and name2*/
-                var posting = $.post( url, { id_art: $('#id_art').val()} );
-
-                /* Alerts the results */
-                posting.done(function( data ) {
-                    $('#btnLike').attr('disabled','-1')
-                });
-                });
-            </script>
-            <div class="txtNoti">
+                    /* Alerts the results */
+                    posting.done(function( data ) {
+                        $('#btnLike').attr('disabled','-1')
+                    });
+                    });
+                </script>
+        </div><!--row-->
+        <div class="row">
+            <div class="txtNoti col-md-9 col-sm-12">
                 <p>
-                <?= $art['contenido'];?>
+                    <?= $art['contenido'];?>
                 </p>
             </div>
-        </div><!--container-->
-        </div>
-        <div class="col-md-3">
-
-        </div>
-        
-    </div> <!--row-->
-
+          
+        </div> <!--row-->
+</div><!--container-->
+<div class="container">
     <div class="row">
-        
-        <div class="publiBanner">
-        <?php 
-        //LLamo a la clase publicidad
-        require_once($CLASES_DIR . 'publicidad.class.php');
-        $publicidad= New publicidad();
-
-        $banner = $publicidad->listarPubNoticia();
-        if ($banner != null){
-        ?>
-        <img class="" src="<?php echo $banner;?>">
-        </div>
-        <?php
-        }
-        ?>
+            
+            <div class="publiBanner col-sm-12">
+            <?php 
+            //LLamo a la clase publicidad
+            require_once($CLASES_DIR . 'publicidad.class.php');
+            $publicidad= New publicidad();
+            //Devuelve false o url de img publicidad
+            $banner = $publicidad->listarPubNoticia();
+            if ($banner != null){
+            ?>
+            <img class="" src="<?php echo $banner;?>">
+            </div>
+            <?php
+            }
+            ?>
     </div>
-    <div class="row">
-        <div class="col-md-2">
-        </div>
-        
+</div>
+   
         
     <?php
     include('comentarios.php');

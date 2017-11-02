@@ -32,7 +32,7 @@
 		<div class="col-md-7 col-sm-3">
 		  <img class="logoimg"src="<?= $IMG?>/logo.png" alt="Logo">
 		</div>
-    
+     
 		
 		<div class="col-md-3 col-sm-1">
 			<!--CALENDARIO-->
