@@ -1,12 +1,12 @@
 <?php 
 //Datos pasados por ajax
-if(isset($_GET['id_fb'])){
-    $id_fb = $_GET['id_fb'];
+if(isset($_POST['id_fb'])){
+    $id_fb = $_POST['id_fb'];
 }
-if(isset($_GET['nombre'])){
-    $nombre = $_GET['nombre'];
+if(isset($_POST['nombre'])){
+    $nombre = $_POST['nombre'];
 }
-
+session_start();
 
 //Verifico si el usuario ya existe
 //LLamo a la clase usuario
@@ -32,13 +32,20 @@ if(isset($_GET['nombre'])){
         $u->setNombre($nom);
         $u->setApellido($ape);
         $u->setCorreo($correo);
-
+        
         $r = $u->fbRegistro();//Metodo para registro
         
         if ($r == true){//registro correcto
-            session_start();
+            
             $_SESSION["Correo"] = $correo;
             $_SESSION["logged"] = true;
+            $_SESSION['fb'] = true;
+
+            echo $_SESSION["Correo"] = $correo;
+            echo $_SESSION['fb'] = true;
+            echo $_SESSION['logged'] = true;
+            
+            
         ?>
         <script>
             console.log('Registro correcto');
@@ -54,15 +61,23 @@ if(isset($_GET['nombre'])){
             Creo session con el correo del usuario
         */
         $correo =  $registro['corre_c'];
+
         $_SESSION["Correo"] = $correo;
         $_SESSION["logged"] = true;
+        $_SESSION["fb"] = true;
+        
         
         //Redirect index
         ?>
         <script>
         window.location.replace('../presentacion/index.php');
         console.log('usu registrado');
+        
+        
         </script>
-        <?php
 
+        <?php
+        echo $_SESSION["Correo"] = $correo;
+        echo $_SESSION['fb'] = true;
+        echo $_SESSION['logged'] = true;
     }

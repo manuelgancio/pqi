@@ -318,7 +318,6 @@ public function fbUsuExiste(){
     $id_fb = $this->getId();
 
     $sql="SELECT `id_cl`,`id_p`,`corre_c` FROM `cliente` WHERE `id_fb` = ?";
-    //$sql="INSERT INTO `edicion`(`titulo`) VALUES (?)";
     $result = $this->_db->prepare($sql);
     $result -> bind_param('i',$id_fb);
     $result->execute();
@@ -326,11 +325,12 @@ public function fbUsuExiste(){
     $resultado = $result->get_result();
     $row = $resultado->fetch_assoc();
 
-    if($row != null){//Si devuelve algo
-        return ($row);//Datos del usuario
+    if ($row == NULL){
+        return false;
     }else{
-        return (false);//No hay datos usuario no registrado
+        return ($row);
     }
+    
 }
 public function fbRegistro(){
 /*  Guardo datos del usuario que entra con fb por primera vez.

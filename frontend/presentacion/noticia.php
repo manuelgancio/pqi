@@ -129,9 +129,13 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
         $publicidad= New publicidad();
 
         $banner = $publicidad->listarPubNoticia();
+        if ($banner != null){
         ?>
-        <img class="" src="<?php echo $banner['publicacion'];?>">
+        <img class="" src="<?php echo $banner;?>">
         </div>
+        <?php
+        }
+        ?>
     </div>
     <div class="row">
         <div class="col-md-2">

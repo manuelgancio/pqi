@@ -1,15 +1,17 @@
 
-window.onload(function logged(){
+
+function logged(){
 	$("#notlogged").css("display","none");
 	$("#logged").css("display","block");
-})
-window.onload(function suscripto(){
+}
+function suscripto(){
 	$("#suscripto").css("display","none");
-})
+}
 function loggedFb(){
 	$("#notlogged").css("display","none");
 	$("#logged").css("display","block");
 	$("#perfil").css("display","none");
+	
 }
 function loggedNoticia(){
 	$('#btnLike').removeAttr('disabled');

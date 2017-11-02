@@ -22,26 +22,19 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 </head>
 
-<?php
-session_start();
-if(isset($_SESSION["logged"]) && ($_SESSION["logged"] == true)){
-?>
-	<script>
-     logged();
-	</script>
-<?php
-	if($_SESSION['Suscripto'] == true){
-?>
-		<script>
-		suscripto();
-	   </script>
-<?php
-	}
-}
-?>
 <body>
+<div class="container">
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-2 col-sm-1">
+
+		</div>
+
+		<div class="col-md-7 col-sm-3">
+		  <img class="logoimg"src="<?= $IMG?>/logo.png" alt="Logo">
+		</div>
+    
+		
+		<div class="col-md-3 col-sm-1">
 			<!--CALENDARIO-->
 			<form action="<?= $LOGICA;?>/procesarEdicion.php" method="GET" id="frmEdicion">
 			<div class="row">
@@ -61,16 +54,9 @@ if(isset($_SESSION["logged"]) && ($_SESSION["logged"] == true)){
 			</div>
 			</form>
 		</div>
-
-		<div class="col-md-6 col-sm-3">
-		  <img class="header"src="<?= $IMG?>/logo.png" alt="Logo">
-		</div>
-    <div id="status">
-    </div>
-		<div class="col-md-3 col-sm-1">
-		
 		</div>
 	</div><!-- row-->
+</div><!--container-->
 
 <!-- BARRA DE NAVEGACION -->
 <?php
@@ -91,6 +77,9 @@ $secciones = $seccion->listarSecciones();
 			?>
 				</li>
       </ul>
+			<ul class="nav navbar-nav">
+        <li><a href=""><span class="glyphicon glyphicon-blog"></span>Blog</a></li>
+      </ul>
       <div id="notlogged">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" data-toggle="modal" data-target="#modalLogin"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
@@ -100,7 +89,8 @@ $secciones = $seccion->listarSecciones();
       <ul class="nav navbar-nav navbar-right">
       	<li><a id="perfil" href="<?= $PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> Perfil</a></li>
         <li><a  id="suscripto"href="#" data-toggle="modal" data-target="#modalSuscripcion"><span class="glyphicon glyphicon-upload"></span> Suscribirme</a></li>
-        <li><a href="<?= $PRESENTACION;?>/logout.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+        <!--<li><a id="btnLogout" href="<?= $PRESENTACION;?>/logout.php" onclick="FB.logout()"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>-->
+				<li><a href="<?= $PRESENTACION;?>/logout.php" onclick="logoutFb()"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
       </ul>
       </div>
 
@@ -195,3 +185,25 @@ $secciones = $seccion->listarSecciones();
 </body>
 
 <?php
+
+if (isset($_SESSION['fb']) && ($_SESSION['fb'] == true)){
+	?>
+	<script>
+	loggedFb();
+	</script>
+	<?php
+}else
+if(isset($_SESSION["logged"]) && ($_SESSION["logged"] == true) && (!isset($_SESSION['fb']))) {
+?>
+	<script>
+		 logged();
+	</script>
+<?php
+	if($_SESSION['Suscripto'] == true){
+?>
+		<script>
+		suscripto();
+	   </script>
+<?php
+	}
+}

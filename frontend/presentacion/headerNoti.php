@@ -36,18 +36,23 @@ $secciones = $seccion->listarSecciones();
       <?php endforeach; ?>
 			</li>
       </ul>
-        <div id="notlogged" name="notlogged">
+      <ul class="nav navbar-nav">
+        <li><a href=""><span class="glyphicon glyphicon-blog"></span>Blog</a></li>
+      </ul>
+        <div id="notlogged">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" data-toggle="modal" data-target="#modalLogin"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a></li>
             </ul>
         </div>
-      <div id="logged" name="notlogged" class="oculto">
+      <div id="logged" class="oculto">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?= $PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> Perfil</a></li>
-            <li><a  id="suscripto"href="#" data-toggle="modal" data-target="#modalSuscripcion"><span class="glyphicon glyphicon-upload"></span> Suscribirme</a></li>
-            <li><a href="<?= $PRESENTACION;?>/logout.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+            <li><a id="perfil" name="perfil" href="<?= $PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> Perfil</a></li>
+            <li><a id="suscripto" href="#" data-toggle="modal" data-target="#modalSuscripcion"><span class="glyphicon glyphicon-upload"></span> Suscribirme</a></li>
+            <li><a id="btnLogout" href="<?= $PRESENTACION;?>/logout.php" onclick="logoutFb()"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+				    
           </ul>
       </div>
+     
     </div>
   </nav>
 
@@ -130,13 +135,25 @@ $secciones = $seccion->listarSecciones();
 	</div><!--dialog-->
 </div><!--modal -->
 </body>
-
-<?php if(isset($_SESSION["logged"]) && ($_SESSION["logged"] == true)) : ?> 
+<?php
+if (isset($_SESSION['fb']) && ($_SESSION['fb'] == true)){
+	?>
+	<script>
+	loggedFb();
+	</script>
+	<?php
+}else
+if(isset($_SESSION["logged"]) && ($_SESSION["logged"] == true) && (!isset($_SESSION['loggedfb']))) {
+?>
 	<script>
      logged();
 	</script>
-<?php elseif (isset($_SESSION['Suscripto']) && ($_SESSION['Suscripto'] == true)) : ?>
+<?php
+	if($_SESSION['Suscripto'] == true){
+?>
 		<script>
-		  suscripto();
-	  </script>
-<?php endif; ?>
+		suscripto();
+	   </script>
+<?php
+	}
+}

@@ -87,9 +87,41 @@ public function listarPubIndex(){
             $i[] = $p['p'];
         }
     return ($publicidades);
-}
+    }
 }
 public function listarPubNoticia(){
+    $espacio = 2; //noticias banner
+    $fecha_hoy = date('Y-m-d');
+
+    $sql="SELECT publicidad.publicacion AS p FROM publicidad, espacio, hay WHERE espacio.ubicacion = ? 
+    AND publicidad.fecha_h > ? AND hay.id_pub = publicidad.id_pub AND hay.id_esp = espacio.id_esp";
+    $result=$this->_db->prepare($sql);
+    $result ->bind_param('ss',$espacio,$fecha_hoy);
+    $result ->execute();
+    $resultado = $result->get_result();
+
+    $publicidades = array();
+    while ($row = $resultado->fetch_assoc()){
+        $publicidades[] = $row;
+    }
+
+    //Si no hay publicidades en esa publicacion...
+    if ($publicidades == null){
+        return (false); //Devuelve false
+    }else{
+        $i = array();
+        foreach($publicidades as $p){//paso de array multi a simple
+            $i[] = $p['p'];
+        }
+        
+        $p = array_rand($i);
+        
+        
+    return ($i[$p]);
+    
+    }
+}
+public function listarPubNoticiaOld(){
 //Devuelve la ruta a la img de una publicidad que este en fecha valida
 //De todas la publicidades selecciona una aleatoriamente
 //Banner Noticia = espacio 2 (bd)
