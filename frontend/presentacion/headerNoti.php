@@ -136,10 +136,11 @@ $secciones = $seccion->listarSecciones();
 </div><!--modal -->
 </body>
 <?php
+
 if (isset($_SESSION['fb']) && ($_SESSION['fb'] == true)){
 	?>
 	<script>
-	loggedFb();
+	  loggedFb();
 	</script>
 	<?php
 }else

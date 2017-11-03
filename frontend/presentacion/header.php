@@ -21,7 +21,9 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 </head>
-
+<?php
+	session_start();
+?>
 <body>
 <div class="container">
 	<div class="row">
@@ -189,21 +191,21 @@ $secciones = $seccion->listarSecciones();
 if (isset($_SESSION['fb']) && ($_SESSION['fb'] == true)){
 	?>
 	<script>
-	loggedFb();
+		loggedFb();
 	</script>
 	<?php
-}else
-if(isset($_SESSION["logged"]) && ($_SESSION["logged"] == true) && (!isset($_SESSION['fb']))) {
+}
+if (isset($_SESSION["logged"]) && ($_SESSION["logged"] == true)) {
 ?>
 	<script>
 		 logged();
 	</script>
 <?php
-	if($_SESSION['Suscripto'] == true){
+}
+if(isset($_SESSION['Suscripto']) && ($_SESSION['Suscripto']) == true){
 ?>
 		<script>
 		suscripto();
 	   </script>
 <?php
-	}
 }

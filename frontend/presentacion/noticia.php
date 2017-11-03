@@ -79,7 +79,7 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
 
         <div class="row">
             <div class="col-md-9 col-sm-12">
-                <img class="imgNoti" src="<?= $IMG?>/bonomi.jpg" alt="Imágen">
+                <img class="imgNoti" src="http://placehold.it/720x470/eeeeee/333333" alt="Imágen">
             </div>
         </div>
             

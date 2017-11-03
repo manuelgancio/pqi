@@ -13,14 +13,12 @@
     margin-top: 50px;
 }
 .publicidadIndex{
-	background-color: red;
+	
 	height: 200px;
 	width: 260px;
 }
 .publiBanner{
-    background-color: red;
     margin-bottom: 20px;
-   
     align-self:center;
 }
 .oculto{
@@ -116,12 +114,12 @@
 .articuloD .img{
     height:300px;
     width:100%;
-    background-color: red;
+    
 }
 .articulo .img{
     height:250;
     width:100%;
-    background-color:yellow;
+        
 }
 .articulo .titulo{
     font-size: 20px;

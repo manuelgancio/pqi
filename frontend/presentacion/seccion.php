@@ -92,7 +92,7 @@ foreach ($articulos as $art){
     <div class="articulo">
         <div class="col-md-3 art">
             <a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>">
-                <div class="img"><img alt="" src="http://placehold.it/250x250/dddddd/333333"></div>
+                <div class="img"><img alt="" src="http://placehold.it/299x250/dddddd/333333"></div>
             </a>
             <div class="descArt">
                 <!--<div class="seccion"></div>-->

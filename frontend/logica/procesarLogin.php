@@ -7,7 +7,7 @@ if(isset($_POST['btnIngresar'])){
 
     // Load user class
     require($CLASES_DIR . 'usuario.class.php');
-    $usuario = New usuario();  
+    $usuario = New usuario();
 
     $usuario->setCorreo($correo);
     $usuario->setPass($pwd);
