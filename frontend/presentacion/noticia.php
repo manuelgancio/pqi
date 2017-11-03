@@ -92,8 +92,8 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
                         </form>
                 </div>
                 <div class="compartirNoticia col-md-1">
-                    <div class="fb-share-button" data-href="http://localhost/pqi/frontend/presentacion/index.php" data-layout="button" data-size="small" data-mobile-iframe="true">
-                        <a class="fb-xfbml-parse-ignore" target="_blank" href="href="http://www.facebook.com/sharer.php?u=http://localhost/pqi/frontend/presentacion&t=paqueteinformes>Compartir</a></div></div>
+                    <div class="fb-share-button" data-href="http://localhost" data-layout="button" data-size="large" data-mobile-iframe="true">
+                    <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2F&amp;src=sdkpreparse">Compartir</a></div>
                 </div>
             </div>  
                 <script>
