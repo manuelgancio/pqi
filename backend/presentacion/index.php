@@ -35,8 +35,7 @@
         </div>
         <div class="card-body">
 
-          
-          <form action="perfil.php" method="POST">
+          <form action="<?php echo $LOGICA;?>login.php" method="POST">
 
             <div class="form-group">
               <label for="exampleInputEmail1">Correo Electronico</label>

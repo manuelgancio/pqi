@@ -9,7 +9,7 @@ session_start();
 
     if($_SERVER['REQUEST_METHOD'] != 'POST'){
         // Just load index template
-    require('..' . $PRESENTACION_DIR . '/login.php');        
+    require('..' . $PRESENTACION_DIR . '/index.php');        
     }
 
     else {
@@ -26,7 +26,8 @@ session_start();
         $user->setPassword($password);
 
 
-
+        $user->obtenerIdEmpleado(); 
+        
         $ERROR = $user->validate($username,$password);
         
         $CATEGORIA = $user->categoria();

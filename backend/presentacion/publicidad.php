@@ -1,5 +1,7 @@
 <?php
 session_start();
+require($CLASES_DIR . 'publicidad.php');
+$pub = New clasePublicidad();
 
 ?>
 <!DOCTYPE html>
@@ -10,36 +12,44 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Pqi. Backend</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Plugin CSS -->
     <link href="../vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="../css/sb-admin.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="jquery.ui.datepicker-es.js"></script>
+
+    <script>
+    $(function () {
+    $("#from").datepicker({
+    onClose: function (selectedDate) {
+    $("#to").datepicker("option", "minDate", selectedDate);
+    }
+    });
+    $("#to").datepicker({
+    onClose: function (selectedDate) {
+    $("#from").datepicker("option", "maxDate", selectedDate);
+    }
+    });
+    });
+    </script>
 
   </head>
 
   <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-      <a class="navbar-brand" href="#">PQI - Backend</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-
-        
+    <a class="navbar-brand" href="#">PQI - Backend</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
       <div class="collapse navbar-collapse" id="navbarResponsive">
 
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
@@ -63,13 +73,13 @@ session_start();
                 <a href="abmAdmin.php">Administradores</a>
               </li>
               <li>
-                <a href="#">Moderador</a>
+                <a href="abmModerador.php">Moderador</a>
               </li>
               <li>
-                <a href="#">Editor</a>
+                <a href="abmEditor.php">Editor</a>
               </li>
               <li>
-                <a href="#">Master</a>
+                <a href="abmMaster.php">Master</a>
               </li>
             </ul>
           </li>
@@ -105,7 +115,7 @@ session_start();
             </a>
             <ul class="sidenav-second-level collapse" id="collapseComponents">
               <li>
-                <a href="miCuenta.php">- Mi cuenta</a>
+                <a href="static-nav.html">- Mi cuenta</a>
               </li>
               <li>
                 <a href="static-nav.html">- General</a>
@@ -211,7 +221,7 @@ session_start();
           <li class="nav-item">
             <form class="form-inline my-2 my-lg-0 mr-lg-2">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
+                <input type="text" class="form-control" placeholder="Buscar...">
                 <span class="input-group-btn">
                   <button class="btn btn-primary" type="button">
                     <i class="fa fa-search"></i>
@@ -245,117 +255,82 @@ session_start();
           </li>
           <li class="breadcrumb-item active">Inicio</li>
         </ol>
- 
-
-<div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="well-block">
-                        <div class="well-title">
-                            <h2>Registrar publicidad</h2>
-                        </div>
-                        <form>
-                            <!-- Form start -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label" for="name">Empresa</label>
-                                        <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md">
-                                    </div>
-                                </div>
-                                <!-- Text input-->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label" for="email">Contacto</label>
-                                        <input id="email" name="email" type="text" placeholder="E-Mail" class="form-control input-md">
-                                    </div>
-                                </div>
-                                <!-- Text input-->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label" for="date">Telefono</label>
-                                        <input id="date" name="date" type="text" placeholder="Celular o Fijo" class="form-control input-md">
-                                    </div>
-                                </div>
-                                <!-- Select Basic -->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label" for="time">Lapso</label>
-                                        <select id="time" name="time" class="form-control">
-                                            <option value="1 año">1 año</option>
-                                            <option value="2 años">2 años</option>
-                                            <option value="3 años">3 años</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!-- Select Basic -->
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="control-label" for="appointmentfor">Tipo de servicio</label>
-                                        <select id="appointmentfor" name="appointmentfor" class="form-control">
-                                            <option value="Service#1">Basico</option>
-                                            <option value="Service#2">Medio</option>
-                                            <option value="Service#3">Premium</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!-- Button -->
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- form end -->
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="well-block">
-                        <div class="well-title">
-                            <h2>Why Appointment with Us</h2>
-                        </div>
-                        <div class="feature-block">
-                            <div class="feature feature-blurb-text">
-                                <h4 class="feature-title">24/7 Hours Available</h4>
-                                <div class="feature-content">
-                                    <p>Integer nec nisi sed mi hendrerit mattis. Vestibulum mi nunc, ultricies quis vehicula et, iaculis in magnestibulum.</p>
-                                </div>
-                            </div>
-                            <div class="feature feature-blurb-text">
-                                <h4 class="feature-title">Experienced Staff Available</h4>
-                                <div class="feature-content">
-                                    <p>Aliquam sit amet mi eu libero fermentum bibendum pulvinar a turpis. Vestibulum quis feugiat risus. </p>
-                                </div>
-                            </div>
-                            <div class="feature feature-blurb-text">
-                                <h4 class="feature-title">Low Price & Fees</h4>
-                                <div class="feature-content">
-                                    <p>Praesent eu sollicitudin nunc. Cras malesuada vel nisi consequat pretium. Integer auctor elementum nulla suscipit in.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         
+       
 
+        <div class="col-md-12 well">
+        <a class="btn btn-primary" style="margin: 5px;" data-toggle="modal" data-target="#usuario"><i class="fa fa-fw -square -circle fa-plus-square"></i> Nuevo </a>
+        </div>
 
+        <div class="fade modal" id="usuario">
+          <div class="modal-dialog">
+              <div class="modal-content">
+              <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h2 class="modal-title" id="myModalLabel">Nueva Publicidad</h2>
+              </div>
+                <div class="modal-body">                           
+              
+              <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo $LOGICA;?>publicidad.php" method="POST">
+                  <table>
+                  <tr>
+                  <td> 
+                  Desde:
+                  <input type="date" id="fDesde" name="fDesde" />
+                  </td>
+                  <td>
+                  Hasta:
+                  <input type="date" id="fHasta" name="fHasta" />
+                  </td>
+                  </tr> 
+                  <tr>
+                  
+                  <div>
+                    <?php
+                    $pub->listarEspacios();
+                    ?>
+                    <hr class="style1">
+                  </div>
+                   
+                  <div style="margin: 20px;">  
+                    <h6>Ingresa la propaganda:</h6>
+                    <input type="file" name="fileToUpload" id="fileToUpload" class="text-center center-block well well-sm">
+                    <br>
+                    <hr class="style1">
+                  </div>                  
+                  </tr>
 
+                  </table>
+                  <br>
+                    <hr class="style1">
+                  <div style="margin-top: 5px;">
+                  <button id="myBtn" type="submit" value="Upload Image" class="btn btn-primary" name="cargar">
+                  <i class="fa fa-fw fa-save"></i>Guardar</button>
+                  </div>  
 
+                </div>
+              </div>
+          </div>
+        </div>
+      <?php  
+      
 
+      $pub->publicidades();
 
+      ?>
+          </form>
+
+          </div>
+        </div>
       </div>
-      <!-- /.container-fluid -->
-    </div>
-    <!-- /.content-wrapper -->
+
+      
 
 
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright &copy; Your Website 2017</small>
+          <small>Copyright &copy; PQI 2017</small>
         </div>
       </div>
     </footer>
@@ -380,7 +355,7 @@ session_start();
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="index.php">Aceptar</a>
+            <a class="btn btn-primary" href="<?php echo $LOGICA;?>cerrarSesion.php">Aceptar</a>
           </div>
         </div>
       </div>

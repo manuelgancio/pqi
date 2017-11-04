@@ -7,9 +7,11 @@
 
         ini_set('display_errors','on');
 
-    $PATH = $_SERVER["DOCUMENT_ROOT"] ;
+    $PATH = $_SERVER["DOCUMENT_ROOT"];
     
     //echo $PATH;
+
+    $CONTENIDOESTATICO ='192.168.43.128/';
 
     #PARA LLAMAR DESDE HTML#
     $PRESENTACION='/presentacion/';

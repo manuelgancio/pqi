@@ -1,12 +1,13 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
 
 
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +28,10 @@
     <!-- Custom styles for this template -->
     <link href="../css/sb-admin.css" rel="stylesheet">
 
-  
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
   </head>
 
@@ -66,13 +70,13 @@
                 <a href="abmAdmin.php">Administradores</a>
               </li>
               <li>
-                <a href="#">Moderador</a>
+                <a href="abmModerador.php">Moderador</a>
               </li>
               <li>
-                <a href="#">Editor</a>
+                <a href="abmEditor.php">Editor</a>
               </li>
               <li>
-                <a href="#">Master</a>
+                <a href="abmMaster.php">Master</a>
               </li>
             </ul>
           </li>
@@ -265,13 +269,18 @@
                 </div>
             </div>
         </div>
+
         <div class="section">
             <div class="container">
-               
                 <div class="row">
                     <div class="col-md-12 well">
                         <a class="btn btn-primary" style="margin: 5px;" data-toggle="modal" data-target="#usuario"><i class="fa fa-fw -square -circle fa-plus-square"></i> Usuario nuevo</a>
                     </div>
+                    <p>
+                    <a href="#">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -376,58 +385,12 @@
                 </div>
             </div>
         </div>
-        <div class='container'>
-                <div class='row'>
-                    <div class='col-md-12'>
-                         
-
-                        <form action='../logica/eliminarAdmin.php' method='POST'> 
-                        <table class='table table-hover table-striped'>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a href='#'><i class='fa fa-2x fa-fw fa-eye-slash'></i></a>
-                                        <a href='#'><i class='-alt fa fa-2x fa-eye fa-fw'></i></a>
-                                    </td>
-                                    <td>
-                                        <h4>
-                                            <b>3</b>
-                                        </h4>
-                                        <p>@pqi.com</p>
-                                    </td>
-                                    <td>
-                                        <img src='http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png' class='img-circle' width='60'>
-                                    </td>
-                                    <td>
-                                        <h4>
-                                            <b>1,2</b>
-                                        </h4>
-                                        <a href='mailto:ramonvillaw@gmail.com'>4</a>
-                                    </td>
-                                    <td>2 años</td>
-                                    <td>
-                                        <div class='btn-group'>
-
-                                            <button class='btn btn-default' value='left' type='submit'>
-                                                <i class='fa fa-fw s fa-remove'></i>Eliminar</button>
-
-
-                                            <button class='btn btn-default' value='right' type='button'>
-                                                <i class='fa fa-fw fa-cog'></i>Configurar</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                               
-                               
-                            </tbody>
-                        </table>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
- 
+    
+  <?php
+    require($CLASES_DIR . 'usuario.php');
+    $user = New usermodel();
+    $user->administradores();
+  ?>
 
       </div>
       </div>
@@ -462,7 +425,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="index.php">Aceptar</a>
+            <a class="btn btn-primary" href="<?php echo $LOGICA;?>cerrarSesion.php">Aceptar</a>
           </div>
         </div>
       </div>

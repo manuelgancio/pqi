@@ -1,4 +1,7 @@
+<?php
+session_start();
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,13 +63,13 @@
                 <a href="abmAdmin.php">Administradores</a>
               </li>
               <li>
-                <a href="#">Moderador</a>
+                <a href="abmModerador.php">Moderador</a>
               </li>
               <li>
-                <a href="#">Editor</a>
+                <a href="abmEditor.php">Editor</a>
               </li>
               <li>
-                <a href="#">Master</a>
+                <a href="abmMaster.php">Master</a>
               </li>
             </ul>
           </li>
@@ -102,7 +105,7 @@
             </a>
             <ul class="sidenav-second-level collapse" id="collapseComponents">
               <li>
-                <a href="miCuenta.php">- Mi cuenta</a>
+                <a href="#">- Mi cuenta</a>
               </li>
               <li>
                 <a href="#">- General</a>
@@ -339,7 +342,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="index.php">Aceptar</a>
+            <a class="btn btn-primary" href="<?php echo $LOGICA;?>cerrarSesion.php">Aceptar</a>
           </div>
         </div>
       </div>

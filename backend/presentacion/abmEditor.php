@@ -1,9 +1,8 @@
 <?php
-
-session_start();
-
-require($CLASES_DIR . 'usuario.php');
-$user = New userModel();
+ 
+ session_start();
+ require($CLASES_DIR . 'usuario.php');
+ $user = New userModel();
 
 ?>
 <!DOCTYPE html>
@@ -19,7 +18,6 @@ $user = New userModel();
     <meta name="author" content="">
     <title>Pqi. Backend</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
@@ -31,7 +29,11 @@ $user = New userModel();
     <!-- Custom styles for this template -->
     <link href="../css/sb-admin.css" rel="stylesheet">
 
+  
+
   </head>
+
+
 
   <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
@@ -48,15 +50,14 @@ $user = New userModel();
 
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
           <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="perfil.php">
               <i class="fa fa-fw fa-dashboard"></i>
               <span class="nav-link-text">
                 Inicio</span>
             </a>
           </li>
 
-
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
               <i class="fa fa-user" aria-hidden="true"></i>
               <span class="nav-link-text">
@@ -67,7 +68,7 @@ $user = New userModel();
                 <a href="abmAdmin.php">Administradores</a>
               </li>
               <li>
-                <a href="abmModerador.php">Moderador</a>
+                <a href="#">Moderador</a>
               </li>
               <li>
                 <a href="abmEditor.php">Editor</a>
@@ -79,6 +80,7 @@ $user = New userModel();
           </li>
 
 
+
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
             <a class="nav-link" href="publicidad.php">
               <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
@@ -86,12 +88,13 @@ $user = New userModel();
             </a>
           </li>
 
-           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
             <a class="nav-link" href="noticias.php">
             <i class="fa fa-newspaper-o" aria-hidden="true"></i>
               <span class="nav-link-text">Noticias</span>
             </a>
           </li>
+
 
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
             <a class="nav-link" href="estadisticas.php">
@@ -101,7 +104,8 @@ $user = New userModel();
             </a>
           </li>
 
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-wrench"></i>
               <span class="nav-link-text">
@@ -109,16 +113,14 @@ $user = New userModel();
             </a>
             <ul class="sidenav-second-level collapse" id="collapseComponents">
               <li>
-                <a href="miCuenta.php">- Mi cuenta</a>
+                <a href="static-nav.html">- Mi cuenta</a>
               </li>
               <li>
-                <a href="General.php">- General</a>
-              </li>
-              <li>
+                <a href="static-nav.html">- General</a>
               </li>
             </ul>
           </li>
-
+          
         </ul>
         <ul class="navbar-nav sidenav-toggler">
           <li class="nav-item">
@@ -247,31 +249,141 @@ $user = New userModel();
         <!-- Breadcrumbs -->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
+            <a href="#">Inicio</a>
           </li>
-          <li class="breadcrumb-item active">Inicio</li>
+          <li class="breadcrumb-item active">Admin`s</li>
         </ol>
 
-        <h5>Bienvenido: </h5>
-        <?php echo $_SESSION['Correo']; ?>
-        -
-        <?php 
+           
 
-        echo $_SESSION['Categoria']; 
 
-        ?>  
-            
+
+<div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center">Editores</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 well">
+                        <a class="btn btn-primary" style="margin: 5px;" data-toggle="modal" data-target="#usuario"><i class="fa fa-fw -square -circle fa-plus-square"></i> Usuario nuevo</a>
+                    </div>
+                    <p>
+                    <a href="#">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="fade modal" id="usuario">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h2 class="modal-title" id="myModalLabel">Nuevo Usuario</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" action="<?php echo $LOGICA;?>crearEditor.php" method="POST">
+                            <fieldset>
+                                <!-- Form Name -->
+                                <!-- Prepended text-->
+                              
+                                <!-- Nombre -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="nombre">Nombre</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input id="nombre" name="nombre" placeholder="Nombre Completo" type="text" required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <!-- Apellido -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="Apellido">Apellido</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input id="apellido" name="apellido" class="" placeholder="Apellido" type="text" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                   
+                              <?php
+                                $user->listarSecciones();
+                              ?>
+
+                                 <!-- Telefono -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="Apellido">Telefono</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            </span>
+                                            <input id="telefono" name="telefono" class="" placeholder="Telefono" type="text" required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                              
+                                <!-- Appended Input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="email">E-mail</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input id="email" name="email"  placeholder="Correo Electrónico" type="email" required="">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="password">Contraseña</label>
+                                    <div class="col-md-5">
+                                        <input id="password" name="password" type="password" placeholder="Contraseña" class="form-control input-md" style="width: 400px; margin-bottom: 10px;" required="">
+                                    </div>
+                                    <div style="margin-left: 315px;">
+                                    <button id="myBtn" type="submit" class="btn btn-primary">
+                                        <i class="fa fa-fw fa-save"></i>Guardar</button>
+                                </div>
+                                </div>  
+                                
+                                <!-- Button -->
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+  <?php
+    $user->Editores();
+  ?>
 
       </div>
+      </div>
       <!-- /.container-fluid -->
-
     </div>
     <!-- /.content-wrapper -->
-
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright &copy; Your Website 2017</small>
+          <small>Backend - Paqueteinformes - Proyecto 2017. </small>
         </div>
       </div>
     </footer>
