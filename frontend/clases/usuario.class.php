@@ -258,7 +258,7 @@ public function login(){
     }
     else{ //Si el correo es correcto..
         
-        $sql ="SELECT pass_c FROM cliente where corre_c = ?";
+        $sql ="SELECT pass_c, id_p FROM cliente where corre_c = ?";
 
         $result =$this->_db->prepare($sql);
         $result-> bind_param('s',$correo);
@@ -266,11 +266,23 @@ public function login(){
 
         $resultado = $result->get_result();
         $pwd_base = $resultado->fetch_assoc();
+        $id_p = $pwd_base['id_p'];
         $pwd_base = $pwd_base['pass_c'];
 
         //Devuelve true si las password coinciden
         if (password_verify($pwd , $pwd_base)){
-            return true;
+            //Averiguo el nombre del usuario
+            $sql="SELECT `p_nomb` FROM `persona` WHERE `id_p` = ?";
+            $result =$this->_db->prepare($sql);
+            $result-> bind_param('i',$id_p);
+            $result->execute();
+            $resultado = $result->get_result();
+            $nombre = $resultado->fetch_assoc();
+            $nombre = $nombre['p_nomb'];
+            //die(var_dump($nombre));
+
+            return ($nombre);
+
         }else{
             return false;
         }

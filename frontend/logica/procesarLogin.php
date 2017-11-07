@@ -32,6 +32,7 @@ if(isset($_POST['btnIngresar'])){
         }
         $_SESSION["Correo"] = $correo;
         $_SESSION["logged"] = true;
+        $_SESSION['Nombre'] = $loginOk;
         ?>
         <script>
             window.location.replace ("../presentacion/index.php");
