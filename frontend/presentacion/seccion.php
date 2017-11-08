@@ -46,7 +46,7 @@ $articulo->setSeccion($_GET['id']);
 $cantArt = $articulo->cantArtXListar();
 $cantArt = $cantArt['cant']; 
 //Cantidad de articulos que muestro en cada pagina
-$artXpag = 10;
+$artXpag = 12;
 //Calcula cantidad de paginas totales
 $paginasTotales = ceil($cantArt / $artXpag);
 
@@ -73,21 +73,34 @@ if ($pagActual > $paginasTotales) {
 
  // the offset of the list, based on current page 
 $offset = ($pagActual - 1) * $artXpag;
-
-
-
 ?>
 
-<div class="well well-sm text-muted tituloSeccion"><h3><?php echo $seccion['nombre'];?></h3></div>
-<div class="row">
+<div class="container">
+	<div class="publiBannerS">
+        <?php
+        //LLamo a la clase publicidad
+        require_once($CLASES_DIR . 'publicidad.class.php');
+        $p = New publicidad();
+        $pub = $p->listarPubSeccion($id_s);
+        if($pub != NULL){//Cargo publicidad
+        ?>
+            <img src="<?php echo $pub;?>" alt="publicidad">
+        <?php
+        }
+        ?>
+	</div>
+</div>
 
-<?php 
-//LLamo metodo para listar articulos
+<div class="well well-sm text-muted tituloSeccion"><h3><?php echo $seccion['nombre'];?></h3></div>
+<div class="container-fluid">
+<div class="row">
+	
+<?php //LLamo metodo para listar articulos
 $articulos = $articulo->listarArtXsec($offset, $artXpag);
 
 $i=1;
 foreach ($articulos as $art){
-    while($i <= 3){
+    while($i <= 4){
     ?>
     <div class="articulo">
         <div class="col-md-3 art">
@@ -95,14 +108,17 @@ foreach ($articulos as $art){
                 <div class="img"><img alt="" src="http://placehold.it/299x250/dddddd/333333"></div>
             </a>
             <div class="descArt">
-                <!--<div class="seccion"></div>-->
                 <a class="titulo" href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>"><?= $art['titulo']?></a>
+            </div>
+            <div class="fechaArt">
+                <p><?php echo $art['fecha_a'];?></p>
             </div>
         </div>
     </div>
 <?php
-    if($i == 3){
-        ?> 
+    if($i == 4){
+		?>
+		
         </div><!--row--><div class="row">
         <?php
         $i= 1;
@@ -116,6 +132,25 @@ foreach ($articulos as $art){
 
 ?>
 </div><!--row-->
+</div>
+
+<div class="container">
+	<div class="publiBannerS">
+    <?php
+        //LLamo a la clase publicidad
+        require_once($CLASES_DIR . 'publicidad.class.php');
+
+        $p = New publicidad();
+        $pub = $p->listarPubSeccion($id_s);
+        if($pub != NULL){//Cargo publicidad
+        ?>
+            <img src="<?php echo $pub;?>" alt="publicidad">
+        <?php
+        }
+        ?>
+	</div>
+</div>
+
 <div class="text-center">
 <ul class="pagination pagination-lg">
 <?php 

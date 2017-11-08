@@ -66,6 +66,17 @@
     </div><!-- End Carousel -->
 </div><!--container-->
 
+<!-- PUBLICIDAD PORTADA -->
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12">
+			<img class="publiBannerP" src="http://placehold.it/1090x130	/eeeeee/333333">
+		</div>
+	</div>
+</div>
+
+
 <!--SECCIONES-->
 <?php
 //Llamo a la clse seccion 

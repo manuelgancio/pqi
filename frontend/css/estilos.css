@@ -1,4 +1,5 @@
 
+
 .navbar {
       margin-bottom: 0;
       border-radius: 0;
@@ -18,9 +19,40 @@
 	width: 260px;
 }
 .publiBanner{
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     align-self:center;
+    margin-right: auto;
+    margin-left: auto;
+    height:130px;
+    width:100%;
 }
+.publiBannerP{
+    margin-top: 40px;
+    margin-right: auto;
+    margin-left: auto;
+    align-self:center;
+    height:130px;
+    width:100%;
+}
+.publiBannerS{
+    margin-top: 60px;
+    margin-right: auto;
+    margin-left: auto;
+    align-self:center;
+    height:130px;
+    width:100%;
+}
+.publiBannerS .img{
+    height:130px;
+    width:1090;
+}
+.publiNotiV{
+    height:480px;
+    width:200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .oculto{
     display:none;
 }
@@ -33,15 +65,13 @@
     text-align: left;
     font-weight: bolder;
     font-size: 42px;
-    margin-left: 5%;
-    margin-right: 10%;
+   
 }
 .cateNoti{
     color: #AFAAAA;
     text-align: left;
     font-weight: bold;
     font-size: 20;
-    margin-left: 5%;
     margin-bottom: 0px;
     text-transform: uppercase;
 }
@@ -50,38 +80,38 @@
     text-align: left;
     font-weight: bold;
     font-size: 20;
-    margin-left: 5%;
     margin-top:0px;
+}
+.encabezado{
+    margin-top:45px;
 }
 .imgNoti{
     height:480px;
     width: 790px;
-    margin-left: 15%;
-    margin-right: 15%;   
+    margin-left: auto;
+    margin-right: auto;   
+    background-color: red;  
 }
 .txtNoti{
-    width: 790px;
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-top: 30px;
+    width: 90%;
+    margin-left: 1%;
+    margin-right: auto;
+    align-self: center;
+    margin-top: 40px;
 }
 .txtNoti p{
     word-wrap: break-word;
     font-size: 18px;
     text-align: justify;
+    margin-bottom: 30px;
     
 }
-.like{
-    margin-left:15%;
+.redesNoti{
     margin-top:15px;
 }
-#likeNoticia {
-    
-    
+.like{
+    margin-left: 80px;
 }
-#compartirNoticia{
-
-}   
 
 /*texto articulos destacados en index*/
 .item-txt{
@@ -96,6 +126,9 @@
     background-color: lightgrey;
     word-wrap: break-word;
 }
+.fechaArt{
+    margin-top: 55px;
+}
 .tituloSeccion{
     margin-top: 40px;
 }
@@ -103,7 +136,7 @@
     margin-left:30px;
 }
 .articulo{
-    margin-left: 30px;
+    margin-left: 20px;
     margin-right: 0px;
     margin-top: 40px;
     margin-bottom:40px;

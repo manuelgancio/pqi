@@ -55,6 +55,8 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
     $art = $articulo->listarArt();
     //Agrego una visita al contador de la base
     $visita = $articulo->visita();
+    //Guardo el id de la seccion
+    $id_secion = $art['id_s'];
     //Llamo a la clase seccion 
     require_once ($CLASES_DIR . 'seccion.class.php');
     $sec = New seccion();
@@ -66,8 +68,8 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
     <body>
     <div class="container">
         <div class="row" >
-            <div class="col-md-9">
-                <div class="articulo">
+            <div class="col-md-9 col-sm-12">
+                <div class="encabezado">
                     <div>
                         <p class="tituloNoti"><?= $art['titulo']?></p>
                         <p class="cateNoti"><?= $seccion?></p>
@@ -80,21 +82,44 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
         <div class="row">
             <div class="col-md-9 col-sm-12">
                 <img class="imgNoti" src="http://placehold.it/720x470/eeeeee/333333" alt="Imágen">
-            </div>
+			</div>
+
+
+			<!--PUBLICIDAD VERTICAL -->
+			
+			<div class="col-md-3">
+            <?php 
+            //Llamo clase publicidad
+            require_once($CLASES_DIR.'publicidad.class.php');
+            $p = new publicidad();
+
+            $pub = $p->listarPubNoticiaXseccion($id_secion);
+            if ($pub != NULL){
+                ?>
+				<img class="publiNotiV" src="<?php echo $pub;?>" alt="publicidad">
+			</div>
+            <?php
+            }else{
+                ?>
+                </div>
+                <?php
+            }
+            ?>
         </div>
-            
+            <!--LIKE / SHARE-->
         <div class="row">
-            <div class="like">
-                <div class="form-group likeNoticia col-md-1">
-                        <form id="frmLike" name="frmLike" action="<?= $LOGICA;?>/procesarLike.php">
-                            <input type="hidden" id="id_art" name="id_art" value="<?php echo $id_art;?>">
-                            <button type="submit" id="btnLike" name="btnLike" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-                        </form>
-                </div>
-                <div class="compartirNoticia col-md-1">
-                    <div class="fb-share-button" data-href="http://localhost" data-layout="button" data-size="large" data-mobile-iframe="true">
-                    <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2F&amp;src=sdkpreparse">Compartir</a></div>
-                </div>
+            <div class="redesNoti col-md-2">
+                <div class="form-group">
+					<div class="col-sm-1">
+                    	<div class="fb-share-button" data-href="http://localhost" data-layout="button" data-size="large" data-mobile-iframe="true">
+                    	<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2F&amp;src=sdkpreparse">Compartir</a></div>
+					</div>
+					<div class="col-sm-1 like">
+						<form id="frmLike" name="frmLike" action="<?= $LOGICA;?>/procesarLike.php">
+							<input type="hidden" id="id_art" name="id_art" value="<?php echo $id_art;?>">
+							<button type="submit" id="btnLike" name="btnLike" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+						</form>	
+					</div>
             </div>  
                 <script>
                     /* attach a submit handler to the form */
@@ -116,37 +141,41 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
                     });
                     });
                 </script>
-        </div><!--row-->
+		</div><!--row-->
+
+		<!-- TEXTO NOTICIA-->
+
         <div class="row">
-            <div class="txtNoti col-md-9 col-sm-12">
+            <div class="txtNoti col-sm-12">
                 <p>
-                    <?= $art['contenido'];?>
+                    <?php echo $art['contenido'];?>
                 </p>
             </div>
-          
         </div> <!--row-->
 </div><!--container-->
-<div class="container">
-    <div class="row">
-            
-            <div class="publiBanner col-sm-12">
-            <?php 
-            //LLamo a la clase publicidad
-            require_once($CLASES_DIR . 'publicidad.class.php');
-            $publicidad= New publicidad();
-            //Devuelve false o url de img publicidad
-            $banner = $publicidad->listarPubNoticia();
-            if ($banner != null){
+
+<!--PUBLICIDAD -->
+<div class="container">  
+    <div class="publiBanner">
+        <?php 
+        //LLamo a la clase publicidad
+        require_once($CLASES_DIR . 'publicidad.class.php');
+        $publicidad= New publicidad();
+        //Devuelve false o url de img publicidad
+        $banner = $publicidad->listarPubNoticia();
+        if ($banner != null){
+        ?>
+        <img class="" src="<?php echo $banner;?>">
+    </div>
+    <?php
+        }else{
             ?>
-            <img class="" src="<?php echo $banner;?>">
             </div>
             <?php
-            }
-            ?>
-    </div>
+        }
+    ?>
 </div>
    
-        
     <?php
     include('comentarios.php');
 }else{//Si no recibi ningun id de articulo...

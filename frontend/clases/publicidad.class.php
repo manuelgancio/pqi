@@ -63,6 +63,8 @@ public function getTipo(){
 }
 /// otros metodos
 public function listarPubIndex(){
+/* Listo publicidades de las secciones del index */
+
     $espacio = 1; //index
     $fecha_hoy = date('Y-m-d');
 
@@ -90,6 +92,9 @@ public function listarPubIndex(){
     }
 }
 public function listarPubNoticia(){
+/* Publicidades para banner horizontal de pagina noticia 
+   No depende de una seccion 
+*/
     $espacio = 2; //noticias banner
     $fecha_hoy = date('Y-m-d');
 
@@ -115,11 +120,76 @@ public function listarPubNoticia(){
         }
         
         $p = array_rand($i);
-        
-        
     return ($i[$p]);
-    
     }
+}
+public function listarPubNoticiaXseccion($id_seccion){
+/* Lista publicidades para banner vertical en pagina
+   noticia segun seccion a la que pertenece */
+
+    $espacio = 4; //id en tabla espacio
+    $fecha_hoy = date('Y-m-d');
+
+    //La id seccion la recibo por parametro
+
+    $sql="SELECT publicidad.publicacion AS p FROM publicidad, hay, espacio, seccion WHERE publicidad.fecha_h > ? 
+    AND espacio.ubicacion = ? AND publicidad.id_seccion = ? AND hay.id_pub = publicidad.id_pub AND hay.id_esp = espacio.id_esp
+    AND publicidad.id_seccion = seccion.id_s";
+    $result=$this->_db->prepare($sql);
+    $result ->bind_param('sis',$fecha_hoy,$espacio,$id_seccion);
+    $result ->execute();
+    $resultado = $result->get_result();
+
+    $publicidades = array();
+    while ($row = $resultado->fetch_assoc()){
+        $publicidades[] = $row;
+    }
+
+    //Si no hay publicidades en esa publicacion...
+    if ($publicidades == null){
+        return (false); //Devuelve false
+    }else{
+        $i = array();
+        foreach($publicidades as $p){//paso de array multi a simple
+            $i[] = $p['p'];
+        }
+        
+        $p = array_rand($i);
+    return ($i[$p]);
+    }
+}
+public function listarPubSeccion($id_seccion){
+/*Lista publicidad para la seccion elegida*/
+
+    $espacio = 3;
+    $fecha_hoy = date('Y-m-d');
+
+    $sql="SELECT publicidad.publicacion AS p FROM publicidad, hay, espacio, seccion WHERE publicidad.fecha_h > ? 
+    AND espacio.ubicacion = ? AND publicidad.id_seccion = ? AND hay.id_pub = publicidad.id_pub AND hay.id_esp = espacio.id_esp
+    AND publicidad.id_seccion = seccion.id_s";
+    $result=$this->_db->prepare($sql);
+    $result ->bind_param('sis',$fecha_hoy,$espacio,$id_seccion);
+    $result ->execute();
+    $resultado = $result->get_result();
+
+    $publicidades = array();
+    while ($row = $resultado->fetch_assoc()){
+        $publicidades[] = $row;
+    }
+
+    //Si no hay publicidades en esa publicacion...
+    if ($publicidades == null){
+        return (false); //Devuelve false
+    }else{
+        $i = array();
+        foreach($publicidades as $p){//paso de array multi a simple
+            $i[] = $p['p'];
+        }
+        
+        $p = array_rand($i);
+    return ($i[$p]);
+    }
+    
 }
 public function listarPubNoticiaOld(){
 //Devuelve la ruta a la img de una publicidad que este en fecha valida
@@ -169,5 +239,6 @@ public function listarPubNoticiaOld(){
         return($banner);
     }
 }
+
 
 }
