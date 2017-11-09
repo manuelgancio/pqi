@@ -26,44 +26,66 @@
 
 ?>
 <!--PORTADA carousel-->
-<div class="container" id="carouselPortada">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    
-      <!-- Wrapper for slides -->
-      	<div class="carousel-inner">
+<div class="container" id="">
 
-		  <div class="item active">
-          <img src="http://placehold.it/760x400/dddddd/333333">
-           <div class="carousel-caption">
-            <h4><a href="#">¿Queres que mostremos tu publicidad? Contactanos a: publicidad@pqi.com</a></h4>
-            <p class="item-txt"></p>
-          </div>
-        </div><!-- End Item -->
+	<div class="row">
+	<div id="carouselPortada">
+		<div id="myCarousel" class="carousel slide col-sm-12 col-md-9" data-ride="carousel">
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
 
-	  	<?php foreach($articulos_d as $art_d):?>
-        	<div class="item">
-			<img src="http://placehold.it/760x400/cccccc/ffffff">
+				<div class="item active">
+				<img src="http://placehold.it/760x400/dddddd/333333">
 				<div class="carousel-caption">
-					<h4><a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art_d['id_a']?>"><?= $art_d['titulo'];?></a></h4>
-					<p class="item-txt"><?= $art_d['contenido'];?></p>
+					<h4><a href="#">¿Queres que mostremos tu publicidad? Contactanos a: publicidad@pqi.com</a></h4>
+					<p class="item-txt"></p>
 				</div>
-			</div><!-- End Item -->
-		<?php endforeach;?>
+				</div><!-- End Item -->
+
+				<?php foreach($articulos_d as $art_d):?>
+					<div class="item">
+					<img src="http://placehold.it/760x400/cccccc/ffffff">
+						<div class="carousel-caption">
+							<h4><a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art_d['id_a']?>"><?= $art_d['titulo'];?></a></h4>
+							<p class="item-txt"><?= $art_d['contenido'];?></p>
+						</div>
+					</div><!-- End Item -->
+				<?php endforeach;?>
         
-                
-      </div><!-- End Carousel Inner -->
+    		</div><!-- End Carousel Inner -->
 
-      <!-- Controls -->
-      <div class="carousel-controls">
-          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-      </div>
+			<!-- Controls -->
+			<div class="carousel-controls">
+				<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				<a class="right carousel-control" href="#myCarousel" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+			</div>
+		</div>
+	</div><!-- End Carousel -->
+	<!--CALENDARIO-->
+	<div class="col-md-3 calendario">
+		<form action="<?= $LOGICA;?>/procesarEdicion.php" method="GET" id="frmEdicion">
+			<div class="row">
+				<div class="form-group">
+					<!--<label class="col-xs-3 control-label"for="embeddingDatePicker">Edición</label>-->
+					<div class="col-xs-5 date">
+						<div id="embeddingDatePicker"></div>
+						<input type="hidden" id="selectedDate" name="selectedDate" />
+					</div>
+				</div>
 
-    </div><!-- End Carousel -->
+				<div class="form-group">
+					<div class="col-xs-5 col-xs-offset-5">
+						<button type="submit" class="btn btn-primary" id="btnEdicion" name="btnEdicion"><span class="glyphicon glyphicon-search"></span></button>
+						</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 </div><!--container-->
 
 <!-- PUBLICIDAD PORTADA -->

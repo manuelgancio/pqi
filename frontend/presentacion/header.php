@@ -23,7 +23,6 @@
 </head>
 <?php
 	session_start();
-
 ?>
 <body>
 <div class="container">
@@ -38,24 +37,7 @@
      
 		
 		<div class="col-md-3 col-sm-1">
-			<!--CALENDARIO-->
-			<form action="<?= $LOGICA;?>/procesarEdicion.php" method="GET" id="frmEdicion">
-			<div class="row">
-				<div class="form-group">
-					<!--<label class="col-xs-3 control-label"for="embeddingDatePicker">Edición</label>-->
-					<div class="col-xs-5 date">
-						<div id="embeddingDatePicker"></div>
-						<input type="hidden" id="selectedDate" name="selectedDate" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="col-xs-5 col-xs-offset-3">
-						<button type="submit" class="btn btn-primary" id="btnEdicion" name="btnEdicion"><span class="glyphicon glyphicon-search"></span></button>
-						</div>
-				</div>
-			</div>
-			</form>
+			
 		</div>
 		</div>
 	</div><!-- row-->
