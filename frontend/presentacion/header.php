@@ -50,6 +50,8 @@ require($CLASES_DIR . 'seccion.class.php');
 $seccion = New seccion(); 
 $secciones = $seccion->listarSecciones();
 
+
+
 ?>
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -136,12 +138,14 @@ $secciones = $seccion->listarSecciones();
 				<h4><span class="glyphicon glyphicon-ok"></span> Utilizar las funciones Me Gusta y Compartir!</h4></p>
 			</article>
 				
-				
+			<?php 
+			if($_SESSION['Suscripto']==false){?>
+			
 			<form class="form-horizontal" action="<?= $LOGICA;?>/procesarSuscripcion.php" method="POST" id="formSuscripcion" role="form">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="t_credito">Tarjeta de Crédito:</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="t_credito" name="t_credito">
+						<input type="text" class="form-control" id="t_credito" name="t_credito" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -159,6 +163,16 @@ $secciones = $seccion->listarSecciones();
 					</div>
 				</div>
 			</form>
+			<?php
+			}else{
+			?>
+			<form>
+				<input type="submit" class="btn btn-danger" value="Cancelar Suscripcion">
+			</form>
+		
+			<?php
+			}
+			?>
 					
 				
 		</div><!--modal body-->
@@ -186,9 +200,10 @@ if (isset($_SESSION["logged"]) && ($_SESSION["logged"] == true)) {
 <?php
 }
 if(isset($_SESSION['Suscripto']) && ($_SESSION['Suscripto']) == true){
-?>
-		<script>
-		suscripto();
-	   </script>
-<?php
-}
+	?>
+			<script>
+			suscripto();
+			 </script>
+	<?php
+}	
+

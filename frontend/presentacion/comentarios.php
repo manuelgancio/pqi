@@ -45,7 +45,9 @@
                                     <div class="mic-info">
                                         <p>Fecha: <?php echo $c['fecha_c'];?></p>
                                     </div>
+                                   
                                 </div>
+                                
                             </div>
                         </div>
                     </li>
@@ -89,6 +91,8 @@
     posting.done(function( data ) {
         alert('Gracias por su comentario!');
         comentario.value ='';
+        
+        
     });
     });
 </script>

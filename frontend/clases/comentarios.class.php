@@ -96,7 +96,7 @@ public function altaComentario(){
     $result = $this->_db->prepare($sql);
     $result -> bind_param('ii',$id_c,$id_noticia);
     $result -> execute();
-
+  
     return (true);
 }
 public function listarComentarios(){
@@ -180,5 +180,8 @@ public function cantComentarios(){
     }
     
     return($cant);
+}
+public function reportarComentario(){
+    
 }
 }

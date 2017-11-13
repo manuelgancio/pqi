@@ -46,7 +46,7 @@ $secciones = $seccion->listarSecciones();
         </div>
       <div id="logged" class="oculto">
         <ul class="nav navbar-nav navbar-right">
-            <li><a id="perfil" name="perfil" href="<?= $PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> Perfil</a></li>
+            <li><a id="perfil" name="perfil" href="<?= $PRESENTACION;?>/perfil.php"><span class="glyphicon glyphicon-user"></span></span> <?php echo '  ', $_SESSION['Nombre'];?></a></li>
             <li><a id="suscripto" href="#" data-toggle="modal" data-target="#modalSuscripcion"><span class="glyphicon glyphicon-upload"></span> Suscribirme</a></li>
             <li><a id="btnLogout" href="<?= $PRESENTACION;?>/logout.php" onclick="logoutFb()"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
 				    
