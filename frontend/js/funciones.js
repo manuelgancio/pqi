@@ -1,5 +1,7 @@
 
-
+function submit(){
+	$('#frmReportar').submit();
+}
 function logged(){
 	$("#notlogged").css("display","none");
 	$("#logged").css("display","block");

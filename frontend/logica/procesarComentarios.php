@@ -39,6 +39,19 @@ if (isset($_POST['btnComentar'])){
 
     $alta = $c->altaComentario();
 
+}
+
+/* PROCESAR REPORTE DE COMENTARIO */
+if (isset($_POST['btnReportar'])){
+    $id_cm = $_POST['id_cm'];
     
+    //Llamo clase comentarios
+    require_once($CLASES_DIR . 'comentarios.class.php');
+    $c = new comentario();
+
+    $c->setId($id_cm);
+
+    $reportar = $c->reportarComentario();
+
 
 }

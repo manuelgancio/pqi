@@ -105,8 +105,9 @@ public function listarComentarios(){
     $id_noticia = $this->getIdNoticia();
     
     //Consulto a la base
-    $sql="SELECT comentario.id_cm, comentario.comentario, comentario.fecha_c FROM comentario, hace, tiene 
-    WHERE (comentario.estado = 1) AND (tiene.id_a = ?) AND (hace.id_cm = comentario.id_cm) AND (tiene.id_cm = hace.id_cm)";
+    $sql="SELECT comentario.id_cm, comentario.comentario, comentario.fecha_c, persona.p_nomb AS nombre FROM comentario,
+    hace, tiene, persona, cliente WHERE (comentario.estado = 1) AND (tiene.id_a = ?) AND (hace.id_cm = comentario.id_cm)
+    AND (tiene.id_cm = hace.id_cm) AND (hace.id_cl = cliente.id_cl) AND (cliente.id_p = persona.id_p)";
     $result = $this->_db->prepare($sql);
     $result -> bind_param('i',$id_noticia);
     $result -> execute();
@@ -182,6 +183,39 @@ public function cantComentarios(){
     return($cant);
 }
 public function reportarComentario(){
+/*  AVISA QUE UN COMENTARIO FUE REPORTADO. 
+    EN LA COLUMNA REPORTADO SUMA UN 1 AL COMENTARIO
+*/
+    $id_cm = $this->getId();
+
+    //Verifico si el comentario ya tiene algun reporte 
+    $sql="SELECT `reportado` FROM `comentario` WHERE `id_cm` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_cm);
+    $result -> execute();
+    $resultado = $result->get_result();
+
+    $cant_reportes = $resultado->fetch_assoc();
+    $cant_reportes = $cant_reportes['reportado'];
     
+    if($cant_reportes == NULL){
+        //Guardo un 1 en la base 
+        $sql="UPDATE `comentario` SET `reportado`= 1 WHERE `id_cm` = ?";
+        $result = $this->_db->prepare($sql);
+        $result -> bind_param('i',$id_cm);
+        $result -> execute();
+        
+        return (true);
+    }else{
+        //Sumo 1 a la cantidad de reportes existentes
+        $cant_reportes = $cant_reportes + 1;
+        $sql="UPDATE `comentario` SET `reportado`= ? WHERE `id_cm` = ?";
+        $result = $this->_db->prepare($sql);
+        $result -> bind_param('ii',$cant_reportes,$id_cm);
+        $result -> execute();
+        
+        return (true);
+    }
 }
+
 }

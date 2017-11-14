@@ -221,6 +221,7 @@ public function actualizarPerfil($correo_old){
     $result ->execute();
 
     return (true);
+
 }
 public function id_p(){
 //devuelve el id de la tabla persona

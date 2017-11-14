@@ -43,11 +43,16 @@
                                         <?php echo $c['comentario'];?>
                                     </div>
                                     <div class="mic-info">
-                                        <p>Fecha: <?php echo $c['fecha_c'];?></p>
+                                        <p style="margin-bottom:1px">Por: <?php echo $c['nombre'];?></p>
+                                        <p style="margin-bottom:1px">Fecha: <?php echo $c['fecha_c'];?></p>
                                     </div>
-                                   
                                 </div>
-                                
+                            </div>
+                            <div class="col-md-1">
+                                <form action="<?= $LOGICA;?>/procesarComentarios.php" method="POST" id="frmReportar" name="frmReportar">
+                                    <input type="hidden" value="<?php echo $c['id_cm'];?>" name="id_cm" id="id_cm">
+                                    <button class="btn btn-basic" onclick="submit" id="btnReportar" name="btnReportar" placeholder="Reportar"><span class="glyphicon glyphicon-exclamation-sign"></span></button>
+                                </form>
                             </div>
                         </div>
                     </li>
@@ -91,7 +96,28 @@
     posting.done(function( data ) {
         alert('Gracias por su comentario!');
         comentario.value ='';
-        
+    });
+    });
+</script>
+
+<script>
+    /* attach a submit handler to the form */
+    $("#frmReportar").submit(function(event) {
+
+    /* stop form from submitting normally */
+    event.preventDefault();
+
+    /* get the action attribute from the <form action=""> element */
+    var $form = $( this ),
+    url = $form.attr( 'action' );
+    
+    /* Send the data using post with comment id*/
+    var posting = $.post( url, { id_cm: $('#id_cm').val(),btnReportar: $('#btnReportar').val()} );
+
+    /* Alerts the results */
+    posting.done(function( data ) {
+        $('#btnReportar').prop('disabled', true);
+        alert('Gracias por su reporte!');
         
     });
     });
