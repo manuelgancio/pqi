@@ -134,12 +134,27 @@
 </div><!--container-->
 
 <!-- PUBLICIDAD PORTADA -->
-
-<div class="container-fluid">
+ 
+<div class="container">
 	<div class="row">
-		<div class="col-sm-12" style="background-color:red;">
-			<img class="publiBannerP" src="http://placehold.it/1090x130	/eeeeee/333333">
+		<div class="">
+			<?php 
+			//LLamo a la clase publicidad
+			require_once($CLASES_DIR . 'publicidad.class.php');
+			$publicidad= New publicidad();
+			//Devuelve false o url de img publicidad
+			$banner = $publicidad->listarPubIndexBanner();
+			if ($banner != null){
+			?>
+			<img class="publiBannerP" src="<?php echo $banner;?>">
 		</div>
+			<?php
+			}else{
+			?>
+		</div>
+			<?php
+			}
+			?>
 	</div>
 </div>
 

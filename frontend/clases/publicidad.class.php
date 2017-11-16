@@ -191,54 +191,37 @@ public function listarPubSeccion($id_seccion){
     }
     
 }
-public function listarPubNoticiaOld(){
-//Devuelve la ruta a la img de una publicidad que este en fecha valida
-//De todas la publicidades selecciona una aleatoriamente
-//Banner Noticia = espacio 2 (bd)
-
-    $espacio = 2;
+public function listarPubIndexBanner(){
+/*  Devuelve una publicidad para el banner del index
+    Selecciona aleatoriamente una de todas las activas
+    No depende de una seccion
+*/
+    $espacio = 5; //Id espacio en la base (index banner)
     $fecha_hoy = date('Y-m-d');
-    //Averiguo los id de las publicaciones en ese espacio
-    $sql="SELECT `id_pub` FROM `hay` WHERE `id_esp` = ?";
 
-    $result = $this->_db->prepare($sql);
-    $result -> bind_param('i',$espacio);
-    $result -> execute();
+    $sql="SELECT publicidad.publicacion AS p FROM publicidad, espacio, hay WHERE espacio.ubicacion = ? 
+    AND publicidad.fecha_h > ? AND hay.id_pub = publicidad.id_pub AND hay.id_esp = espacio.id_esp";
+    $result=$this->_db->prepare($sql);
+    $result ->bind_param('is',$espacio,$fecha_hoy);
+    $result ->execute();
     $resultado = $result->get_result();
-    
+
     $publicidades = array();
     while ($row = $resultado->fetch_assoc()){
-        $publicidades[] = $row;//ids de las publicidades
+        $publicidades[] = $row;
     }
-    
+
     //Si no hay publicidades en esa publicacion...
     if ($publicidades == null){
         return (false); //Devuelve false
     }else{
         $i = array();
         foreach($publicidades as $p){//paso de array multi a simple
-            $i[] = $p['id_pub'];
+            $i[] = $p['p'];
         }
         
-        $publicidad = implode(' OR ',$i); //convierto array a strig separado por 'OR' para consultar a la base
-       
-        $sql="SELECT `publicacion` FROM `publicidad` WHERE `fecha_h` > ? AND (`id_pub` = ?)";
-        $result = $this->_db->prepare($sql);
-        $result -> bind_param('ss',$fecha_hoy,$publicidad);
-        $result -> execute();
-        $resultado = $result->get_result();
-
-        $banners = array();
-        while ($row = $resultado->fetch_assoc()){
-            $banners[]=$row;//todos las direcciones de las publicidades que puedo listar
-        }
-        
-        
-        $publi = array_rand($banners);
-        $banner = $banners[$publi];//Ruta img banner
-        return($banner);
+        $p = array_rand($i);
+    return ($i[$p]);
     }
 }
-
-
 }
