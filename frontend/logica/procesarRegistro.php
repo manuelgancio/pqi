@@ -63,14 +63,14 @@ if(isset($_POST['btnRegistro'])){
         }
         ?>
         <script>
-            window.location.href = "../presentacion/index.php";
+            window.location.replace ("../presentacion/index.php?err=regOk");
         </script>
         <?php
     }else{//El correo ya estaba registrado
         ?>
         <script>
-            window.location.href = "../presentacion/registro.php";
-            alert('Error!, El correo ya se encuentra registrado!');
+            window.location.replace("../presentacion/registro.php?err=regC");
+            //alert('Error!, El correo ya se encuentra registrado!');
         </script>
         <?php 
     }
@@ -95,8 +95,8 @@ if(isset($_POST['btnModificar'])){
             if($correoOk == true){//el correo esta registrado y no es el anterior de este usuario
                 ?>
                 <script>
-                    window.location.href = "../presentacion/perfil.php";
-                    alert('El correo pertenece a otra persona!');
+                    window.location.replace("../presentacion/perfil.php?err=correo");
+                    //alert('El correo pertenece a otra persona!');
                 </script>
                 <?php 
             }
@@ -113,9 +113,9 @@ if(isset($_POST['btnModificar'])){
     if ($mod == true){
     ?>
     <script>
-        window.location.href = "../presentacion/perfil.php";
-        alert('Datos modificados correctamente!');
-    </script>0
+        window.location.replace ("../presentacion/perfil.php?err=modOk");
+        //alert('Datos modificados correctamente!');
+    </script>
     <?php 
     }
 

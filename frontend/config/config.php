@@ -7,6 +7,9 @@
     $url = $_SERVER['REQUEST_URI'];
     $url_limpia = filter_var($url, FILTER_SANITIZE_STRING);
     $_SERVER['REQUEST_URI'] = $url_limpia;
+
+
+    
 /* Rutas */
     $RUTA ='/pqi/frontend';
 

@@ -1,15 +1,60 @@
+
 <body>
     <?php 
 		include $PRESENTACION_DIR ."header.php";
     ?>
-    <!-- PORTADA --> 
+	 
+<!--ALERTA-->
+	<div class="alert alert-success alert-dismissable alerta" id="alert_template" style="display: none;">
+    	<button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
+	</div>
+	<div class="alert alert-danger alert-dismissable alerta" id="error_div" style="display: none;">
+    	<button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
+	</div>
+<!-- PORTADA -->
     <div class="well well-sm text-muted" id="portada"><h3>PORTADA</h3></div>
 
 <?php
+
+/* Controlo errores */
+	if(isset($_GET['err'])){
+		if ($_GET['err'] == 'fecha'){
+			?>
+			<script>
+			error('No hay artículos en esa fecha.','7000');
+			</script>
+			<?php	
+		}elseif ($_GET['err'] == 'regOk'){
+			?>
+			<script>
+			aviso('Registro correcto! Ya puedes iniciar sesión.','7000');
+			</script>
+			<?php	
+		}elseif($_GET['err'] == 'susOk'){
+			?>
+			<script>
+			aviso('La suscripción se realizo con éxito.','7000');
+			</script>
+			<?php	
+		}elseif($_GET['err'] == 'susC'){
+			?>
+			<script>
+			aviso('Se cancelo la suscripción.','7000');
+			</script>
+			<?php	
+		}elseif($_GET['err'] == 'loginF'){
+			?>
+			<script>
+			error('Usuario o contraseña incorrecta.','7000');
+			</script>
+			<?php	
+		}
+	}
 /*Fecha del dia
   Si paso fecha de edicion por get cargo articulos de esa fecha
   Si no esta la fecha por get uso la fecha del dia actual
 */
+
 	if(isset($_GET['fecha'])){
 		$fecha = $_GET['fecha'];
 	}else{
@@ -92,7 +137,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-12" style="background-color:red;">
 			<img class="publiBannerP" src="http://placehold.it/1090x130	/eeeeee/333333">
 		</div>
 	</div>

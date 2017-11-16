@@ -30,8 +30,8 @@ if(isset($_GET['btnEdicion'])){
         if($fecha_ok == false){//No hay articulos
             ?>
             <script>
-                alert('En esa fecha no hay artículos disponibles');
-                window.location.replace ("../presentacion/index.php");
+                //alert('En esa fecha no hay artículos disponibles');
+                window.location.replace ("../presentacion/index.php?err=fecha");
             </script>
             <?php
         }else{//Hay articulos

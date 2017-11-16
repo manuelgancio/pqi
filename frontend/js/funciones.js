@@ -1,4 +1,39 @@
 
+
+function aviso(msj,timeout){
+
+	$("#alert_template button").after("<span>"+msj+"</span>");
+	$('#alert_template').fadeIn('slow');
+
+	if (timeout || timeout === 0) {
+		setTimeout(function() { 
+			$('#alert_template').alert('close');
+			$("#alert_template span").remove();
+		
+		}, timeout);    
+	}
+	
+	$('#alert_template .close').click(function(e) {
+		$("#alert_template span").remove();
+	});
+}
+function error(msj,timeout){
+	
+	$("#error_div button").after("<span>"+msj+"</span>");
+	$('#error_div').fadeIn('slow');
+	
+	if (timeout || timeout === 0) {
+		setTimeout(function() { 
+			$('#error_div').alert('close');
+			$("#error_div span").remove();			
+		}, timeout);    
+	}
+		
+	$('#error_div .close').click(function(e) {
+		$("#error_div span").remove();
+	});
+}
+
 function submit(){
 	$('#frmReportar').submit();
 }

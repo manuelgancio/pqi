@@ -17,8 +17,8 @@ if(isset($_POST['btnIngresar'])){
     if ($loginOk == false){//Login incorrecto
         ?>
         <script>
-            window.location.href = "../presentacion/index.php";
-            alert('Error!, Correo o contraseña incorrecto!')
+            window.location.replace ("../presentacion/index.php?err=loginF");
+            //alert('Error!, Correo o contraseña incorrecto!')
         </script>
         <?php
     }else{//Login correcto

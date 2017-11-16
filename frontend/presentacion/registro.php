@@ -17,6 +17,22 @@
 <script src="<?= $JS;?>/funciones.js"></script>
 
 <body>
+<div class="alert alert-danger alert-dismissable alerta" id="error_div" style="display: none;">
+	<button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
+</div>
+<?php 
+/* Controlo errores */
+if(isset($_GET['err'])){
+	if ($_GET['err'] == 'regC'){
+		?>
+		<script>
+		error('El correo ya se encuentra registrado, pruebe con otro!.','7000');
+		</script>
+		<?php	
+	}
+	
+}
+?>
 
 <div class="row">
 	<div class="col-sm-6">

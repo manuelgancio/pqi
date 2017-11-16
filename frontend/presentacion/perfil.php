@@ -1,25 +1,47 @@
-
-<!DOCTYPE html>
 <html>
 <title>Perfil - Paqueteinformes.com</title>
-<meta charset="UTF-8">
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="author" content="paqueteinformes">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 <?php
 include('headerNoti.php');
+?>
+<body>
+<!--ALERTA-->
+<div class="alert alert-success alert-dismissable alerta" id="alert_template" style="display: none;">
+  	<button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
+</div>
+<div class="alert alert-danger alert-dismissable alerta" id="error_div" style="display: none;">
+   	<button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
+</div>
 
+
+<?php
+/* Controlo errores */
+if(isset($_GET['err'])){
+    if ($_GET['err'] == 'correo'){
+        ?>
+        <script>
+        error('El correo pertenece a otra persona.','7000');
+        </script>
+        <?php	
+    }elseif($_GET['err'] == 'modOk'){
+        ?>
+        <script>
+        aviso('Datos modificados correctamente!.','7000');
+        </script>
+        <?php	
+    }   
+}
+
+//Llamo a la clase usuario
 require_once($CLASES_DIR . 'usuario.class.php');
 
 $usu = New usuario(); 
 $usu->setCorreo($_SESSION['Correo']);
-$datos = $usu->verPerfil();
+$datos = $usu->verPerfil();//Datos del perfil
 ?>
 
-<body>
+
 <div class="row">
       <div class="col-md-3">
       </div>
@@ -140,3 +162,5 @@ $datos = $usu->verPerfil();
 </div>
 
 </body>
+
+<?php

@@ -1,6 +1,9 @@
 <html>
 
 <body>
+<div class="alert alert-success alert-dismissable alerta" id="alert_template" style="display: none;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
+</div>
 <!-- LISTO COMENTARIOS -->
 <?php 
     //Llamo a la clase comentarios
@@ -50,7 +53,7 @@
                             </div>
                             <div class="col-md-1">
                                 <form action="<?= $LOGICA;?>/procesarComentarios.php" method="POST" id="frmReportar" name="frmReportar">
-                                    <input type="hidden" value="<?php echo $c['id_cm'];?>" name="id_cm" id="id_cm">
+                                    <input type="input" value="<?php echo $c['id_cm'];?>" name="id_cm" id="id_cm">
                                     <button class="btn btn-basic" onclick="submit" id="btnReportar" name="btnReportar" placeholder="Reportar"><span class="glyphicon glyphicon-exclamation-sign"></span></button>
                                 </form>
                             </div>
@@ -94,8 +97,8 @@
 
     /* Alerts the results */
     posting.done(function( data ) {
-        alert('Gracias por su comentario!');
         comentario.value ='';
+        aviso('Gracias por su comentario!','7000');
     });
     });
 </script>
@@ -117,9 +120,10 @@
     /* Alerts the results */
     posting.done(function( data ) {
         $('#btnReportar').prop('disabled', true);
-        alert('Gracias por su reporte!');
+        aviso('El reporte fue guardado, Gracias!','7000');
         
     });
     });
 </script>
+
 </body>

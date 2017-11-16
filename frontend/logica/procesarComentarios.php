@@ -38,7 +38,6 @@ if (isset($_POST['btnComentar'])){
     $c->setEstado($estado);
 
     $alta = $c->altaComentario();
-
 }
 
 /* PROCESAR REPORTE DE COMENTARIO */
@@ -52,6 +51,4 @@ if (isset($_POST['btnReportar'])){
     $c->setId($id_cm);
 
     $reportar = $c->reportarComentario();
-
-
 }

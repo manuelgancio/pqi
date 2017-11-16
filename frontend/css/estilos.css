@@ -1,4 +1,15 @@
-
+.alerta{
+    display: none;
+    position: fixed;
+    top: 55px;
+    width: 70%;
+    align-self: center;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    z-index: 999;
+}
 .calendario{
     align-self: center;
     margin-top: 50px;
