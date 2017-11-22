@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Paqueteinformes.com - Bienvenidos!</title>
-<meta charset="UTF-8">
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="paqueteinformes">
@@ -14,9 +14,8 @@
 <link rel="stylesheet" href="<?= $CSS;?>/estilos.css">
 <script src="<?= $JS;?>/funciones.js"></script>
 </head>
-<?php 
+<?php
 session_start();
-
 ?>
 <!-- BARRA DE NAVEGACION -->
 <?php

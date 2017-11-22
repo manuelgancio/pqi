@@ -22,7 +22,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 </head>
 <?php
-	session_start();
+session_start();
 ?>
 <body>
 <div class="container">
@@ -32,7 +32,7 @@
 		</div>
 
 		<div class="col-md-7 col-sm-3">
-		  <img class="logoimg"src="<?= $IMG?>/logo.png" alt="Logo">
+		  <img class="logoimg" src="<?= $IMG?>/logo.png" alt="Logo">
 		</div>
      
 		
@@ -143,7 +143,7 @@ $secciones = $seccion->listarSecciones();
 			
 			<form class="form-horizontal" action="<?= $LOGICA;?>/procesarSuscripcion.php" method="POST" id="formSuscripcion" role="form">
 				<div class="form-group">
-					<label class="control-label col-sm-2" for="t_credito">Tarjeta de Crédito:</label>
+					<label class="control-label col-sm-2" for="t_credito">Tarjeta de Cr&eacute;ndito:</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="t_credito" name="t_credito" required>
 					</div>
@@ -152,7 +152,7 @@ $secciones = $seccion->listarSecciones();
 					<label class="control-label col-sm-2" for="tipo">Periodicidad:</label>
 					<div class="col-sm-5">
 						<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="1">Lunes a Domingo</label>
-						<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="2">Sábados y Domingos</label>
+						<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="2">S&aacute;nbados y Domingos</label>
 						<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="3">Lu - Mi - Vi</label>	
 					</div>
 				</div>

@@ -7,30 +7,45 @@
 <meta name="author" content="paqueteinformes">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta property="og:url"           content="http://localhost/pqi/frontend/presentacion/index.php" />
-<meta property="og:type"          content="website" />
-<meta property="og:title"         content="Paqueteinformes" />
-<meta property="og:description"   content="Your description" />
-<meta property="og:image"         content="<?= $IMG?>/bonomi.jpg"/>
+<meta property="og:type"               content="article" />
+<meta property="og:title"              content="Paqueteinformes - Noticias" />
+<meta property="og:description"        content="" />
+<meta property="og:image"              content=""/>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<?= $CSS;?>/estilos.css">
 <script src="<?= $JS;?>/funciones.js"></script>
+<!--FACEBOOK-->
+<script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
+
 </head>
 
-<div id="fb-root"></div>
-    <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=141862136411361';
-    fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+<script>
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '141862136411361',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.8' // use graph api version 2.8
+  });
+}
+
+window.onload = function(){ 
+    
+
+    document.getElementById('shareBtn').onclick = function() {
+        FB.ui({
+            app_id: '141862136411361',
+            method: 'share',
+            display: 'popup',
+            href: 'http://localhost/pqi/frontend',
+        }, function(response){});
+    }
+}
 </script>
-
-
 
 <?php
 include('headerNoti.php');
@@ -111,9 +126,14 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
             <div class="redesNoti col-md-2">
                 <div class="form-group">
 					<div class="col-sm-1">
+                    <!--
                     	<div class="fb-share-button" data-href="http://localhost" data-layout="button" data-size="large" data-mobile-iframe="true">
                     	<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2F&amp;src=sdkpreparse">Compartir</a></div>
-					</div>
+					-->
+                    <div id="shareBtn" name="shareBtn" class="btn btn-primary clearfix">Compartir</div>
+
+
+                    </div>
 					<div class="col-sm-1 like">
 						<form id="frmLike" name="frmLike" action="<?= $LOGICA;?>/procesarLike.php">
 							<input type="hidden" id="id_art" name="id_art" value="<?php echo $id_art;?>">
@@ -137,7 +157,8 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
 
                     /* Alerts the results */
                     posting.done(function( data ) {
-                        $('#btnLike').attr('disabled','-1')
+                        $('#btnLike').attr('disabled','-1');
+                        aviso('Like!','4000');
                     });
                     });
                 </script>

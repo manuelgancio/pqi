@@ -24,16 +24,16 @@
     padding-top: 0px;
     padding-bottom: 0px;    
 }
-.logoimg{
+.logoimg {
     height: 150px;
-    margin-top: 50px;
+    margin-top: -15px;
+    margin-bottom: 10px;
 }
-.publicidadIndex{
-	
+.publicidadIndex {
 	height: 200px;
 	width: 260px;
 }
-.publiBanner{
+.publiBanner {
     margin-bottom: 30px;
     align-self:center;
     margin-right: auto;
@@ -41,7 +41,7 @@
     height:130px;
     width:100%;
 }
-.publiBannerP{
+.publiBannerP {
     margin-top: 40px;
     margin-right: auto;
     margin-left: auto;
@@ -49,7 +49,7 @@
     height:130px;
     width:100%;
 }
-.publiBannerS{
+.publiBannerS {
     margin-top: 60px;
     margin-right: auto;
     margin-left: auto;
@@ -61,17 +61,17 @@
     height:130px;
     width:1090;
 }
-.publiNotiV{
+.publiNotiV {
     height:480px;
     width:200px;
     margin-right: auto;
     margin-left: auto;
 }
 
-.oculto{
+.oculto {
     display:none;
 }
-#suscripto{
+#suscripto {
     display: block;
 }
 /** PAGINA NOTICA **/
@@ -80,7 +80,6 @@
     text-align: left;
     font-weight: bolder;
     font-size: 42px;
-   
 }
 .cateNoti{
     color: #AFAAAA;
@@ -107,14 +106,14 @@
     margin-right: auto;   
     background-color: red;  
 }
-.txtNoti{
+.txtNoti {
     width: 90%;
     margin-left: 1%;
     margin-right: auto;
     align-self: center;
     margin-top: 40px;
 }
-.txtNoti p{
+.txtNoti p {
     word-wrap: break-word;
     font-size: 18px;
     text-align: justify;

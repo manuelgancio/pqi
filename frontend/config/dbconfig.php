@@ -4,7 +4,7 @@
     define('DB_USER','root');
     define('DB_PASS','');
     define('DB_NAME','bd2');
-    define('DB_CHARSET','UTF-8');
+    define('DB_CHARSET','ISO-8859-1');
 
 
 /*

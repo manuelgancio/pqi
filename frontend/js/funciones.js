@@ -1,4 +1,21 @@
+function errCom(){
+	var msj = 'Debe iniciar sesión para comentar!';
+	var timeout = '7000';
 
+	$("#error_div button").after("<span>"+msj+"</span>");
+	$('#error_div').fadeIn('slow');
+		
+	if (timeout || timeout === 0) {
+		setTimeout(function() { 
+			$('#error_div').alert('close');
+			$("#error_div span").remove();			
+		}, timeout);    
+	}
+			
+	$('#error_div .close').click(function(e) {
+		$("#error_div span").remove();
+	});
+}	
 
 function aviso(msj,timeout){
 
@@ -37,6 +54,17 @@ function error(msj,timeout){
 function submit(){
 	$('#frmReportar').submit();
 }
+function reportarrr(){
+	$.post("../logica/procesarComentarios.php", {
+		btnReportar: $("#btnReportar").val(),
+		id_cm: $("#id_cm").val(),
+
+	
+	  });
+	  
+	aviso('reportado','7000');
+}
+
 function logged(){
 	$("#notlogged").css("display","none");
 	$("#logged").css("display","block");

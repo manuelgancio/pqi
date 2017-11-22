@@ -208,25 +208,7 @@ public function reportarComentario(){
     $result -> bind_param('ii',$cant_reportes,$id_cm);
     $result -> execute();
     return (true);
-/*
-    if($cant_reportes == NULL){
-        //Guardo un 1 en la base 
-        $sql="UPDATE `comentario` SET `reportado`= 1 WHERE `id_cm` = ?";
-        $result = $this->_db->prepare($sql);
-        $result -> bind_param('i',$id_cm);
-        $result -> execute();
-        
-        return (true);
-    }else{
-        //Sumo 1 a la cantidad de reportes existentes
-        $cant_reportes = $cant_reportes + 1;
-        $sql="UPDATE `comentario` SET `reportado`= ? WHERE `id_cm` = ?";
-        $result = $this->_db->prepare($sql);
-        $result -> bind_param('ii',$cant_reportes,$id_cm);
-        $result -> execute();
-        return (true);
-    }
-*/
+
 }
 
 }

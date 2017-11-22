@@ -21,31 +21,31 @@
 		if ($_GET['err'] == 'fecha'){
 			?>
 			<script>
-			error('No hay artículos en esa fecha.','7000');
+			error('No hay art&iacute;culos en esa fecha.','7000');
 			</script>
 			<?php	
 		}elseif ($_GET['err'] == 'regOk'){
 			?>
 			<script>
-			aviso('Registro correcto! Ya puedes iniciar sesión.','7000');
+			aviso('Registro correcto! Ya puedes iniciar sesi&oacute;n.','7000');
 			</script>
 			<?php	
 		}elseif($_GET['err'] == 'susOk'){
 			?>
 			<script>
-			aviso('La suscripción se realizo con éxito.','7000');
+			aviso('La suscripción se realizo con &eacute;xito.','7000');
 			</script>
 			<?php	
 		}elseif($_GET['err'] == 'susC'){
 			?>
 			<script>
-			aviso('Se cancelo la suscripción.','7000');
+			aviso('Se cancelo la suscripci&oacute;n.','7000');
 			</script>
 			<?php	
 		}elseif($_GET['err'] == 'loginF'){
 			?>
 			<script>
-			error('Usuario o contraseña incorrecta.','7000');
+			error('Usuario o contrase&ntilde;a incorrecta.','7000');
 			</script>
 			<?php	
 		}

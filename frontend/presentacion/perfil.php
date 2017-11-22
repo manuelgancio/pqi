@@ -30,7 +30,7 @@ if(isset($_GET['err'])){
         aviso('Datos modificados correctamente!.','7000');
         </script>
         <?php	
-    }   
+    }
 }
 
 //Llamo a la clase usuario
@@ -54,12 +54,12 @@ $datos = $usu->verPerfil();//Datos del perfil
 
 <div class="container">
   <h2>Hola<?php echo ' '.$datos['p_nomb'].'!';?></h2>
-  <p>Desde aquí puedes ver y modificar tus datos así como realizar el alta o baja de tu suscripción.</p>
+  <p>Desde aqu&iacute; puedes ver y modificar tus datos as&iacute; como realizar el alta o baja de tu suscripci&oacute;n.</p>
 
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#datos">Mis datos</a></li>
     <li><a data-toggle="tab" href="#modificar">Editar</a></li>
-    <li><a data-toggle="tab" href="#sus">Suscripción</a></li>
+    <li><a data-toggle="tab" href="#sus">Suscripci&oacute;n</a></li>
   </ul>
 
   <div class="tab-content">
@@ -71,8 +71,8 @@ $datos = $usu->verPerfil();//Datos del perfil
                 <h4>Correo: </h4><p><?php echo ' '.$datos['corre_c'];?></p>
             </div>
             <div class="col-md-6">
-                <h4>Teléfono de contacto: </h4><p><?php echo ' '.$datos['tel'];?></p>
-                <h4>Estado suscripción:</h4>
+                <h4>Tel&eacute;fono de contacto: </h4><p><?php echo ' '.$datos['tel'];?></p>
+                <h4>Estado suscripci&oacute;n:</h4>
                 <?php
                 if($_SESSION['Suscripto'] == true){
                     ?>
@@ -80,7 +80,7 @@ $datos = $usu->verPerfil();//Datos del perfil
                 <?php 
                 }else{
                     ?>
-                    <p> No está suscripto </p>
+                    <p> No est&aacute; suscripto </p>
                     <?php
                 }
                 ?>
@@ -97,13 +97,13 @@ $datos = $usu->verPerfil();//Datos del perfil
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2" for="tel" required>Teléfono:</label>
+                    <label class="control-label col-md-2" for="tel" required>Tel&eacute;fono:</label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" id="tel" name="tel">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2" for="pwd" required>Contraseña:</label>
+                    <label class="control-label col-md-2" for="pwd" required>Contrase&ntilde;a:</label>
                     <div class="col-md-3">
                         <input type="password" class="form-control" id="pwd" name="pwd">
                     </div>
@@ -117,24 +117,29 @@ $datos = $usu->verPerfil();//Datos del perfil
     <?php 
     ?>
     <div id="sus" class="tab-pane fade">
-        <h3>Suscripción</h3>
-        <p>Fruta sobre suscripción</p>
+        <h3>Suscripci&oacute;n</h3>
+        <h4>Ventajas de la suscripci&oacuten;</h4>  
+        <article>
+			<p><h4><span class="glyphicon glyphicon-ok"></span> Recibir suplementos en tu correo!</h4></p>
+			<p><h4><span class="glyphicon glyphicon-ok"></span> Realizar comentarios en las noticias!</h4></p>
+			<h4><span class="glyphicon glyphicon-ok"></span> Utilizar las funciones Me Gusta y Compartir!</h4></p>
+		</article>
         <?php 
         if($_SESSION['Suscripto'] == true){//esta suscripto
             ?>
         <p> Usted ya se encuentra suscripto.</p>
-        <p> Si desea cancelar su suscripcion haga click aqui:</p>
+        <p> Si desea cancelar su suscripci&oacute;n haga click aqui:</p>
         <a href="<?= $LOGICA;?>/procesarSuscripcion.php?f=can_sus" class="btn btn-danger" id="btnCancelarSus" name="btnCancelarSus">Cancelar Suscripción</a>
         <?php 
         }else{
             ?>
-            <h4> ¿Desea suscribirse? </h4>
-            <p> Ingrese sus datos y empezará a recibir nuestro suplemento!</p>
+            <h4>¿Desea suscribirse?</h4>
+            <p> Ingrese sus datos y empezar&aacute; a recibir nuestro suplemento!</p>
             <div class="row">
                 <div class="col-md-6">
                     <form action="<?= $LOGICA;?>/procesarSuscripcion.php" method='POST' id="frmSus" role='form' class="form-horizontal">
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="t_credito">Tarjeta de Crédito:</label>
+                            <label class="control-label col-sm-2" for="t_credito">Tarjeta de Cr&eacute;dito:</label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" id="t_credito" name="t_credito">
                             </div>
@@ -143,7 +148,7 @@ $datos = $usu->verPerfil();//Datos del perfil
                             <label class="control-label col-sm-2" for="tipo">Periodicidad:</label>
                             <div class="col-sm-5">
                                 <label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="1">Lunes a Domingo</label>
-                                <label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="2">Sábados y Domingos</label>
+                                <label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="2">S&aacute;bados y Domingos</label>
                                 <label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="3">Lu - Mi - Vi</label>	
                             </div>
                         </div>
