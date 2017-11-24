@@ -1,4 +1,6 @@
 <?php
+/* MOSTRAR ERROES */
+//error_reporting(0);
 /* PATH */
 
     $PATH = $_SERVER["DOCUMENT_ROOT"].'/pqi/frontend';

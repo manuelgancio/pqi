@@ -80,16 +80,12 @@
 			<div class="carousel-inner">
 
 				<div class="item active">
-				<img src="http://placehold.it/760x400/dddddd/333333">
-				<div class="carousel-caption">
-					<h4><a href="#">¿Queres que mostremos tu publicidad? Contactanos a: publicidad@pqi.com</a></h4>
-					<p class="item-txt"></p>
-				</div>
-				</div><!-- End Item -->
+				<img src="<?= $IMG;?>/paquetesenial.jpg">
+			</div><!-- End Item -->
 
 				<?php foreach($articulos_d as $art_d):?>
 					<div class="item">
-					<img src="http://placehold.it/760x400/cccccc/ffffff">
+					<img src="http://placehold.it/840x400/cccccc/ffffff">
 						<div class="carousel-caption">
 							<h4><a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art_d['id_a']?>"><?= $art_d['titulo'];?></a></h4>
 							<p class="item-txt"><?= $art_d['contenido'];?></p>
@@ -134,7 +130,7 @@
 </div><!--container-->
 
 <!-- PUBLICIDAD PORTADA -->
- 
+
 <div class="container">
 	<div class="row">
 		<div class="">

@@ -92,7 +92,7 @@ $secciones = $seccion->listarSecciones();
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Ingresar</h4>
+          <h4 class="modal-title">Iniciar sesi&oacute;n</h4>
         </div>
         <div class="modal-body" align="center">
           <form action="<?= $LOGICA;?>/procesarLogin.php" method="POST" id="formLogin" role="form">
@@ -128,7 +128,7 @@ $secciones = $seccion->listarSecciones();
       	<div class="modal-content">
 			<div class="modal-header" align="center">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h3 class="modal-title">¿Por qué suscribirme?</h3>
+				<h3 class="modal-title">&#191;Por qué suscribirme?</h3>
 			</div>
 		<div class="modal-body">
 				
@@ -143,7 +143,7 @@ $secciones = $seccion->listarSecciones();
 			
 			<form class="form-horizontal" action="<?= $LOGICA;?>/procesarSuscripcion.php" method="POST" id="formSuscripcion" role="form">
 				<div class="form-group">
-					<label class="control-label col-sm-2" for="t_credito">Tarjeta de Cr&eacute;ndito:</label>
+					<label class="control-label col-sm-2" for="t_credito">Tarjeta de Cr&eacute;dito:</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="t_credito" name="t_credito" required>
 					</div>
@@ -152,7 +152,7 @@ $secciones = $seccion->listarSecciones();
 					<label class="control-label col-sm-2" for="tipo">Periodicidad:</label>
 					<div class="col-sm-5">
 						<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="1">Lunes a Domingo</label>
-						<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="2">S&aacute;nbados y Domingos</label>
+						<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="2">S&aacute;bados y Domingos</label>
 						<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="3">Lu - Mi - Vi</label>	
 					</div>
 				</div>

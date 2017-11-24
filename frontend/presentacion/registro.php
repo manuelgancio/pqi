@@ -57,26 +57,26 @@ if(isset($_GET['err'])){
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="tel">Teléfono:</label>
+			<label class="control-label col-sm-2" for="tel">Tel&eacute;fono:</label>
 			<div class="col-sm-5">
 				<input type="text" class="form-control" id="tel" name="tel" required>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="pwd">Contraseña:</label>
+			<label class="control-label col-sm-2" for="pwd">Contrase&ntilde;a:</label>
 			<div class="col-sm-5">
 				<input type="password" class="form-control" id="pwd" name="pwd" reqired>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="pre">Suscripción:</label>
+			<label class="control-label col-sm-2" for="pre">Suscripci&oacute;n:</label>
 			<div class="col-sm-5">
   				<input type="checkbox" data-toggle="collapse" data-target="#premium" id="pre" name="pre" value="premium">
 			</div>
 		</div>
 		<div class="collapse" id="premium">
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="t_credito">Tarjeta de Crédito:</label>
+				<label class="control-label col-sm-2" for="t_credito">Tarjeta de Cr&eacute;dito:</label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="t_credito" name="t_credito">
 				</div>
@@ -85,7 +85,7 @@ if(isset($_GET['err'])){
 				<label class="control-label col-sm-2" for="tipo">Periodicidad:</label>
 				<div class="col-sm-5">
 					<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="1">Lunes a Domingo</label>
-					<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="2">Sábados y Domingos</label>
+					<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="2">S&aacute;bados y Domingos</label>
 					<label class="radio-inline"><input type="radio" id="tipo" name="tipo" value="3">Lu - Mi - Vi</label>	
 				</div>
 			</div>
@@ -98,11 +98,17 @@ if(isset($_GET['err'])){
 		</form>
 	</div>
 	<div class="col-sm-6">
-		<div class="well well-sm text-muted"><h3>¿Por qué suscribirme?</h3></div>
+		<div class="well well-sm text-muted"><h3>&#191;Por qu&eacute; suscribirme?</h3></div>
 		<article>
 			<p><h4><span class="glyphicon glyphicon-ok"></span> Recibir suplementos en tu correo!</h4></p>
 			<p><h4><span class="glyphicon glyphicon-ok"></span> Realizar comentarios en las noticias!</h4></p>
 			<h4><span class="glyphicon glyphicon-ok"></span> Utilizar las funciones Me Gusta y Compartir!</h4></p>
 		</article>
+		<div class="">
+			<img src="<?= $IMG;?>/diario.jpg" class="imgRegistro" alt="diario">
+		</div>
+		<div style="margin-top:20px;">
+			<a class="btn btn-primary" href="<?php echo $PRESENTACION;?>/index.php">Volver</a>
+		</div>
 	</div>
 </div>

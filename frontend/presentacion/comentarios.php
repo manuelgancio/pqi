@@ -125,7 +125,7 @@
     var $form = $( this ),
     url = $form.attr('action');
     
-    /* Send the data using post with id comentario*/
+    /* Send the data using post with id comentario */
     var posting = $.post( url, { id_cm: $('#id_cm').val(),btnReportar: $('#btnReportar').val()} );
 
     /* Alerts the results */

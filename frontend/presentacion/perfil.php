@@ -1,5 +1,5 @@
 <html>
-<title>Perfil - Paqueteinformes.com</title>
+
 
 
 <?php
@@ -67,20 +67,20 @@ $datos = $usu->verPerfil();//Datos del perfil
         <h3>Mis datos:</h3>
         <div class="row">
             <div class="col-md-6">
-                <h4>Nombre: </h4><p><?php echo ' '.$datos['p_nomb'].' '.$datos['p_ap'];?></p>
-                <h4>Correo: </h4><p><?php echo ' '.$datos['corre_c'];?></p>
+            <h4><span class="glyphicon glyphicon-user"></span> Nombre: </h4><p><?php echo ' '.$datos['p_nomb'].' '.$datos['p_ap'];?></p>
+                <h4><span class="glyphicon glyphicon-envelope"></span> Correo: </h4><p><?php echo ' '.$datos['corre_c'];?></p>
             </div>
             <div class="col-md-6">
-                <h4>Tel&eacute;fono de contacto: </h4><p><?php echo ' '.$datos['tel'];?></p>
-                <h4>Estado suscripci&oacute;n:</h4>
+                <h4><span class="glyphicon glyphicon-earphone"></span> Tel&eacute;fono de contacto: </h4><p><?php echo ' '.$datos['tel'];?></p>
+                <h4><span class="glyphicon glyphicon-star"></span> Estado suscripci&oacute;n:</h4>
                 <?php
                 if($_SESSION['Suscripto'] == true){
                     ?>
-                    <p> Suscripto correctamente! </p>
+                    <p> Suscripto correctamente! <span class="glyphicon glyphicon-ok"></span></span></p>
                 <?php 
                 }else{
                     ?>
-                    <p> No est&aacute; suscripto </p>
+                    <p> No est&aacute; suscripto <span class="glyphicon glyphicon-remove"></span></p>
                     <?php
                 }
                 ?>
@@ -91,19 +91,19 @@ $datos = $usu->verPerfil();//Datos del perfil
         <h3>Actualizar datos.</h3>
             <form action="<?= $LOGICA;?>/procesarRegistro.php" autocomplete="off" id="frmMod" method="POST" class="form-horizontal">
                 <div class="form-group">
-                    <label class="control-label col-md-2" for="correo">Correo:</label>
+                    <label class="control-label col-md-2" for="correo"><span class="glyphicon glyphicon-envelope"></span> Correo:</label>
                     <div class="col-md-3">
                         <input type="email" class="form-control" id="correo" name="correo" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2" for="tel" required>Tel&eacute;fono:</label>
+                    <label class="control-label col-md-2" for="tel" required><span class="glyphicon glyphicon-earphone"></span> Tel&eacute;fono:</label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" id="tel" name="tel">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2" for="pwd" required>Contrase&ntilde;a:</label>
+                    <label class="control-label col-md-2" for="pwd" required><span class="glyphicon glyphicon-lock"></span> Contrase&ntilde;a:</label>
                     <div class="col-md-3">
                         <input type="password" class="form-control" id="pwd" name="pwd">
                     </div>
@@ -120,6 +120,7 @@ $datos = $usu->verPerfil();//Datos del perfil
         <h3>Suscripci&oacute;n</h3>
         <h4>Ventajas de la suscripci&oacuten;</h4>  
         <article>
+            <p></p>
 			<p><h4><span class="glyphicon glyphicon-ok"></span> Recibir suplementos en tu correo!</h4></p>
 			<p><h4><span class="glyphicon glyphicon-ok"></span> Realizar comentarios en las noticias!</h4></p>
 			<h4><span class="glyphicon glyphicon-ok"></span> Utilizar las funciones Me Gusta y Compartir!</h4></p>
@@ -133,7 +134,7 @@ $datos = $usu->verPerfil();//Datos del perfil
         <?php 
         }else{
             ?>
-            <h4>¿Desea suscribirse?</h4>
+            <h4>&#191;Desea suscribirse?</h4>
             <p> Ingrese sus datos y empezar&aacute; a recibir nuestro suplemento!</p>
             <div class="row">
                 <div class="col-md-6">
