@@ -1,7 +1,7 @@
 <?php
-session_start();
-require($CLASES_DIR . 'noticia.php');
-$noticia = New claseNoticia();
+ session_start();
+ require($CLASES_DIR . 'usuario.php');
+ $user = New userModel();
 
 ?>
 <!DOCTYPE html>
@@ -17,6 +17,10 @@ $noticia = New claseNoticia();
     <meta name="author" content="">
     <title>Pqi. Backend</title>
 
+    <link href="../css/metisMenu.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.css" rel="stylesheet">
+
+
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,7 +32,7 @@ $noticia = New claseNoticia();
 
     <!-- Custom styles for this template -->
     <link href="../css/sb-admin.css" rel="stylesheet">
-
+    
   </head>
 
   <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -245,33 +249,85 @@ $noticia = New claseNoticia();
         </ul>
       </div>
     </nav>
-<?php 
-//LLamo clase usuario 
-require_once ($CLASES_DIR . 'usuario.php');
-$usuario = new userModel();
-?>
+
     <div class="content-wrapper">
 
       <div class="container-fluid">
- 
+
         <!-- Breadcrumbs -->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="perfil.php">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Estadisticas</li>
+          <li class="breadcrumb-item active">Frontend</li>
         </ol>
 
-        <table>
-        <tr>
-          <td> <?php $noticia->ArtVisitas(); ?> </td>
-          <td> <?php $noticia->SecVisitas(); ?> </td>
-          <td> <?php $noticia->ArtMeGusta(); ?> </td>
-        </tr>
-        <tr>
-          <td> <?php $usuario->usuariosfb(); ?> </td>
-          <td> <?php $usuario->usuariosNormal(); ?> </td>
-        </tr>
+
+        <style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li article{
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block;
+  margin-bottom: 5px;
+  
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+</style>
+
+<h2>Usuarios frontend.</h2>
+
+<?php
+    $user-> usuariosFrontend();
+  ?>
+
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+
+        }
+    }
+}
+</script>
+
 
     </div>
     <!-- /.content-wrapper -->

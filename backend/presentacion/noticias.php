@@ -1,5 +1,7 @@
 <?php
 session_start();
+require($CLASES_DIR . 'noticia.php');
+$not = New claseNoticia();
 
 ?>
 <!DOCTYPE html>
@@ -63,13 +65,16 @@ session_start();
                 <a href="abmAdmin.php">Administradores</a>
               </li>
               <li>
-                <a href="#">Moderador</a>
+                <a href="abmModerador.php">Moderador</a>
               </li>
               <li>
-                <a href="#">Editor</a>
+                <a href="abmEditor.php">Editor</a>
               </li>
               <li>
-                <a href="#">Master</a>
+                <a href="abmMaster.php">Master</a>
+              </li>
+              <li>
+                <a href="usrFrontend.php">Front-end</a>
               </li>
             </ul>
           </li>
@@ -86,6 +91,13 @@ session_start();
             <a class="nav-link" href="noticias.php">
             <i class="fa fa-newspaper-o" aria-hidden="true"></i>
               <span class="nav-link-text">Noticias</span>
+            </a>
+          </li>
+
+           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+            <a class="nav-link" href="abmSecciones.php">
+            <i class="fa fa-star" aria-hidden="true"></i>
+              <span class="nav-link-text">Secciones</span>
             </a>
           </li>
 
@@ -245,63 +257,93 @@ session_start();
 
       
       <div class="container">
-      <a class="btn btn-primary" style="margin: 5px;" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw -square -circle fa-plus-square"></i> Nueva Noticia </a>
+      <a class="btn btn-primary" style="margin: 5px;" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw -square -circle fa-plus-square"></i> Noticia Nueva </a>
       
-
-        <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
-          
-            <!-- Modal content-->
+             <!-- Formulario que lleva a la logica de la noticia -->
+           <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo $LOGICA;?>noticias.php" method="POST">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Cargar noticia</h4>
               </div>
-              <div class="modal-body">
-                
+
+              <div class="modal-body">          
                 <div class="form-group">
-                  <label class="col-md-4 control-label" for="Titulo">Titulo</label>
+                  <label class="col-md-4 control-label" for="Titulo"><small>Titulo</small></label>
                   <div class="col-md-5">
                       <div class="input-group">
                           <span class="input-group-addon">
                               <i class="fa fa-font"></i>
                           </span>
-                          <input id="titulo" name="titulo" class="" placeholder="Titulo" type="text" required="">
+                          <input id="titulo" name="titulo" class="" placeholder="Titulo de la noticia" type="text" required="">
                       </div>
                   </div>
                 </div>
 
-
-                  <div class="input-append date form_datetime">
-                      <input size="16" type="text" value="" readonly>
-                      <span class="add-on"><i class="icon-th"></i></span>
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="Fecha"><small>Fecha</small></label>
+                  <div class="col-md-5">
+                      <div class="input-group">
+                          <span class="input-group-addon">
+                              <i class="fa fa-time"></i>
+                          </span>
+                          <input id="fecha" name="fecha" class="" placeholder="Fecha de publicacion" type="date" required="">
+                      </div>
                   </div>
-                   
-                  <script type="text/javascript">
-                      $(".form_datetime").datetimepicker({
-                          format: "dd MM yyyy - hh:ii",
-                          autoclose: true,
-                          todayBtn: true,
-                          pickerPosition: "bottom-left"
-                      });
-                  </script>         
+                </div>
 
+                <div style="margin: 20px;">  
+                    <small>Imagen de la publiciadad:</small>
+                    <input type="file" name="fileToUpload" id="fileToUpload" class="text-center center-block well well-sm">
+                    <br>
+                    <hr class="style1">
+                </div>                  
+
+                <small> maximo: 7000 caracteres. </small>
+                <div class="container">
+                  <div class="row">
+                    <script src="http://code.jquery.com/jquery-1.5.js"></script>
+                    <script>
+                      function countChar(val) {
+                        var len = val.value.length;
+                        if (len >= 7000) {
+                          val.value = val.value.substring(0, 7000);
+                        } else {
+                          $('#charNum').text(len);
+
+                        }
+                      };
+                    </script>
+                    <textarea id="contenido" name="contenido" class="form-control" rows="5" onkeyup="countChar(this)"></textarea>
+                    <div id="charNum"></div>
+                  </div>
+                </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              
+              <div>
+                    <?php
+                    $not->listarSecciones();
+                    ?>
+                    <hr class="style1">
               </div>
-            </div>
-            
+
+              <div style="margin: 20px;">
+            <button id="myBtn" type="submit" value="Upload Image" class="btn btn-primary" name="cargar">
+            <i class="fa fa-fw fa-save"></i>Guardar</button>
           </div>
+          </form>
+          </div>  
         </div>
-        
       </div>
 
+      <?php  
+    
+      $not->noticias();
 
-        
-   
-
+      ?>
+    
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">

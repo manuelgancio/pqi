@@ -9,7 +9,7 @@
 
     $PATH = $_SERVER["DOCUMENT_ROOT"];
     
-    //echo $PATH;
+    echo $PATH;
 
     $CONTENIDOESTATICO ='192.168.43.128/';
 

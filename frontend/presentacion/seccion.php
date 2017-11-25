@@ -82,7 +82,7 @@ $offset = ($pagActual - 1) * $artXpag;
         require_once($CLASES_DIR . 'publicidad.class.php');
         $p = New publicidad();
         $pub = $p->listarPubSeccion($id_s);
-        if($pub != NULL){//Cargo publicidad
+        if($pub != false){//Cargo publicidad
         ?>
             <img src="<?php echo $pub;?>" alt="publicidad">
         <?php

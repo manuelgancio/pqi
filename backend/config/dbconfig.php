@@ -3,7 +3,7 @@
     define('DB_HOST','localhost');
     define('DB_USER','root');
     define('DB_PASS','');
-    define('DB_NAME','pqi');
+    define('DB_NAME','bd2');
     define('DB_CHARSET','utf-8');
 
 /**

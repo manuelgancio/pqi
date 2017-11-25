@@ -76,6 +76,9 @@
               <li>
                 <a href="abmMaster.php">Master</a>
               </li>
+              <li>
+                <a href="usrFrontend.php">Front-end</a>
+              </li>
             </ul>
           </li>
 
@@ -95,6 +98,12 @@
             </a>
           </li>
 
+           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+            <a class="nav-link" href="abmSecciones.php">
+            <i class="fa fa-star" aria-hidden="true"></i>
+              <span class="nav-link-text">Secciones</span>
+            </a>
+          </li>
 
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
             <a class="nav-link" href="estadisticas.php">

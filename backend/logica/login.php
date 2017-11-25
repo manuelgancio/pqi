@@ -25,12 +25,15 @@ session_start();
         $user->setUsername($username);
         $user->setPassword($password);
 
-
         $user->obtenerIdEmpleado(); 
+        $user->obtenerNombre();
+        $user->obtenerApellido();
+        $user->obtenerCargo();
         
         $ERROR = $user->validate($username,$password);
         
         $CATEGORIA = $user->categoria();
+
         $_SESSION["Categoria"] = $CATEGORIA;
 
         if($ERROR == false ){

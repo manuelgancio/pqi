@@ -65,13 +65,16 @@ session_start();
                 <a href="abmAdmin.php">Administradores</a>
               </li>
               <li>
-                <a href="#">Moderador</a>
+                <a href="abmModerador.php">Moderador</a>
               </li>
               <li>
-                <a href="#">Editor</a>
+                <a href="abmEditor.php">Editor</a>
               </li>
               <li>
-                <a href="#">Master</a>
+                <a href="abmMaster.php">Master</a>
+              </li>
+              <li>
+                <a href="usrFrontend.php">Front-end</a>
               </li>
             </ul>
           </li>
@@ -88,6 +91,13 @@ session_start();
             <a class="nav-link" href="noticias.php">
             <i class="fa fa-newspaper-o" aria-hidden="true"></i>
               <span class="nav-link-text">Noticias</span>
+            </a>
+          </li>
+
+           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+            <a class="nav-link" href="abmSecciones.php">
+            <i class="fa fa-star" aria-hidden="true"></i>
+              <span class="nav-link-text">Secciones</span>
             </a>
           </li>
 

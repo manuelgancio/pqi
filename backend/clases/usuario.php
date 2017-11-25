@@ -1,7 +1,19 @@
 <?php
+?>
+<script>
+function submit(){
+	$('#frmReportar').submit();
+}
+function oculto(){
+    window.onload = function{
+        $('#btnBloquear').prop('disabled', true);
 
+    }
+}
+</script>
+<?php 
 
-require('model.php');
+require_once('model.php');
 
 class userModel extends Model{
 
@@ -77,6 +89,17 @@ class userModel extends Model{
     public function getSeccion(){
     return $this->seccion;
     }
+
+public function bloquear(){
+    $id_p = $this->getIdp();
+
+    $sql="UPDATE `cliente` SET `edo_cl`= 0 WHERE `id_p` = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_p);
+    $result -> execute();
+
+    return (true);
+}
 
     public function administradores(){
 
@@ -409,6 +432,61 @@ class userModel extends Model{
     }
  
 
+
+   public function usuariosFrontend(){
+
+    $sqladmin="select p.id_p, p.p_nomb, p.p_ap, c.corre_c, c.edo_cl  from persona p inner join cliente c where p.id_p = c.id_p ";
+    $result = mysqli_query($this->_db,$sqladmin);
+
+
+    echo "<input type='text' id='myInput' onkeyup='myFunction()' placeholder='Busca por nombre..' title='Type in a name'>
+        <ul id='myUL'>";
+
+    while($row=mysqli_fetch_array($result)){
+
+    $habilitado = $row[4];
+    $row4="";
+
+    if($habilitado == 1){
+        $row4="<i class='fa fa-eye' aria-hidden='true'></i> Usuario activo.";
+    }
+    else{
+        $row4="<i class='fa fa-eye-slash' aria-hidden='true'></i> Usuario bloqueado.";
+        ?>
+        <script>
+        oculto();
+        </script>
+        <?php
+    }    
+
+
+
+    echo "    
+          <li>
+          
+          <article>
+          <div style=''><i class='fa fa-user' aria-hidden='true'></i> ". $row[1] ." ". $row[2] ." 
+          <div><i class='fa fa-envelope' aria-hidden='true'></i> ". $row[3] ."</div>
+
+          <div>". $row4 ." 
+          "; if($habilitado == 0){echo "<form action='../logica/procesarBloquear.php' method='POST' id='frmBloquear' name='frmBloquear'>
+            <input type='hidden' value='$row[0]' name='id_p' id='id_p'>
+            <button placeholder='bloquear' id='btnBloquear' name='btnBloquear' class='btn btn-success' onclick='submit();'><i class='fa fa-lock' aria-hidden='true'></div></i></button>
+            </form>";}else{echo"
+                <div>
+                <form action='../logica/procesarBloquear.php' method='POST' id='frmBloquear' name='frmBloquear'>
+                <input type='hidden' value='$row[0]' name='id_p' id='id_p'>
+                <button placeholder='bloquear' id='btnBloquear' name='btnBloquear' class='btn btn-danger' onclick='submit();'><i class='fa fa-lock' aria-hidden='true'></div></i></button>
+            </form>";}"
+      </div>
+          </article>
+          </li>
+        ";
+     }   
+
+     echo "</ul>";
+    }
+ 
     public function Editores(){
 
         $sqladmin="select p.id_p, p.p_nomb, p.p_ap, e.cargo, e.e_correo, e.seccion from persona p inner join empleado e where p.id_p = e.id_p and cargo = 'Editor'";
@@ -753,4 +831,105 @@ class userModel extends Model{
         $_SESSION["idEmpleado"] = $row['id_e'];
         }
 
-    }
+    public function obtenerNombre(){
+
+        $sql="SELECT p.p_nomb FROM persona p 
+        inner join empleado e on p.id_p = e.id_p
+        where e_correo = ? ;";
+        $result = $this->_db->prepare($sql);
+
+        $correo = $_SESSION['Correo'];  
+        $result -> bind_param('s',$correo);
+        $result->execute();
+        $resultado = $result->get_result();
+        $row = $resultado->fetch_assoc();
+        $_SESSION["Nombre"] = $row['p_nomb'];
+        }
+
+     public function obtenerApellido(){
+
+        $sql="SELECT p.p_ap FROM persona p 
+        inner join empleado e on p.id_p = e.id_p
+        where e_correo = ?;";
+
+        $result = $this->_db->prepare($sql);
+        $correo = $_SESSION['Correo'];  
+        $result -> bind_param('s',$correo);
+        $result->execute();
+        $resultado = $result->get_result();
+        $row = $resultado->fetch_assoc();
+        $_SESSION["Apellido"] = $row['p_ap'];
+        }
+
+        public function obtenerCargo(){
+
+        $sql="SELECT cargo FROM empleado WHERE e_correo = ?";
+
+        $result = $this->_db->prepare($sql);
+        $correo = $_SESSION['Correo'];  
+        $result -> bind_param('s',$correo);
+        $result->execute();
+        $resultado = $result->get_result();
+        $row = $resultado->fetch_assoc();
+        $_SESSION["Cargo"] = $row['cargo'];
+
+        }
+
+
+
+public function usuariosfb(){
+    /* Devuelve cantidad de usuarios que se registran con fb */
+    $sql="SELECT COUNT(id_cl) FROM `cliente` WHERE `id_fb` != 0";
+    $result = mysqli_query($this->_db,$sql);
+    
+      $row = mysqli_fetch_array($result);
+          
+            echo"
+                <div class='card text-white bg-primary o-hidden h-100'>
+                  <div class='card-body'>
+                    <div class='card-body-icon'>
+                      <i class='fa fa-fw fa-list'></i>
+                    </div>
+                    <div class='mr-5'>
+                    <strong>Usuario registrados utilizando Facebook:</strong> " . $row[0] . "<br><br>
+                      
+                    </div>
+                   </div>
+                    <a href='#' class='card-footer text-white clearfix small z-1'>
+                    <span class='float-left'>Ver mas</span>
+                    <span class='float-right'>
+                    <i class='fa fa-angle-right'></i>
+                    </span>
+                  </a>
+                </div>
+            ";        
+}
+public function usuariosNormal(){
+    /* Devuelve cantidad de usuarios que se registran con fb */
+    $sql="SELECT COUNT(id_cl) FROM `cliente` WHERE `id_fb` = 0";
+    $result = mysqli_query($this->_db,$sql);
+    
+      $row = mysqli_fetch_array($result);
+          
+            echo"
+                <div class='card text-white bg-primary o-hidden h-100'>
+                  <div class='card-body'>
+                    <div class='card-body-icon'>
+                      <i class='fa fa-fw fa-list'></i>
+                    </div>
+                    <div class='mr-5'>
+                    <strong>Usuario registrados desde nuestra plataforma: </strong> " . $row[0] . "<br><br>
+                      
+                    </div>
+                   </div>
+                    <a href='#' class='card-footer text-white clearfix small z-1'>
+                    <span class='float-left'>Ver mas</span>
+                    <span class='float-right'>
+                    <i class='fa fa-angle-right'></i>
+                    </span>
+                  </a>
+                </div>
+            ";        
+}
+
+}

@@ -1,14 +1,24 @@
 <?php
-
+    
     session_start(); 
 		
-	require($CLASES_DIR . 'publicidad.php');
-	$clasePublicidad = New clasePublicidad(); 
+	require($CLASES_DIR . 'noticia.php');
+	$claseNoticia = New claseNoticia(); 
 
-    $fechaDesde = strip_tags(trim($_POST['fDesde']));
-    $fechaHasta = strip_tags(trim($_POST['fHasta']));
-    $idEspacio = strip_tags(trim($_POST['espacio']));
-    $idEmpleado = $_SESSION['idEmpleado'];
+        $idArticulo = "";
+        $titulo = strip_tags(trim($_POST['titulo']));
+        $fecha = strip_tags(trim($_POST['fecha']));
+        $contenido = strip_tags(trim($_POST['contenido']));
+        $seccion = strip_tags(trim($_POST['Seccion']));
+        $art_d = "";
+
+        $nom = $_SESSION['Nombre'];
+        $ape = $_SESSION['Apellido'];
+
+        $autor = $nom . " " . $ape ;
+        $likes = "";
+        $contador_a = "";
+        
 
     //MANEJO DE IMAGEN
     $target_dir = $PATH ."/uploads/";
@@ -26,7 +36,7 @@
             (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file));
             $ruta_img =strtolower($target_file);
             
-            $publicidad = "http://localhost/uploads/". basename($_FILES["fileToUpload"]["name"]); 
+            $imagen = "http://localhost/uploads/". basename($_FILES["fileToUpload"]["name"]); 
 
 
         }else{   
@@ -67,19 +77,22 @@
     }
     **/
 
-        $clasePublicidad->setFechaDesde($fechaDesde);
-        $clasePublicidad->setFechaHasta($fechaHasta);
-        $clasePublicidad->setPublicacion($publicidad);
-        $clasePublicidad->setIdEspacio($idEspacio);
-        $clasePublicidad->setIdEmpleado($idEmpleado);
+        $claseNoticia->setIdArticulo($fecha);
+        $claseNoticia->setTitulo($titulo);
+        $claseNoticia->setFechaArticulo($fecha);
+        $claseNoticia->setContenido($contenido);
+        $claseNoticia->setAutor($autor);
+        $claseNoticia->setContador($contador_a);
+        $claseNoticia->setImagen($imagen);
+        $claseNoticia->setLikes($likes);
+        $claseNoticia->setIdSeccion($seccion);
 
-        $tf = $clasePublicidad->ingresarPublicidad($fechaDesde,$fechaHasta,$idEmpleado,$idEspacio,$publicidad); 
-        
+        $tf = $claseNoticia->ingresarNoticia($idArticulo,$titulo,$fecha,$art_d,$contenido,$autor,$contador_a,$imagen,$likes,$seccion); 
 
         ?>
 
          <script> 
-           window.location.href = "../presentacion/publicidad.php"
+           window.location.href = "../presentacion/noticias.php"
         </script>   
     
 <?php

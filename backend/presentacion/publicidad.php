@@ -81,6 +81,9 @@ $pub = New clasePublicidad();
               <li>
                 <a href="abmMaster.php">Master</a>
               </li>
+              <li>
+                <a href="usrFrontend.php">Front-end</a>
+              </li>
             </ul>
           </li>
 
@@ -99,6 +102,13 @@ $pub = New clasePublicidad();
             </a>
           </li>
 
+           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+            <a class="nav-link" href="abmSecciones.php">
+            <i class="fa fa-star" aria-hidden="true"></i>
+              <span class="nav-link-text">Secciones</span>
+            </a>
+          </li>
+          
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
             <a class="nav-link" href="estadisticas.php">
               <i class="fa fa-fw fa-area-chart"></i>
@@ -259,7 +269,7 @@ $pub = New clasePublicidad();
        
 
         <div class="col-md-12 well">
-        <a class="btn btn-primary" style="margin: 5px;" data-toggle="modal" data-target="#usuario"><i class="fa fa-fw -square -circle fa-plus-square"></i> Nuevo </a>
+        <a class="btn btn-primary" style="margin: 5px;" data-toggle="modal" data-target="#usuario"><i class="fa fa-fw -square -circle fa-plus-square"></i> Publicidad nueva </a>
         </div>
 
         <div class="fade modal" id="usuario">
@@ -275,6 +285,11 @@ $pub = New clasePublicidad();
                   <table>
                   <tr>
                   <td> 
+                  <label for='sel1'><h6> Lapso de la publicidad:</h6></label>
+                  </td>
+                  </tr>
+                  <tr>
+                  <td> 
                   Desde:
                   <input type="date" id="fDesde" name="fDesde" />
                   </td>
@@ -284,11 +299,13 @@ $pub = New clasePublicidad();
                   </td>
                   </tr> 
                   <tr>
-                  
                   <div>
+                  <label for='sel1'><h6> Ingresa espacio publicitario:</h6></label>
+                    <form>
                     <?php
                     $pub->listarEspacios();
                     ?>
+                    </form>
                     <hr class="style1">
                   </div>
                    
