@@ -80,12 +80,13 @@
 			<div class="carousel-inner">
 
 				<div class="item active">
-				<img src="<?= $IMG;?>/paquetesenial.jpg">
-			</div><!-- End Item -->
+					<img src="<?= $IMG;?>/paquetesenial.jpg">
+				</div><!-- End Item -->
 
 				<?php foreach($articulos_d as $art_d):?>
 					<div class="item">
-					<img src="http://placehold.it/840x400/cccccc/ffffff">
+					<!--<img src="http://placehold.it/840x400/cccccc/ffffff">-->
+						<img class="imgCarousel" src="<?= $art_d['imagen'];?>">
 						<div class="carousel-caption">
 							<h4><a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art_d['id_a']?>"><?= $art_d['titulo'];?></a></h4>
 							<p class="item-txt"><?= $art_d['contenido'];?></p>
@@ -133,7 +134,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="">
+		<div>
 			<?php 
 			//LLamo a la clase publicidad
 			require_once($CLASES_DIR . 'publicidad.class.php');
@@ -192,7 +193,7 @@ foreach ($articulos as $art){
     ?>
 		<div class="noticia col-sm-3">
 		<a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>">
-			<div class="img-noticia"><img alt="" src="http://placehold.it/300x200/dddddd/333333"></div>
+			<div class="img-noticia"><img alt="" src="<?= $art['imagen'];?>"></div>
 			<div class="titulo"><?= $art['titulo'];?></div>
 		</a>
 		</div>

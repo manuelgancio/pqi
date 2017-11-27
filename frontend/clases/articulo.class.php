@@ -105,7 +105,7 @@ public function listartArtXSecPortada(){
     $id_s = $this -> getSeccion();
     $fecha = $this-> getFecha();
 
-    $sql="SELECT `id_a`,`fecha_a`, `titulo`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ? AND  `fecha_a` = ? ORDER BY `fecha_a` DESC LIMIT 6";
+    $sql="SELECT `id_a`,`fecha_a`, `titulo`, `contenido`, `autor`, `id_s`, `imagen` FROM articulo WHERE `id_s` = ? AND  `fecha_a` = ? ORDER BY `fecha_a` DESC LIMIT 6";
     $result = $this->_db->prepare($sql);
     $result -> bind_param('is',$id_s,$fecha);
     $result -> execute();
@@ -160,7 +160,7 @@ public function listarArtDest(){
 //Devuelve array de articulos destacados del día
     $fecha = $this->getFecha();
 
-    $sql="SELECT `id_a`, `titulo`, `contenido`, `autor`, `id_s` FROM `articulo` WHERE `art_d` = true AND `fecha_a` =?";
+    $sql="SELECT `id_a`, `titulo`, `contenido`, `autor`, `id_s` , `imagen` FROM `articulo` WHERE `art_d` = true AND `fecha_a` =?";
 
     $result = $this->_db->prepare($sql);
     $result -> bind_param('s',$fecha);

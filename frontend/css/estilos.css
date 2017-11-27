@@ -2,6 +2,7 @@
     height: 350px;
     width: 95%;
 }
+
 .alerta{
     display: none;
     position: fixed;
@@ -108,7 +109,7 @@
     width: 790px;
     margin-left: auto;
     margin-right: auto;   
-    background-color: red;  
+  
 }
 .txtNoti {
     width: 90%;
@@ -169,8 +170,8 @@
 }
 .articulo .img{
     height:250;
-    width:100%;
-        
+    width:300px;
+    background-color: red;
 }
 .articulo .titulo{
     font-size: 20px;
@@ -236,7 +237,14 @@
 	.carousel-caption p,
 	#myCarousel .list-group {display:none;} 
 }
-
+.item{
+    width:840px;
+    height: 400px;
+}
+.imgCarousel{
+    width:840px;
+    height: 400px;
+}
 
 /** NOTICIAS SECCIONES **/
 .noticia .titulo{
@@ -282,7 +290,7 @@
 }
 
 .noticia .img-noticia img{
-    width: 100%;
+    width: 300px;
 	height:200px;
 }
 
