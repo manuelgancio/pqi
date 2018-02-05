@@ -12,7 +12,8 @@
     	<button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
 	</div>
 <!-- PORTADA -->
-    <div class="well well-sm text-muted" id="portada"><h3>PORTADA</h3></div>
+    <!--<div class="well well-sm text-muted" id="portada"><h3>PORTADA</h3></div>-->
+	<div style="margin-bottom:20px;"> </div>
 
 <?php
 
