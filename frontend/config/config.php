@@ -37,4 +37,5 @@
 /* Include */
 
     include($CONFIG_DIR.'dbconfig.php');
+    include($PRESENTACION_DIR.'footer.php');
    

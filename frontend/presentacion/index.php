@@ -1,10 +1,11 @@
 
-<body>
+<body class="">
     <?php 
 		include $PRESENTACION_DIR ."header.php";
     ?>
 	 
 <!--ALERTA-->
+<div class="wrapper">
 	<div class="alert alert-success alert-dismissable alerta" id="alert_template" style="display: none;">
     	<button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
 	</div>
@@ -133,7 +134,7 @@
 
 <!-- PUBLICIDAD PORTADA -->
 
-<div class="container">
+<div class="container ">
 	<div class="row">
 		<div>
 			<?php 
@@ -227,7 +228,6 @@ foreach ($articulos as $art){
     
   	</div><!--row-->
 </div><!--container-->
+</div>
 <?php endforeach;?>
 
-
-</body>
