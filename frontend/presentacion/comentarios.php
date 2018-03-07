@@ -98,9 +98,10 @@
                             </form>
                             
                             <?php else:?>
+                            </form>
                             <button data-toggle="modal" data-target="#modalLogin" class="btn btn-success" id="btnComentarF" name="btnComentarF" onclick="errCom();">Enviar</button>
                             <?php endif;?>
-                        </form>
+                        
                         </div>
                     </li>
                 </ul>                

@@ -348,3 +348,42 @@ body { padding-top:30px; }
 }
 
 
+/*FAQs*/
+#faq{
+    background-color:white;
+    text-align: center;
+    margin-top: 30px;
+}
+#faq a{
+    color: black;
+    cursor: pointer;
+}
+#faq a:hover{
+    text-decoration-line: none;
+    color: gray;
+}
+.query{
+    text-align: center;
+    color: gray;
+}
+
+/* CONTACTO */
+.jumbotron {
+    background: #358CCE;
+    color: #FFF;
+    border-radius: 0px;
+    }
+    .jumbotron-sm { padding-top: 24px;
+    padding-bottom: 24px; }
+    .jumbotron small {
+    color: #FFF;
+    }
+    .h3 small {
+    font-size: 24px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    }
+    #c{
+        margin-top: 0px;
+        padding-top: 0px;
+    }
