@@ -248,6 +248,52 @@ public function like(){
     return (true);
     
 }
+public function cantLikes(){
+    $id_art= $this->getId();
+
+    //Averiguo la cantidad de likes
+    $sql="SELECT `likes` FROM `articulo` WHERE id_a = ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('i',$id_art);
+    $result->execute();
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+    
+    $likes = $row['likes'];
+
+    return($likes);
+
+}
+public function sugerencias(){
+/*Devuelve las 6 noticias de la misma seccion con fecha reciente y mas visitas */
+
+    $id_art = $this->getId();
+    $id_secion = $this->getSeccion();
+
+    $cant_resultados = 3; //Cantidad de sugerencias 
+
+    //Calculo la fecha de hace 2 semanas
+    $fecha_hoy = date('Y-m-d');
+    $nuevafecha = strtotime ( '-14 day' , strtotime ( $fecha_hoy ) ) ;
+    $fecha = date ( 'Y-m-d' , $nuevafecha );
+ 
+    //SQL
+    $sql="SELECT id_a, titulo,imagen FROM `articulo` WHERE `id_a` != ? AND 
+    fecha_a > ? AND id_s = ? ORDER BY contador_a DESC LIMIT ?";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('isii',$id_art,$fecha,$id_secion,$cant_resultados);
+    $result -> execute();
+    $resultado = $result->get_result();
+    
+    $sugerencias = array();
+    while ($row = $resultado->fetch_assoc()){
+        $sugerencias[] = $row;
+    }
+    
+    return ($sugerencias);
+}
+
+
 public function busquedaArt(){
 
 }

@@ -79,6 +79,10 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
 
     $seccion = $sec->nombreSeccion();
     $seccion = $seccion['nombre'];
+
+    //Averiguo la cantidad de likes del art
+    $l = $articulo ->cantLikes();
+    
     ?>
     <body>
     <div class="container">
@@ -134,13 +138,15 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
 
 
                     </div>
+
+                
 					<div class="col-sm-1 like">
 						<form id="frmLike" name="frmLike" action="<?= $LOGICA;?>/procesarLike.php">
 							<input type="hidden" id="id_art" name="id_art" value="<?php echo $id_art;?>">
-							<button type="submit" id="btnLike" name="btnLike" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+							<button type="submit" id="btnLike" name="btnLike" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span><?php echo ' '.$l;?></button>
 						</form>	
 					</div>
-            </div>  
+                </div>   
                 <script>
                     /* attach a submit handler to the form */
                     $("#frmLike").submit(function(event) {
@@ -162,8 +168,8 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
                     });
                     });
                 </script>
-		</div><!--row-->
-
+		    </div><!--row-->
+        </div>            
 		<!-- TEXTO NOTICIA-->
 
         <div class="row">

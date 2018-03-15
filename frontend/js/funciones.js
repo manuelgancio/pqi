@@ -147,3 +147,9 @@ $(window).load(function() {
 
 
 
+$(document).ready(function(){
+    
+	var clickEvent = false;
+	$('#myCarouselsg').carousel({
+		interval:   false	});
+		});

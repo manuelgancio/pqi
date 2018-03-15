@@ -243,7 +243,7 @@ body{
 	.carousel-caption p,
 	#myCarousel .list-group {display:none;} 
 }
-.item{
+#portada{
     width:840px;
     height: 400px;
 }
@@ -387,3 +387,22 @@ body { padding-top:30px; }
         margin-top: 0px;
         padding-top: 0px;
     }
+
+/*Carousel sugerencias*/
+
+
+.carouselsgimg{
+    max-height: 320px;
+    max-width: 320px;
+}
+#txtsg {
+    color: black;
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: 100;
+
+    margin-left: 50px;
+    
+    text-shadow: 0 0 5px #8B8585;
+}

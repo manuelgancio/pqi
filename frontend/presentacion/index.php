@@ -81,12 +81,12 @@
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 
-				<div class="item active">
+				<div class="item active" id="portada" >
 					<img src="<?= $IMG;?>/paquetesenial.jpg">
 				</div><!-- End Item -->
 
 				<?php foreach($articulos_d as $art_d):?>
-					<div class="item">
+					<div class="item" id="portada">
 					<!--<img src="http://placehold.it/840x400/cccccc/ffffff">-->
 						<img class="imgCarousel" src="<?= $art_d['imagen'];?>">
 						<div class="carousel-caption">

@@ -145,6 +145,60 @@
     </div>
 </div>
 
+<!-- SUGERENCIAS -->
+
+<div class="well well-sm text-muted"><h3>Noticias similares.</h3></div>
+
+<?php 
+//LLamo a la clase articulos
+require_once ($CLASES_DIR . 'articulo.class.php');
+    $a = New articulo();            
+    $a->setId($art['id_a']);
+    $a->setSeccion($id_secion);
+    $sugerencias = $a->sugerencias();        
+    //die(var_dump($sugerencias));
+   
+?>
+<div class="container">
+  <br>
+  <div id="myCarouselsg" class="carousel slide" data-ride="carousel">
+    <!-- Indicators 
+    <ol class="carousel-indicators">
+      <li data-target="#myCarouselsg" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarouselsg" data-slide-to="1"></li>
+    </ol>-->
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+    <?php 
+        
+        ?> 
+        <div class="item active" id="sg">
+        <div class="row">
+        <?php
+        $i = 0;
+        foreach ($sugerencias as $sg){
+        ?>
+             <div class="item active" id="sg">
+                <div class="col-md-4">
+                    <a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$sg['id_a']?>" class="carouselsgimg thumbnail"><img src="<?= $sg['imagen'];?>" alt="Image">
+                    <span><p id="txtsg"><?php echo $sg['titulo'];?></p></span>
+                    </a>
+                </div>
+            <?php
+            $i = $i + 1;
+            
+        }
+        ?>
+            </div><!--.row-->
+         </div><!--.item-->  
+      
+    </div>
+    </div>
+</div><!--container-->  
+
+
+
 <script>
     /* attach a submit handler to the form */
     $("#frmComentario").submit(function(event) {
