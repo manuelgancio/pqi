@@ -7,9 +7,11 @@
 <meta name="author" content="paqueteinformes">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+<meta property="og:url"                content="" />
 <meta property="og:type"               content="article" />
 <meta property="og:title"              content="Paqueteinformes - Noticias" />
-<meta property="og:description"        content="" />
+<meta property="og:description"        content="asdasdkasjdklajsdlkjs" />
 <meta property="og:image"              content=""/>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -23,6 +25,29 @@
 </head>
 
 <script>
+ <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+</script>
+<!--
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.12&appId=141862136411361&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+-->
+
+<script>
 window.fbAsyncInit = function() {
   FB.init({
     appId      : '141862136411361',
@@ -32,6 +57,8 @@ window.fbAsyncInit = function() {
     version    : 'v2.8' // use graph api version 2.8
   });
 }
+</script>
+<!--
 
 window.onload = function(){ 
     
@@ -45,7 +72,9 @@ window.onload = function(){
         }, function(response){});
     }
 }
-</script>
+
+
+-->
 
 <?php
 include('headerNoti.php');
@@ -133,13 +162,12 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
                     <!--
                     	<div class="fb-share-button" data-href="http://localhost" data-layout="button" data-size="large" data-mobile-iframe="true">
                     	<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2F&amp;src=sdkpreparse">Compartir</a></div>
-					-->
+					
                     <div id="shareBtn" name="shareBtn" class="btn btn-primary clearfix">Compartir</div>
+-->
+            <div class="fb-share-button" data-href="/pqi/frontend/presentacion/noticia.php?art=<?= $id_art;?>" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank"
+            href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2Fpqi%2Ffrontend%2Fpresentacion%2Fnoticia.php%3Fart%3D1&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
 
-
-                    </div>
-
-                
 					<div class="col-sm-1 like">
 						<form id="frmLike" name="frmLike" action="<?= $LOGICA;?>/procesarLike.php">
 							<input type="hidden" id="id_art" name="id_art" value="<?php echo $id_art;?>">

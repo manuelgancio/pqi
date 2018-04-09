@@ -182,8 +182,9 @@ require_once ($CLASES_DIR . 'articulo.class.php');
              <div class="item active" id="sg">
                 <div class="col-md-4">
                     <a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$sg['id_a']?>" class="carouselsgimg thumbnail"><img src="<?= $sg['imagen'];?>" alt="Image">
-                    <span><p id="txtsg"><?php echo $sg['titulo'];?></p></span>
+                   
                     </a>
+                    <span><p id="txtsg"><?php echo $sg['titulo'];?></p></span>
                 </div>
             <?php
             $i = $i + 1;

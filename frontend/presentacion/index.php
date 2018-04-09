@@ -166,13 +166,23 @@ require_once($CLASES_DIR . 'seccion.class.php');
 $sec = New seccion();
 
 $secciones = $sec->listarSecciones();
-
+//contador
+$u=0;
 ?>
 <?php foreach ($secciones as $seccion):?>
 <div class="well well-sm text-muted" id="<?=$seccion['nombre']?>"><h3><?=$seccion['nombre']?></h3></div>
 <div class="container">
 	<div class="row">
 <?php 
+$u = $u + 1;
+//LLamo a la clase articulo
+require_once($CLASES_DIR . 'articulo.class.php');
+
+$articulo = New articulo();
+$articulo->setSeccion($seccion['id_s']);
+$articulo->setFecha($fecha);
+
+
 //LLamo a la clase articulo
 require_once($CLASES_DIR . 'articulo.class.php');
 
@@ -225,8 +235,32 @@ foreach ($articulos as $art){
 }
 ?>
 	
-    
+
   	</div><!--row-->
+<?php
+	  if ($u == 2){
+	?>
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-md-6">
+	<div class="well well-sm text-muted" id=""><h3>Noticia mas popular!</h3></div>
+	<div class="noticia_esp">
+	<?php 
+
+	$art_mas_likes = $articulo->artConMasLikes();
+	//die(var_dump($art_mas_likes));
+	?>
+	<a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art_mas_likes['id_a']?>">
+		<div class="img_not_esp"><img alt="Image" src="<?= $art_mas_likes['imagen'];?>"></div>
+		<div class="titulo_not_esp"><?= $art_mas_likes['titulo'];?></div>
+	</a>
+	</div>
+	</div>
+	</div>
+	<?php 
+} 
+?>
 </div><!--container-->
 </div>
 <?php endforeach;?>

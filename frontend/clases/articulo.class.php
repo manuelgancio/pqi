@@ -293,7 +293,25 @@ public function sugerencias(){
     return ($sugerencias);
 }
 
+public function artConMasLikes(){
+/*Devuelve id, titulo y img del art con mas likes de la ultima semana*/
 
+    //averiguo la fecha de hace 7 dias
+    $fecha_hoy = date('Y-m-d');
+    $nuevafecha = strtotime ( '-30 day' , strtotime ( $fecha_hoy ) ) ;
+    $fecha = date ( 'Y-m-d' , $nuevafecha );
+
+    //sql
+    $sql="SELECT id_a,titulo,imagen,likes FROM `articulo` WHERE fecha_a > ? ORDER BY likes DESC LIMIT 1";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('s',$fecha);
+    $result -> execute();
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+
+    return $row;
+
+}
 public function busquedaArt(){
 
 }
