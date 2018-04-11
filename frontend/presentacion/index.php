@@ -1,5 +1,5 @@
 
-<body class="">
+<body onload="" class="">
     <?php 
 		include $PRESENTACION_DIR ."header.php";
     ?>
@@ -143,9 +143,13 @@
 			$publicidad= New publicidad();
 			//Devuelve false o url de img publicidad
 			$banner = $publicidad->listarPubIndexBanner();
+			//die(var_dump($banner));
 			if ($banner != null){
+				
 			?>
-			<img class="publiBannerP" src="<?php echo $banner;?>">
+			<img id="img_banner_p" class="publiBannerP" src="">
+			<!-- Banner rotativo cargado en el script de final de pagina-->
+			
 		</div>
 			<?php
 			}else{
@@ -211,7 +215,7 @@ foreach ($articulos as $art){
 		</div>
 	<?php
     	if($i == 3){
-    ?> 
+    ?>
 			<div class="col-sm-3 publicidadIndex">
 			<?php if($publicidad != false){//Si hay publicidad contratada...Selecciono una aleatoriamente
 				$p = array_rand($publicidad);
@@ -265,3 +269,19 @@ foreach ($articulos as $art){
 </div>
 <?php endforeach;?>
 
+
+<!--BANNER ROTATIVO-->
+<script>
+i = 0;
+var timer = setInterval(cambiar, 2000);
+		
+var p = <?php echo '["' . implode('", "', $banner) . '"]' ?>;
+function cambiar(){
+	var img = document.getElementById("img_banner_p");
+	img.src = p[i];
+	i = i + 1;
+	if (i >= p.length){
+		i = 0;
+	}
+}
+</script>

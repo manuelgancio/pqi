@@ -220,8 +220,9 @@ public function listarPubIndexBanner(){
             $i[] = $p['p'];
         }
         
-        $p = array_rand($i);
-    return ($i[$p]);
+    return ($i);
+        //$p = array_rand($i);
+    //return ($i[$p]);
     }
 }
 }
