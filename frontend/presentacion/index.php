@@ -147,7 +147,7 @@
 			if ($banner != null){
 				
 			?>
-			<img id="img_banner_p" class="publiBannerP" src="">
+			<img id="img_banner_p" class="publiBannerP" alt="banner">
 			<!-- Banner rotativo cargado en el script de final de pagina-->
 			
 		</div>
@@ -242,27 +242,39 @@ foreach ($articulos as $art){
 
   	</div><!--row-->
 <?php
-	  if ($u == 2){
+if ($u == 2){
 	?>
 	</div>
 	</div>
 	<div class="row">
-	<div class="col-md-6">
-	<div class="well well-sm text-muted" id=""><h3>Noticia mas popular!</h3></div>
-	<div class="noticia_esp">
-	<?php 
+		<div class="col-md-6">
+		<div class="well well-sm text-muted" id=""><h3>Noticia con mas Me Gusta!</h3></div>
+			<div class="noticia_esp">
+				<?php 
+				$art_mas_likes = $articulo->artConMasLikes();
+				//die(var_dump($art_mas_likes));
+				?>
+				<a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art_mas_likes['id_a']?>">
+					<div class="img_not_esp"><img alt="Image" src="<?= $art_mas_likes['imagen'];?>"></div>
+					<div class="titulo_not_esp"><?= $art_mas_likes['titulo'];?></div>
+				</a>
+			</div>
+		</div><!--col-->
 
-	$art_mas_likes = $articulo->artConMasLikes();
-	//die(var_dump($art_mas_likes));
-	?>
-	<a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art_mas_likes['id_a']?>">
-		<div class="img_not_esp"><img alt="Image" src="<?= $art_mas_likes['imagen'];?>"></div>
-		<div class="titulo_not_esp"><?= $art_mas_likes['titulo'];?></div>
-	</a>
+		<div class="col-md-6">
+			<div class="well well-sm text-muted" id=""><h3>Mas visitadas!</h3></div>
+			<div class="noticia_esp">
+				<?php 
+				$mas_visitadas = $articulo->masVisitadas();
+				?>
+				<a id="mas_vistas_href" href="">
+					<div class="img_not_esp"><img id="mas_vistas_img" alt="Image"></div>
+					<div id="mas_vistas_txt" class="titulo_not_esp"></div>
+				</a>
+			</div>
+		</div><!--col-->
 	</div>
-	</div>
-	</div>
-	<?php 
+<?php 
 } 
 ?>
 </div><!--container-->
@@ -273,10 +285,44 @@ foreach ($articulos as $art){
 <!--BANNER ROTATIVO-->
 <script>
 i = 0;
-var timer = setInterval(cambiar, 2000);
-		
+var timer = setInterval(cambiar_banner, 5000);
+
+var timer_mas_vistas = setInterval(cambiar_mas_vistas,4000);
+var z = 0;
+var art0 = <?php echo '["' . implode('", "', $mas_visitadas[0]) . '"]' ?>;
+var art1 = <?php echo '["' . implode('", "', $mas_visitadas[1]) . '"]' ?>;
+var art2 = <?php echo '["' . implode('", "', $mas_visitadas[2]) . '"]' ?>;
+
+function cambiar_mas_vistas(){
+	
+	var link = document.getElementById("mas_vistas_href");
+	var img_art = document.getElementById("mas_vistas_img");
+	var titulo = document.getElementById("mas_vistas_txt");
+	
+	if (z == 0){
+		img_art.src = art0[2];
+		titulo.innerHTML = art0[1];
+		link.href = "../presentacion/noticia.php?art=" 	+ art0[0];
+	}else if (z == 1){
+		img_art.src = art1[2];
+		titulo.innerHTML = art1[1];
+		link.href ="../presentacion/noticia.php?art=" 	+ art1[0];
+	}else if (z == 2){
+		img_art.src = art2[2];
+		titulo.innerHTML = art2[1];
+		link.href = "../presentacion/noticia.php?art=" 	+ art2[0];
+	}
+	z = z + 1;
+	if (z >= 3){
+		z = 0;
+	}
+}
+
+
+/*Cambiar banner*/		
 var p = <?php echo '["' . implode('", "', $banner) . '"]' ?>;
-function cambiar(){
+
+function cambiar_banner(){
 	var img = document.getElementById("img_banner_p");
 	img.src = p[i];
 	i = i + 1;

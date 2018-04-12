@@ -298,7 +298,7 @@ public function artConMasLikes(){
 
     //averiguo la fecha de hace 7 dias
     $fecha_hoy = date('Y-m-d');
-    $nuevafecha = strtotime ( '-30 day' , strtotime ( $fecha_hoy ) ) ;
+    $nuevafecha = strtotime ( '-7 day' , strtotime ( $fecha_hoy ) ) ;
     $fecha = date ( 'Y-m-d' , $nuevafecha );
 
     //sql
@@ -312,8 +312,29 @@ public function artConMasLikes(){
     return $row;
 
 }
-public function busquedaArt(){
+public function masVisitadas(){
+/*Devuelve los datos de las 3 noticias mas visitadas del mes*/
 
+    //averiguo la fecha de hace 30 dias
+    $fecha_hoy = date('Y-m-d');
+    $nuevafecha = strtotime ( '-30 day' , strtotime ( $fecha_hoy ) ) ;
+    $fecha = date ( 'Y-m-d' , $nuevafecha );
+    
+    //sql
+    $sql="SELECT id_a,titulo,imagen FROM articulo WHERE fecha_a > ? ORDER BY contador_a DESC LIMIT 3";
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('s',$fecha);
+    $result -> execute();
+    $resultado = $result->get_result();
+
+    $articulos = array();
+    while ($row = $resultado->fetch_assoc()){
+        $articulos[] = $row;
+    }
+    
+    return $articulos;
+    
+    
 }
 public function filtrarXfecha(){
 
