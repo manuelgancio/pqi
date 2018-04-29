@@ -1,3 +1,45 @@
+$(document).ready(function() {
+  
+	$(window).scroll(function () {
+		//if you hard code, then use console
+		//.log to determine when you want the 
+		//nav bar to stick.  
+		//console.log($(window).scrollTop())
+	  if ($(window).scrollTop() > 175) {
+		$('#navbar').addClass('navbar-fixed');
+		$('.logo_navbar').show();
+	  }
+	  if ($(window).scrollTop() < 175) {
+		$('#navbar').removeClass('navbar-fixed');
+		$('.logo_navbar').hide();
+	  }
+	});
+  });
+
+
+$(document).ready(function() {
+  
+	$(window).scroll(function () {
+		//if you hard code, then use console
+		//.log to determine when you want the 
+		//nav bar to stick.  
+		console.log($(window).scrollTop())
+	  if ($(window).scrollTop() > 19) {
+		$('#well-noti').addClass('well-fixed');
+	
+	  }
+	  if ($(window).scrollTop() < 19) {
+		$('#well-noti').removeClass('well-fixed');
+	
+	  }
+	});
+  });
+
+
+
+
+
+
 function errCom(){
 	var msj = 'Debe iniciar sesión para comentar!';
 	var timeout = '7000';

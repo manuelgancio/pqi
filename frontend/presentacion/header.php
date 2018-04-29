@@ -3,7 +3,7 @@
 <head>
 <title>Paqueteinformes.com - Bienvenidos!</title>
 <meta charset="ISO-8859-1"> 
-<meta name="description" content="">
+<meta name="description" content="pqi">
 <meta name="keywords" content="">
 <meta name="author" content="paqueteinformes">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,8 +53,9 @@ $secciones = $seccion->listarSecciones();
 
 
 ?>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+  <nav class="navbar navbar-inverse" id="navbar">
+    <div class="container-fluid ">
+		<a class="navbar-brand" href="#"><img id="logo_navbar"src="<?= $IMG?>/logo.png" alt="logo"></a>
       	<ul class="nav navbar-nav">
 			<?php
 		  	foreach($secciones as $sec){?>

@@ -174,7 +174,7 @@ $secciones = $sec->listarSecciones();
 $u=0;
 ?>
 <?php foreach ($secciones as $seccion):?>
-<div class="well well-sm text-muted" id="<?=$seccion['nombre']?>"><h3><?=$seccion['nombre']?></h3></div>
+<div class="well well-sm text-muted" id="<?=$seccion['nombre']?>"><h3><a class="well-seccion" href="<?= $PRESENTACION;?>/seccion.php?id=<?php echo $seccion['id_s']?>"><?=$seccion['nombre']?></a></h3></div>
 <div class="container">
 	<div class="row">
 <?php 
@@ -255,7 +255,7 @@ if ($u == 2){
 				//die(var_dump($art_mas_likes));
 				?>
 				<a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art_mas_likes['id_a']?>">
-					<div class="img_not_esp"><img alt="Image" src="<?= $art_mas_likes['imagen'];?>"></div>
+					<div><img class="img_not_esp" alt="Image" src="<?= $art_mas_likes['imagen'];?>"></div>
 					<div class="titulo_not_esp"><?= $art_mas_likes['titulo'];?></div>
 				</a>
 			</div>
@@ -268,7 +268,7 @@ if ($u == 2){
 				$mas_visitadas = $articulo->masVisitadas();
 				?>
 				<a id="mas_vistas_href" href="">
-					<div class="img_not_esp"><img id="mas_vistas_img" alt="Image"></div>
+					<div ><img class="img_not_esp" id="mas_vistas_img" alt="Image"></div>
 					<div id="mas_vistas_txt" class="titulo_not_esp"></div>
 				</a>
 			</div>

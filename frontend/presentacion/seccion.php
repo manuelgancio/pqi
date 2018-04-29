@@ -105,7 +105,7 @@ foreach ($articulos as $art){
     <div class="articulo">
         <div class="col-md-3 art">
             <a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>">
-                <div class="img"><img alt="" src="http://placehold.it/299x250/dddddd/333333"></div>
+                <div class=""><img class="img-art-seccion"alt="" src="<?=$art['imagen'];?>"></div>
             </a>
             <div class="descArt">
                 <a class="titulo" href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>"><?= $art['titulo']?></a>

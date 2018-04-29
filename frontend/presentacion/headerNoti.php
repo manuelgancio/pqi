@@ -7,6 +7,13 @@
 <meta name="keywords" content="">
 <meta name="author" content="paqueteinformes">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:url"                content="http://pqi2.com/presentacion/noticia.php<?= $id_art;?>"/>
+<meta property="og:type"               content="article"/>
+<meta property="og:title"              content="TITULO TITULO" />
+<meta property="og:description"        content="asdasdkasjdklajsdlkjs"/>
+<meta property="og:image"              content="../img/logo.png"/>
+<meta property="fb:app_id"             content="141862136411361" />
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

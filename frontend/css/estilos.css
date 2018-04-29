@@ -3,7 +3,44 @@ body{
     padding-bottom: 110px; /*PARA FOOTER*/
     position: relative;
 }
-
+.navbar { 
+   /* min-height: 60px; */
+   
+  }
+.navbar-fixed {
+    top: 0;
+    z-index: 100;
+  position: fixed;
+    width: 100%;
+}
+.well-fixed{
+    top: 10;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    
+    background: rgb(199, 194, 194);
+}
+#logo_navbar{
+    height: 50px;
+    width:200px;
+    padding-bottom:20px;
+    
+}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    /*background-color: rgb(245, 219, 107);*/
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+.well-seccion:hover{
+    font-weight: bold;
+    color: gray;
+    text-decoration: none;
+}
+.well-seccion{
+    color: gray;
+}
+    
 .imgRegistro{
     height: 350px;
     width: 95%;
@@ -92,6 +129,12 @@ body{
     font-weight: bolder;
     font-size: 42px;
 }
+.tituloArt{
+    color: black;
+    text-align: left;
+    font-weight: bolder;
+    
+}
 .cateNoti{
     color: #AFAAAA;
     text-align: left;
@@ -131,11 +174,20 @@ body{
     margin-bottom: 30px;
     
 }
+.like{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
 .redesNoti{
     margin-top:15px;
 }
 .like{
     margin-left: 80px;
+}
+.redes-btn{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
 }
 
 /*texto articulos destacados en index*/
@@ -156,6 +208,7 @@ body{
 }
 .tituloSeccion{
     margin-top: 40px;
+    height: 70px;
 }
 .articuloD {
     margin-left:30px;
@@ -175,8 +228,8 @@ body{
     
 }
 .articulo .img{
-    height:250;
-    width:300px;
+    max-height:250px;
+    width:250;
     
 }
 .articulo .titulo{
@@ -299,7 +352,10 @@ body{
     width: 300px;
 	height:200px;
 }
-
+.img-art-seccion{
+    width:250px; 
+    height:250px;
+}
 
 /*COMENTARIOS*/
 .label-info { 
@@ -409,7 +465,7 @@ body { padding-top:30px; }
 
 .img_not_esp{
     height: 250px;
-    width: 320px;
+    width: 100%;
 }
 .titulo_not_esp{
     font-size: 20px;
@@ -449,7 +505,7 @@ body { padding-top:30px; }
     -webkit-transition: opacity .3s;
 
     background: rgba(0, 0, 0, 1);
-    background: linear-gradient(to top,rgba(0,0,0,0) 0,rgb(255, 255, 255) 90%,rgb(68, 4, 185) 100%);
+    background: linear-gradient(to top,rgba(0,0,0,0) 0,rgb(255, 255, 255) 90%,rgb(252, 252, 252) 100%);
 }
 /*
 background: rgba(0, 0, 0, 0.3);

@@ -124,7 +124,7 @@ public function listarArtXsec($offset,$artXPag){
 */
     $id_s = $this -> getSeccion();
 
-    $sql="SELECT `id_a`, `titulo`, `fecha_a`, `contenido`, `autor`, `id_s` FROM articulo WHERE `id_s` = ? ORDER BY fecha_a DESC LIMIT ?, ?";
+    $sql="SELECT `id_a`, `titulo`, `fecha_a`, `contenido`, `autor`, `id_s`,`imagen` FROM articulo WHERE `id_s` = ? ORDER BY fecha_a DESC LIMIT ?, ?";
     $result = $this->_db->prepare($sql);
     $result -> bind_param('iii',$id_s,$offset,$artXPag);
     $result -> execute();
