@@ -16,7 +16,7 @@
     <!--<div class="well well-sm text-muted" id="portada"><h3>PORTADA</h3></div>-->
 	<div style="margin-bottom:20px;"> </div>
 
-<?php
+<?php 
 
 /* Controlo errores */
 	if(isset($_GET['err'])){
