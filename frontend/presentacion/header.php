@@ -55,7 +55,7 @@ $secciones = $seccion->listarSecciones();
 ?>
   <nav class="navbar navbar-inverse" id="navbar">
     <div class="container-fluid ">
-		<a class="navbar-brand" href="#"><img id="logo_navbar"src="<?= $IMG?>/logo.png" alt="logo"></a>
+		<a class="navbar-brand" href="<?= $PRESENTACION;?>/index.php"><img id="logo_navbar"src="<?= $IMG?>/logo.png" alt="logo"></a>
       	<ul class="nav navbar-nav">
 			<?php
 		  	foreach($secciones as $sec){?>

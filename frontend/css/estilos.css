@@ -161,8 +161,7 @@ body{
   
 }
 .txtNoti {
-    width: 90%;
-    margin-left: 1%;
+    width: 100%;
     margin-right: auto;
     align-self: center;
     margin-top: 40px;

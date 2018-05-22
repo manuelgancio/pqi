@@ -35,6 +35,7 @@ $secciones = $seccion->listarSecciones();
 <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
+    <a class="navbar-brand" href="<?= $PRESENTACION;?>/index.php"><img id="logo_navbar"src="<?= $IMG?>/logo.png" alt="logo"></a>
       	<ul class="nav navbar-nav">
           <li><a href="<?= $PRESENTACION;?>/index.php"> Inicio</a></li>
       <?php foreach($secciones as $sec): ?>

@@ -138,8 +138,8 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
             ?>
         </div>
             <!--LIKE / SHARE-->
-        <div class="row">
-            <div class="redesNoti col-md-2">
+            <!--
+        
                 <div class="form-group">
 					<div class="col-sm-1">
                     <div class="fb-share-button" data-href="/pqi/frontend/presentacion/noticia.php?art=<?= $id_art;?>" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank"
@@ -152,6 +152,7 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
 						</form>	
 					</div>
                 </div>   
+                -->
                 <script>
                     /* attach a submit handler to the form */
                     $("#frmLike").submit(function(event) {
@@ -173,8 +174,7 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
                     });
                     });
                 </script>
-		    </div><!--row-->
-        </div>            
+	          
 		<!-- TEXTO NOTICIA-->
 
         <div class="row">
