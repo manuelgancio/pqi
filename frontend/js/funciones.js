@@ -23,7 +23,7 @@ $(document).ready(function() {
 		//if you hard code, then use console
 		//.log to determine when you want the 
 		//nav bar to stick.  
-		console.log($(window).scrollTop())
+		//console.log($(window).scrollTop())
 	  if ($(window).scrollTop() > 19) {
 		$('#well-noti').addClass('well-fixed');
 	

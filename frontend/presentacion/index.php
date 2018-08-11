@@ -1,6 +1,6 @@
 
 <body onload="" class="">
-    <?php 
+	<?php 
 		include $PRESENTACION_DIR ."header.php";
     ?>
 	 
