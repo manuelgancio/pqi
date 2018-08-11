@@ -1,20 +1,34 @@
 <?php
 /* proceso form bloquear usu */
 
-if (isset($_POST['btnBloquear'])){
-    $id_p = $_POST['id_p'];
+    $id_p = $_GET['pid'];
+    $acc = $_GET['acc'];
 
    //Llamo clase usuario
    require_once($CLASES_DIR.'usuario.php');
 
+   if($acc == 'act'){ 
+
+    $usuario = new userModel();
+    $usuario->setId($id_p);
+    $bloquear = $usuario->activar(); 
+    ?>
+    <script>
+    window.location.replace('../presentacion/usrFrontend.php');
+    alert('Usuario Activado');
+    </script> 
+    <?php
+    
+   }
+   elseif($acc == 'blo'){
+
     $usuario = new userModel();
     $usuario->setId($id_p);
     $bloquear = $usuario->bloquear();
-
-   ?>
-   <script>
+    ?>
+    <script>
     window.location.replace('../presentacion/usrFrontend.php');
     alert('Usuario bloqueado');
-    </script>
+    </script> 
     <?php
-}
+   }

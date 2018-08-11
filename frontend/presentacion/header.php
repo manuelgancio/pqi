@@ -23,24 +23,13 @@
 </head>
 <?php
 session_start();
+//date_default_timezone_set('America/Montevideo');
+$fa= date('Y-m-d');
 ?>
 <body>
 <div class="container">
-	<div class="row">
-		<div class="col-md-2 col-sm-1">
+		  <img class="center-block logoimg" src="<?= $CONT_ESTATICO?>/logo01.fw.png" alt="Logo">
 
-		</div>
-
-		<div class="col-md-7 col-sm-3">
-		  <img class="logoimg" src="<?= $IMG?>/logo.png" alt="Logo">
-		</div>
-     
-		
-		<div class="col-md-3 col-sm-1">
-			
-		</div>
-		</div>
-	</div><!-- row-->
 </div><!--container-->
 
 <!-- BARRA DE NAVEGACION -->
@@ -55,7 +44,7 @@ $secciones = $seccion->listarSecciones();
 ?>
   <nav class="navbar navbar-inverse" id="navbar">
     <div class="container-fluid ">
-		<a class="navbar-brand" href="<?= $PRESENTACION;?>/index.php"><img id="logo_navbar"src="<?= $IMG?>/logo.png" alt="logo"></a>
+		<a class="navbar-brand" href="<?= $PRESENTACION;?>/index.php"><img id="logo_navbar"src="<?= $CONT_ESTATICO?>/logo01.fw.png" alt="logo"></a>
       	<ul class="nav navbar-nav">
 			<?php
 		  	foreach($secciones as $sec){?>
@@ -66,7 +55,7 @@ $secciones = $seccion->listarSecciones();
 				</li>
       </ul>
 			<ul class="nav navbar-nav">
-        <li><a href=""><span class="glyphicon glyphicon-blog"></span>Blog</a></li>
+        <li><a href="http://192.168.1.4"><span class="glyphicon glyphicon-blog"></span>Blog</a></li>
       </ul>
       <div id="notlogged">
       <ul class="nav navbar-nav navbar-right">
@@ -103,7 +92,7 @@ $secciones = $seccion->listarSecciones();
             </div>
             <div class="form-group input-group col-xs-6">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-              <input type="password" id="pwd" name="pwd" placeholder="ContraseÃ±a" required class="form-control">
+              <input type="password" id="pwd" name="pwd" placeholder="Contraseña" required class="form-control">
             </div>
             <div class="form-group">
               <input type="submit" id="btnIngresar" name="btnIngresar" value="Ingresar" class="btn btn-success">
@@ -129,7 +118,7 @@ $secciones = $seccion->listarSecciones();
       	<div class="modal-content">
 			<div class="modal-header" align="center">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h3 class="modal-title">&#191;Por quÃ© suscribirme?</h3>
+				<h3 class="modal-title">&#191;Por qué suscribirme?</h3>
 			</div>
 		<div class="modal-body">
 				
@@ -144,7 +133,7 @@ $secciones = $seccion->listarSecciones();
 			
 			<form class="form-horizontal" action="<?= $LOGICA;?>/procesarSuscripcion.php" method="POST" id="formSuscripcion" role="form">
 				<div class="form-group">
-					<label class="control-label col-sm-2" for="t_credito">Tarjeta de Cr&eacute;dito:</label>
+					<label class="control-label col-sm-2" for="t_credito">Tarjeta de Crédito:</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="t_credito" name="t_credito" required>
 					</div>

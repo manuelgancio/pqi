@@ -1,9 +1,11 @@
+<html>
 
-<body onload="" class="">
-	<?php 
+    <?php 
+
 		include $PRESENTACION_DIR ."header.php";
+		
     ?>
-	 
+<body>	 
 <!--ALERTA-->
 <div class="wrapper">
 	<div class="alert alert-success alert-dismissable alerta" id="alert_template" style="display: none;">
@@ -23,31 +25,31 @@
 		if ($_GET['err'] == 'fecha'){
 			?>
 			<script>
-			error('No hay art&iacute;culos en esa fecha.','7000');
+			error('No hay artículos en esa fecha.','7000');
 			</script>
 			<?php	
 		}elseif ($_GET['err'] == 'regOk'){
 			?>
 			<script>
-			aviso('Registro correcto! Ya puedes iniciar sesi&oacute;n.','7000');
+			aviso('Registro correcto! Ya puedes iniciar sesión.','7000');
 			</script>
 			<?php	
 		}elseif($_GET['err'] == 'susOk'){
 			?>
 			<script>
-			aviso('La suscripciÃ³n se realizo con &eacute;xito.','7000');
+			aviso('La suscripciÃ³n se realizo con éxito.','7000');
 			</script>
 			<?php	
 		}elseif($_GET['err'] == 'susC'){
 			?>
 			<script>
-			aviso('Se cancelo la suscripci&oacute;n.','7000');
+			aviso('Se cancelo la suscripción.','7000');
 			</script>
 			<?php	
 		}elseif($_GET['err'] == 'loginF'){
 			?>
 			<script>
-			error('Usuario o contrase&ntilde;a incorrecta.','7000');
+			error('Usuario o contraseña incorrecta.','7000');
 			</script>
 			<?php	
 		}
@@ -82,13 +84,13 @@
 			<div class="carousel-inner">
 
 				<div class="item active" id="portada" >
-					<img src="<?= $IMG;?>/paquetesenial.jpg">
+					<img src="<?= $CONT_ESTATICO;?>/paquetesenial.jpg">
 				</div><!-- End Item -->
 
 				<?php foreach($articulos_d as $art_d):?>
 					<div class="item" id="portada">
 					<!--<img src="http://placehold.it/840x400/cccccc/ffffff">-->
-						<img class="imgCarousel" src="<?= $art_d['imagen'];?>">
+						<img class="imgCarousel" src="<?= $CONT_ESTATICO . $art_d['imagen'];?>">
 						<div class="carousel-caption">
 							<h4><a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art_d['id_a']?>"><?= $art_d['titulo'];?></a></h4>
 							<p class="item-txt"><?= $art_d['contenido'];?></p>
@@ -209,7 +211,7 @@ foreach ($articulos as $art){
     ?>
 		<div class="noticia col-sm-3">
 		<a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>">
-			<div class="img-noticia"><img alt="" src="<?= $art['imagen'];?>"></div>
+			<div class="img-noticia"><img alt="" src="<?= $CONT_ESTATICO . $art['imagen'];?>"></div>
 			<div class="titulo"><?= $art['titulo'];?></div>
 		</a>
 		</div>
@@ -221,7 +223,7 @@ foreach ($articulos as $art){
 				$p = array_rand($publicidad);
 				$p = $publicidad[$p];//Ruta img
 			?>
-			<img src="<?php echo $p['p'];?>" alt='pub'>
+			<img class="img-noti-index" src="<?= $CONT_ESTATICO_PUB . $p['p'];?>" alt='pub'>
 			<?php 
 			}
 			?>
@@ -255,7 +257,7 @@ if ($u == 2){
 				//die(var_dump($art_mas_likes));
 				?>
 				<a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art_mas_likes['id_a']?>">
-					<div><img class="img_not_esp" alt="Image" src="<?= $art_mas_likes['imagen'];?>"></div>
+					<div><img class="img_not_esp" alt="Image" src="<?= $CONT_ESTATICO . $art_mas_likes['imagen'];?>"></div>
 					<div class="titulo_not_esp"><?= $art_mas_likes['titulo'];?></div>
 				</a>
 			</div>
@@ -266,6 +268,7 @@ if ($u == 2){
 			<div class="noticia_esp">
 				<?php 
 				$mas_visitadas = $articulo->masVisitadas();
+//die(var_dump($mas_visitadas));
 				?>
 				<a id="mas_vistas_href" href="">
 					<div ><img class="img_not_esp" id="mas_vistas_img" alt="Image"></div>
@@ -300,15 +303,15 @@ function cambiar_mas_vistas(){
 	var titulo = document.getElementById("mas_vistas_txt");
 	
 	if (z == 0){
-		img_art.src = art0[2];
+		img_art.src = '<?php echo $CONT_ESTATICO;?>' + art0[2];
 		titulo.innerHTML = art0[1];
 		link.href = "../presentacion/noticia.php?art=" 	+ art0[0];
 	}else if (z == 1){
-		img_art.src = art1[2];
+		img_art.src = '<?php echo $CONT_ESTATICO;?>' + art1[2];
 		titulo.innerHTML = art1[1];
 		link.href ="../presentacion/noticia.php?art=" 	+ art1[0];
 	}else if (z == 2){
-		img_art.src = art2[2];
+		img_art.src = '<?php echo $CONT_ESTATICO;?>' + art2[2];
 		titulo.innerHTML = art2[1];
 		link.href = "../presentacion/noticia.php?art=" 	+ art2[0];
 	}
@@ -324,7 +327,7 @@ var p = <?php echo '["' . implode('", "', $banner) . '"]' ?>;
 
 function cambiar_banner(){
 	var img = document.getElementById("img_banner_p");
-	img.src = p[i];
+	img.src = '<?php echo $CONT_ESTATICO_PUB;?>' + p[i];
 	i = i + 1;
 	if (i >= p.length){
 		i = 0;

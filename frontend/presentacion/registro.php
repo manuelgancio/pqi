@@ -93,7 +93,7 @@ if(isset($_GET['err'])){
 		
 			<div class="col-sm-3"></div>
 				<div class="form-group col-sm-3">
-					<input type="submit" class="form-control btn btn-success" id="btnRegistro" name="btnRegistro">
+					<input type="submit" class="form-control btn btn-success" id="btnRegistro" name="btnRegistro" value="Registrarme!">
 				</div>
 		</form>
 	</div>
@@ -105,7 +105,7 @@ if(isset($_GET['err'])){
 			<h4><span class="glyphicon glyphicon-ok"></span> Utilizar las funciones Me Gusta y Compartir!</h4></p>
 		</article>
 		<div class="">
-			<img src="<?= $IMG;?>/diario.jpg" class="imgRegistro" alt="diario">
+			<img src="<?= $CONT_ESTATICO;?>/diario.jpg" class="imgRegistro" alt="diario">
 		</div>
 		<div style="margin-top:20px;">
 			<a class="btn btn-primary" href="<?php echo $PRESENTACION;?>/index.php">Volver</a>

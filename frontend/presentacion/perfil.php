@@ -4,6 +4,15 @@
 
 <?php
 include('headerNoti.php');
+if(!isset($_SESSION["logged"]) && ($_SESSION["logged"] != true)){
+?>
+<script>
+	window.location.replace ("../presentacion/index.php");
+</script>
+
+<?php 
+}
+
 ?>
 <body>
 <!--ALERTA-->
@@ -46,7 +55,7 @@ $datos = $usu->verPerfil();//Datos del perfil
       <div class="col-md-3">
       </div>
       <div class="col-md-6">
-        <a href="index.php"><img class="header"src="../img/logo.png" style="width:100%;height:150px;margin-top:20px;"></a>
+        <a href="index.php"><img class="header"src="<?= $CONT_ESTATICO;?>/logo.png" style="width:100%;height:150px;margin-top:20px;"></a>
       </div>
       <div class="col-md-3">
       </div>
@@ -129,8 +138,8 @@ $datos = $usu->verPerfil();//Datos del perfil
         if($_SESSION['Suscripto'] == true){//esta suscripto
             ?>
         <p> Usted ya se encuentra suscripto.</p>
-        <p> Si desea cancelar su suscripci&oacute;n haga click aqui:</p>
-        <a href="<?= $LOGICA;?>/procesarSuscripcion.php?f=can_sus" class="btn btn-danger" id="btnCancelarSus" name="btnCancelarSus">Cancelar SuscripciÃ³n</a>
+        <p> Si desea cancelar su suscripción haga click aqui:</p>
+        <a href="<?= $LOGICA;?>/procesarSuscripcion.php?f=can_sus" class="btn btn-danger" id="btnCancelarSus" name="btnCancelarSus">Cancelar Suscripción</a>
         <?php 
         }else{
             ?>

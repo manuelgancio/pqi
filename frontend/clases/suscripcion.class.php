@@ -81,6 +81,7 @@ public function altaSus(){
     //inerto los datos de la suscripcion en la tabla suscribe
     $sql="INSERT INTO `suscripcion`(`plan`, `fecha_d`,`id_cp`) VALUES (?,?,?)";
     $result = $this->_db->prepare($sql);
+//die(var_dump($fecha_i));
     $result->bind_param('isi',$tipo,$fecha_i,$id_pago);
     $result->execute();
 

@@ -9,7 +9,7 @@ session_start();
 
     if($_SERVER['REQUEST_METHOD'] != 'POST'){
         // Just load index template
-    require('..' . $PRESENTACION_DIR . '/index.php');        
+    require('' . $PRESENTACION_DIR . 'index.php');        
     }
 
     else {
@@ -20,6 +20,7 @@ session_start();
         $username = strip_tags(trim($_POST['correo']));
         $password = strip_tags(trim($_POST['pwd']));
 
+        
         $_SESSION["Correo"] = $username;
 
         $user->setUsername($username);

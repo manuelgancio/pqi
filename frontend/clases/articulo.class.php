@@ -95,7 +95,6 @@ public function listarArt(){
     $result ->execute();
     $resultado = $result->get_result();
     $art = $resultado->fetch_assoc();
-
     return($art);
 }
 public function listartArtXSecPortada(){
@@ -105,7 +104,7 @@ public function listartArtXSecPortada(){
     $id_s = $this -> getSeccion();
     $fecha = $this-> getFecha();
 
-    $sql="SELECT `id_a`,`fecha_a`, `titulo`, `contenido`, `autor`, `id_s`, `imagen` FROM articulo WHERE `id_s` = ? AND  `fecha_a` = ? ORDER BY `fecha_a` DESC LIMIT 6";
+    $sql="SELECT `id_a`,`fecha_a`, `titulo`, `contenido`, `autor`, `id_s`, `imagen` FROM articulo WHERE `id_s` = ? AND  `fecha_a` <= ? ORDER BY `fecha_a` DESC LIMIT 6";
     $result = $this->_db->prepare($sql);
     $result -> bind_param('is',$id_s,$fecha);
     $result -> execute();
@@ -161,7 +160,6 @@ public function listarArtDest(){
     $fecha = $this->getFecha();
 
     $sql="SELECT `id_a`, `titulo`, `contenido`, `autor`, `id_s` , `imagen` FROM `articulo` WHERE `art_d` = true AND `fecha_a` =?";
-
     $result = $this->_db->prepare($sql);
     $result -> bind_param('s',$fecha);
     $result -> execute();
@@ -171,7 +169,6 @@ public function listarArtDest(){
     while ($row = $resultado->fetch_assoc()){
         $articulos[] = $row;
     }
-    
     return ($articulos);
 }
 public function verificarFecha(){
@@ -265,7 +262,7 @@ public function cantLikes(){
 
 }
 public function sugerencias(){
-/*Devuelve las 6 noticias de la misma seccion con fecha reciente y mas visitas */
+/*Devuelve las 3 noticias de la misma seccion con fecha reciente y mas visitas */
 
     $id_art = $this->getId();
     $id_secion = $this->getSeccion();
@@ -274,7 +271,7 @@ public function sugerencias(){
 
     //Calculo la fecha de hace 2 semanas
     $fecha_hoy = date('Y-m-d');
-    $nuevafecha = strtotime ( '-14 day' , strtotime ( $fecha_hoy ) ) ;
+    $nuevafecha = strtotime ( '-30 day' , strtotime ( $fecha_hoy ) ) ;
     $fecha = date ( 'Y-m-d' , $nuevafecha );
  
     //SQL

@@ -1,17 +1,6 @@
 <?php
-?>
-<script>
-function submit(){
-	$('#frmReportar').submit();
-}
-function oculto(){
-    window.onload = function{
-        $('#btnBloquear').prop('disabled', true);
 
-    }
-}
-</script>
-<?php 
+
 
 require_once('model.php');
 
@@ -89,17 +78,6 @@ class userModel extends Model{
     public function getSeccion(){
     return $this->seccion;
     }
-
-public function bloquear(){
-    $id_p = $this->getIdp();
-
-    $sql="UPDATE `cliente` SET `edo_cl`= 0 WHERE `id_p` = ?";
-    $result = $this->_db->prepare($sql);
-    $result -> bind_param('i',$id_p);
-    $result -> execute();
-
-    return (true);
-}
 
     public function administradores(){
 
@@ -209,7 +187,45 @@ public function bloquear(){
                    }
                    }
 
+    public function activar(){
+        $id_p = $this->getIdp();
 
+        $sql="UPDATE `cliente` SET `edo_cl`= 1 WHERE `id_p` = ?";
+        $result = $this->_db->prepare($sql);
+        $result -> bind_param('i',$id_p);
+        $result -> execute();
+
+        return (true);
+    }
+
+     public function activarComentario($idComentario){
+
+        $sql="UPDATE comentario SET estado = '1' WHERE comentario.id_cm = ?";
+        $result = $this->_db->prepare($sql);
+        $result -> bind_param('i',$idComentario);
+        $result -> execute() or die('error interno al activar comentario.');
+
+        return (true);
+    }
+
+    public function bloquearComentario($idComentario){
+        $sql="UPDATE comentario SET estado = '0' WHERE comentario.id_cm = ?";
+        $result = $this->_db->prepare($sql);
+        $result -> bind_param('i',$idComentario);
+        $result -> execute() or die('error interno al activar comentario.');
+
+        return (true);
+    }
+     public function bloquear(){
+        $id_p = $this->getIdp();
+
+        $sql="UPDATE `cliente` SET `edo_cl`= 0 WHERE `id_p` = ?";
+        $result = $this->_db->prepare($sql);
+        $result -> bind_param('i',$id_p);
+        $result -> execute();
+
+        return (true);
+    }
    public function Masters(){
 
 
@@ -430,63 +446,213 @@ public function bloquear(){
 
         ";
     }
- 
+ public function usuariosNormal(){
+    /* Devuelve cantidad de usuarios que se registran con fb */
+    $sql="SELECT COUNT(id_cl) FROM `cliente` WHERE `id_fb` = 0";
+    $result = mysqli_query($this->_db,$sql);
+    
+      $row = mysqli_fetch_array($result);
+          
+            echo"
+                <div class='card text-white bg-primary o-hidden h-100'>
+                  <div class='card-body'>
+                    <div class='card-body-icon'>
+                      <i class='fa fa-fw fa-list'></i>
+                    </div>
+                    <div class='mr-5'>
+                    <strong>Usuario registrados desde nuestra plataforma: </strong> " . $row[0] . "<br><br>
+                      
+                    </div>
+                   </div>
+                    <a href='#' class='card-footer text-white clearfix small z-1'>
+                    <span class='float-left'>Ver mas</span>
+                    <span class='float-right'>
+                    <i class='fa fa-angle-right'></i>
+                    </span>
+                  </a>
+                </div>
+            ";        
+}
 
+
+
+
+public function usuariosfb(){
+    /* Devuelve cantidad de usuarios que se registran con fb */
+    $sql="SELECT COUNT(id_cl) FROM `cliente` WHERE `id_fb` != 0";
+    $result = mysqli_query($this->_db,$sql);
+    
+      $row = mysqli_fetch_array($result);
+          
+            echo"
+                <div class='card text-white bg-primary o-hidden h-100'>
+                  <div class='card-body'>
+                    <div class='card-body-icon'>
+                      <i class='fa fa-fw fa-list'></i>
+                    </div>
+                    <div class='mr-5'>
+                    <strong>Usuario registrados utilizando Facebook:</strong> " . $row[0] . "<br><br>
+                      
+                    </div>
+                   </div>
+                    <a href='#' class='card-footer text-white clearfix small z-1'>
+                    <span class='float-left'>Ver mas</span>
+                    <span class='float-right'>
+                    <i class='fa fa-angle-right'></i>
+                    </span>
+                  </a>
+                </div>
+            ";        
+}
 
    public function usuariosFrontend(){
 
     $sqladmin="select p.id_p, p.p_nomb, p.p_ap, c.corre_c, c.edo_cl  from persona p inner join cliente c where p.id_p = c.id_p ";
     $result = mysqli_query($this->_db,$sqladmin);
 
-
-    echo "<input type='text' id='myInput' onkeyup='myFunction()' placeholder='Busca por nombre..' title='Type in a name'>
+    echo "<input type='text' id='myInput' onkeyup='myFunction()' placeholder='Ingrese lo que quiere buscar..' title='Type in a name'>
         <ul id='myUL'>";
 
     while($row=mysqli_fetch_array($result)){
 
     $habilitado = $row[4];
     $row4="";
+    $id=$row[0];
+    $_SESSION["idPersonaComentario"]=$id;
 
     if($habilitado == 1){
-        $row4="<i class='fa fa-eye' aria-hidden='true'></i> Usuario activo.";
+        $row4="
+        <i class='fa fa-eye' aria-hidden='true'></i> 
+        Usuario activo.
+        <div style='float: right;'>
+        <form action='../logica/procesarBloquear.php?pid=". $id ."&acc=blo' method='POST'>
+        <button style='float: right; margin-rigth: 10px; ' type='submit' class='btn btn-danger'>Bloquear</button>
+        </form>
+        </div>
+        ";
     }
     else{
-        $row4="<i class='fa fa-eye-slash' aria-hidden='true'></i> Usuario bloqueado.";
-        ?>
-        <script>
-        oculto();
-        </script>
-        <?php
+        $row4="
+                <i class='fa fa-eye-slash' aria-hidden='true'></i> 
+                Usuario bloqueado.
+                <div style='float: right;'>
+                <form action='../logica/procesarBloquear.php?pid=". $id ."&acc=act' method='POST'>
+                <button type='submit' class='btn btn-success'>Desbloquear</button>
+                </form>
+                </div>
+                ";
+
     }    
 
 
 
     echo "    
           <li>
-          
           <article>
-          <div style=''><i class='fa fa-user' aria-hidden='true'></i> ". $row[1] ." ". $row[2] ." 
+          <a >
+          <div style=''><i class='fa fa-user' aria-hidden='true'></i> ". $row[1] ." ". $row[2] ."</div>
           <div><i class='fa fa-envelope' aria-hidden='true'></i> ". $row[3] ."</div>
 
-          <div>". $row4 ." 
-          "; if($habilitado == 0){echo "<form action='../logica/procesarBloquear.php' method='POST' id='frmBloquear' name='frmBloquear'>
-            <input type='hidden' value='$row[0]' name='id_p' id='id_p'>
-            <button placeholder='bloquear' id='btnBloquear' name='btnBloquear' class='btn btn-success' onclick='submit();'><i class='fa fa-lock' aria-hidden='true'></div></i></button>
-            </form>";}else{echo"
-                <div>
-                <form action='../logica/procesarBloquear.php' method='POST' id='frmBloquear' name='frmBloquear'>
-                <input type='hidden' value='$row[0]' name='id_p' id='id_p'>
-                <button placeholder='bloquear' id='btnBloquear' name='btnBloquear' class='btn btn-danger' onclick='submit();'><i class='fa fa-lock' aria-hidden='true'></div></i></button>
-            </form>";}"
-      </div>
+          <div>". $row4 ."</div>
+          <div style='color:#159AF3 ;' data-toggle='modal' data-target='#linkComentarios". $id ."' href='#linkComentarios". $id ."'><small>Haga click aqui para ver comentarios.</small></div>
+          
+          </a>
           </article>
           </li>
+
+          <div class='modal fade' id='linkComentarios". $id ."' role='dialog'>
+            <div class='modal-dialog '>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                  <h4 class='modal-title'></h4>
+                </div>
+                <div class='modal-body'> 
+                <div class='list-group'>
+                  <a href='#' class='list-group-item list-group-item-action flex-column align-items-start active'>
+                    <div class='d-flex w-100 justify-content-between'>
+                      <h5 class='mb-1'>Comentarios de ". $row[1] . " ". $row[2] .".</h5>
+                      <small>Hoy es "; echo date('d/m/Y'); echo "</small>
+                    </div>
+                    <p class='mb-1'>Para ver mas opciones, haga click sobre el comentario.</p>
+                  </a>";
+                    $this->comentarios();
+                    echo "
+                </div>
+                </div>
+                <div class='modal-footer'>
+                <button type='button' class='btn btn-default' data-dismiss='modal'>Salir</button>
+                </div>
+                </form>
+              </div>
+            </div>
+            </div>
+
         ";
      }   
-
-     echo "</ul>";
+     echo "</ul>
+     ";
     }
- 
+
+ public function comentarios(){
+
+        $idper = $_SESSION['idPersonaComentario'];
+
+    $sqladmin=" select c.comentario, c.fecha_c, a.titulo ,c.reportado,c.estado,c.id_cm FROM comentario c 
+                INNER JOIN hace h ON c.id_cm = h.id_cm 
+                INNER JOIN cliente cl ON cl.id_cl = h.id_cl 
+                INNER JOIN tiene t ON c.id_cm = t.id_cm
+                INNER JOIN articulo a ON t.id_a = a.id_a
+                WHERE cl.id_p =". $idper."";
+
+        $result = mysqli_query($this->_db,$sqladmin);
+
+         while($row=mysqli_fetch_array($result)){
+            echo "
+            <a href='#' class='list-group-item list-group-item-action flex-column align-items-start'>
+            <div class='d-flex w-100 justify-content-between'>
+              <h5 class='mb-1'>". $row[2] ."</h5>
+              <small class='text-muted'>" . $row[1] . "</small>
+            </div>
+            <p class='mb-1' style='color: red;'><strong>``" . $row[0] . "´´</strong></p>
+
+            ";
+
+            $estado = $row[4];
+            if($estado == 0){
+
+                $v = "danger";
+                $t = "Bloquear";
+                $acc = "act";
+            }
+            else{
+
+                $v = "success";
+                $t = "Activar";
+                $acc = "blo";
+             }   
+
+            if($row[3] == NULL){
+
+                echo "<small class='text-muted'>Este comentario no ha sido reportado.</small>
+
+                    <form action='../logica/bloquearComentario.php?idp=". $row[5] ."&acc=". $acc ."' method='POST'>
+                    <button style='float: right; ' type='submit' class='btn btn-". $v."'>". $t ."</button>
+                    </form>
+        </a>";
+            }
+            else{
+
+            echo "<small class='text-muted'>Reportado como ofensivo ".$row[3]."  veces.</small> 
+            <form action='../logica/bloquearComentario.php?idp=". $row[5] ."&acc=". $acc ."' method='POST'>
+                    <button style='float: right; ' type='submit' class='btn btn-". $v."'>". $t ."</button>
+                    </form>
+                    </a>";
+            }
+                       
+        }
+    
+}
     public function Editores(){
 
         $sqladmin="select p.id_p, p.p_nomb, p.p_ap, e.cargo, e.e_correo, e.seccion from persona p inner join empleado e where p.id_p = e.id_p and cargo = 'Editor'";
@@ -820,7 +986,7 @@ public function bloquear(){
 
     public function obtenerIdEmpleado(){
 
-        $sql="SELECT id_e FROM empleado where e_correo = ?;";
+        $sql="SELECT id_e FROM empleado where e_correo = ? ;";
         $result = $this->_db->prepare($sql);
 
         $correo = $_SESSION['Correo'];  
@@ -876,60 +1042,183 @@ public function bloquear(){
         }
 
 
+        public function menuModerador(){
 
-public function usuariosfb(){
-    /* Devuelve cantidad de usuarios que se registran con fb */
-    $sql="SELECT COUNT(id_cl) FROM `cliente` WHERE `id_fb` != 0";
-    $result = mysqli_query($this->_db,$sql);
-    
-      $row = mysqli_fetch_array($result);
-          
-            echo"
-                <div class='card text-white bg-primary o-hidden h-100'>
-                  <div class='card-body'>
-                    <div class='card-body-icon'>
-                      <i class='fa fa-fw fa-list'></i>
-                    </div>
-                    <div class='mr-5'>
-                    <strong>Usuario registrados utilizando Facebook:</strong> " . $row[0] . "<br><br>
-                      
-                    </div>
-                   </div>
-                    <a href='#' class='card-footer text-white clearfix small z-1'>
-                    <span class='float-left'>Ver mas</span>
-                    <span class='float-right'>
-                    <i class='fa fa-angle-right'></i>
-                    </span>
-                  </a>
-                </div>
-            ";        
-}
-public function usuariosNormal(){
-    /* Devuelve cantidad de usuarios que se registran con fb */
-    $sql="SELECT COUNT(id_cl) FROM `cliente` WHERE `id_fb` = 0";
-    $result = mysqli_query($this->_db,$sql);
-    
-      $row = mysqli_fetch_array($result);
-          
-            echo"
-                <div class='card text-white bg-primary o-hidden h-100'>
-                  <div class='card-body'>
-                    <div class='card-body-icon'>
-                      <i class='fa fa-fw fa-list'></i>
-                    </div>
-                    <div class='mr-5'>
-                    <strong>Usuario registrados desde nuestra plataforma: </strong> " . $row[0] . "<br><br>
-                      
-                    </div>
-                   </div>
-                    <a href='#' class='card-footer text-white clearfix small z-1'>
-                    <span class='float-left'>Ver mas</span>
-                    <span class='float-right'>
-                    <i class='fa fa-angle-right'></i>
-                    </span>
-                  </a>
-                </div>
-            ";        
-}
+        echo '<li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="perfil.php">
+                      <i class="fa fa-fw fa-dashboard"></i>
+                      <span class="nav-link-text">
+                        Inicio</span>
+                    </a>
+                  </li>
 
-}
+                  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                    <a class="nav-link" href="abmSecciones.php">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                      <span class="nav-link-text">Secciones</span>
+                    </a>
+                  </li>
+
+
+                  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                    <a class="nav-link" href="noticias.php">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                      <span class="nav-link-text">Noticias</span>
+                    </a>
+                  </li>
+
+
+                  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                    <a class="nav-link" href="estadisticas.php">
+                      <i class="fa fa-fw fa-area-chart"></i>
+                      <span class="nav-link-text">
+                        Estadisticas</span>
+                    </a>
+                  </li>
+
+
+                  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                      <span class="nav-link-text">
+                        Usuarios</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+                      <li>
+                        <a href="usrFrontend.php">Front-end</a>
+                      </li>
+                    </ul>
+                  </li>';
+
+        }
+
+        public function menuAdministrador(){
+
+            echo '
+               <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="perfil.php">
+                  <i class="fa fa-fw fa-dashboard"></i>
+                  <span class="nav-link-text">
+                    Inicio</span>
+                </a>
+               </li>
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <span class="nav-link-text">
+                    Usuarios</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+                  <li>
+                    <a href="abmAdmin.php">Administradores</a>
+                  </li>
+                  <li>
+                    <a href="abmModerador.php">Moderador</a>
+                  </li>
+                  <li>
+                    <a href="abmEditor.php">Editor</a>
+                  </li>
+                  <li>
+                    <a href="abmMaster.php">Master</a>
+                  </li>
+                  <li>
+                    <a href="usrFrontend.php">Front-end</a>
+                  </li>
+                </ul>
+              </li>
+
+
+              <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                <a class="nav-link" href="publicidad.php">
+                  <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                  <span class="nav-link-text">Publicidad</span>
+                </a>
+              </li>
+
+              <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                <a class="nav-link" href="suplementos.php">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                  <span class="nav-link-text">
+                    Cargar suplementos</span>
+                </a>
+              </li>
+
+                  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                    <a class="nav-link" href="abmSecciones.php">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                      <span class="nav-link-text">Secciones</span>
+                    </a>
+                  </li>
+
+
+                  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                    <a class="nav-link" href="noticias.php">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                      <span class="nav-link-text">Noticias</span>
+                    </a>
+                  </li>
+
+
+                  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                    <a class="nav-link" href="estadisticas.php">
+                      <i class="fa fa-fw fa-area-chart"></i>
+                      <span class="nav-link-text">
+                        Estadisticas</span>
+                    </a>
+                  </li>
+
+            ';
+
+        }
+
+
+        public function menuEditor(){
+
+             echo '
+
+              <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="perfil.php">
+                  <i class="fa fa-fw fa-dashboard"></i>
+                  <span class="nav-link-text">
+                    Inicio</span>
+                </a>
+              </li>
+
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                    <a class="nav-link" href="noticias.php">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                      <span class="nav-link-text">Noticias</span>
+                    </a>
+                  </li>
+
+
+              ';
+
+        }
+
+
+        public function menuMaster(){
+             
+         echo '
+
+              <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="perfil.php">
+                  <i class="fa fa-fw fa-dashboard"></i>
+                  <span class="nav-link-text">
+                    Inicio</span>
+                </a>
+              </li>
+
+              <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                <a class="nav-link" href="publicidad.php">
+                  <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                  <span class="nav-link-text">Publicidad</span>
+                </a>
+              </li>
+
+              ';
+        }
+
+        
+        }

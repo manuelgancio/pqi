@@ -24,7 +24,7 @@ if(isset($_POST['btnSuscripcion'])){
     $sus = New suscripcion();
 
     //fecha en que se subscribe
-    $fecha_i = date('y-m-d');
+    $fecha_i = date('Y-m-d');
     $fecha_f ='';//???
 
     $sus->setIdUsu($id_cl);
@@ -42,7 +42,7 @@ if(isset($_POST['btnSuscripcion'])){
         <script>
 
             window.location.replace ("../presentacion/index.php?err=susOk");
-            //alert('La suscripciÃ³n se realizÃ³ correctamente!');
+            //alert('La suscripción se realizó correctamente!');
             
         </script>
         <?php

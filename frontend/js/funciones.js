@@ -41,7 +41,7 @@ $(document).ready(function() {
 
 
 function errCom(){
-	var msj = 'Debe iniciar sesiÃ³n para comentar!';
+	var msj = 'Debe iniciar sesión para comentar!';
 	var timeout = '7000';
 
 	$("#error_div button").after("<span>"+msj+"</span>");

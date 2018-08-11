@@ -10,14 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>PQI - Backend. </title>
-
-    <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom styles for this template -->
     <link href="../css/sb-admin.css" rel="stylesheet">
 
   </head>
@@ -35,7 +29,7 @@
         </div>
         <div class="card-body">
 
-          <form action="<?php echo $LOGICA;?>login.php" method="POST">
+          <form action='../logica/login.php' method="POST">
 
             <div class="form-group">
               <label for="exampleInputEmail1">Correo Electronico</label>
@@ -56,10 +50,6 @@
             
             <input type="submit" class ="form-control btn btn-success" id="btnLogin" name="btnLogin">
           </form>
-
-          <div class="text-center">
-            <a class="d-block small" href="forgot-password.html">Olvido su contraseña?</a>
-          </div>
         </div>
       </div>
     </div>

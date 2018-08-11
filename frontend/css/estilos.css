@@ -4,7 +4,7 @@ body{
     position: relative;
 }
 .navbar { 
-   /* min-height: 60px; */
+    min-height: 60px;
    
   }
 .navbar-fixed {
@@ -22,10 +22,10 @@ body{
     background: rgb(199, 194, 194);
 }
 #logo_navbar{
-    height: 50px;
+    height: 60px;
     width:200px;
-    padding-bottom:20px;
-    
+    padding-bottom:30px;
+    margin-top:0px;
 }
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     /*background-color: rgb(245, 219, 107);*/
@@ -76,10 +76,18 @@ body{
     height: 150px;
     margin-top: -15px;
     margin-bottom: 10px;
+
+align-self:center;
 }
 .publicidadIndex {
-	height: 200px;
-	width: 260px;
+	max-height: 200px;
+	max-width: 270px;
+}
+.img-noti-index{
+	width:300px;
+
+max-height: 200px;
+max-width: 300px;
 }
 .publiBanner {
     margin-bottom: 30px;
@@ -87,8 +95,26 @@ body{
     margin-right: auto;
     margin-left: auto;
     height:130px;
-    width:100%;
+    width:1090px;
 }
+.img-banner-noti{
+ margin-bottom: 30px;
+width:1090px;
+height:130px;
+align-self:center;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+.banner_pub_sec{
+width:1090;
+height:130;
+margin-top: 60px;
+margin-right: auto;
+margin-left: auto;
+align-self:center;
+}
+
 .publiBannerP {
     margin-top: 40px;
     margin-right: auto;
@@ -96,18 +122,6 @@ body{
     align-self:center;
     height:130px;
     width:100%;
-}
-.publiBannerS {
-    margin-top: 60px;
-    margin-right: auto;
-    margin-left: auto;
-    align-self:center;
-    height:130px;
-    width:100%;
-}
-.publiBannerS .img{
-    height:130px;
-    width:1090;
 }
 .publiNotiV {
     height:480px;
@@ -199,11 +213,19 @@ body{
 }
 /* SECCION */
 .descArt {
-    background-color: lightgrey;
-    word-wrap: break-word;
+        word-wrap: break-word;
+	font-size: 20px;
+    font-weight: 90;
+	text-color:black;
+	text:black;
 }
+#nArt{
+a:visited: green;
+
+}
+
 .fechaArt{
-    margin-top: 10px;
+    margin-top: 0px;
 }
 .tituloSeccion{
     margin-top: 40px;
@@ -352,7 +374,7 @@ body{
 	height:200px;
 }
 .img-art-seccion{
-    width:250px; 
+    width:310px; 
     height:250px;
 }
 
@@ -447,8 +469,13 @@ body { padding-top:30px; }
 
 
 .carouselsgimg{
-    height: 320px;
-    max-width: 320px;
+    height:280px;
+	width:330;
+    max-width: 330px;
+}
+.thumbnail{
+height: 250px;
+width: 330px;
 }
 #txtsg {
     color: black;
@@ -509,3 +536,5 @@ body { padding-top:30px; }
 /*
 background: rgba(0, 0, 0, 0.3);
 background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.3) 60%,rgba(0,0,0,.7) 100%);*/
+
+

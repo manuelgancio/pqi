@@ -10,38 +10,17 @@
     $idEspacio = strip_tags(trim($_POST['espacio']));
     $idEmpleado = $_SESSION['idEmpleado'];
 
-    //MANEJO DE IMAGEN
-    $target_dir = $PATH ."/uploads/";
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-    if(isset($_POST["cargar"])) {
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if($check !== false) {
-            $uploadOk = 1;
-        } else {
-            $uploadOk = 0;
-        }
-        if ($uploadOk == 1){
-            (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file));
-            $ruta_img =strtolower($target_file);
-            
-            $publicidad = "http://localhost/uploads/". basename($_FILES["fileToUpload"]["name"]); 
 
-
-        }else{   
-           echo "No se guardo.";
-        }
-    }
-
-  /**
-    $host="192.168.43.128";
+    if(is_uploaded_file($_FILES["fileToUpload"]["tmp_name"]))
+	{
+    # Definimos las variables
+    $host=$IP_CONT_ESTATICO;
     $port=21;
-    $user="santiago";
-    $password="Inicio123";
-    $ruta="/var/ftp";
+    $user="usuarioftp";
+    $password="Inicio1234";
+    $ruta="/var/www/html/img_publicidad/";
  
-     Realizamos la conexion con el servidor
+    # Realizamos la conexion con el servidor
     $conn_id=@ftp_connect($host,$port);
     if($conn_id)
     {
@@ -52,9 +31,13 @@
             if(@ftp_chdir($conn_id,$ruta))
             {
                 # Subimos el fichero
-                if(@ftp_put($conn_id,$_FILES["fileToUpload"]["name"],$_FILES["fileToUpload"]["tmp_name"],FTP_BINARY))
-                    echo "Fichero subido correctamente";
-                else
+                if(@ftp_put($conn_id,$_FILES["fileToUpload"]["name"],$_FILES["fileToUpload"]["tmp_name"],FTP_BINARY)){
+                ?>
+                  <script>
+                    alert("Fichero subido correctamente.")
+                  </script>
+                <?php
+                }else
                     echo "No ha sido posible subir el fichero";
             }else
                 echo "No existe el directorio especificado";
@@ -62,10 +45,18 @@
             echo "El usuario o la contraseña son incorrectos";
         # Cerramos la conexion ftp
         ftp_close($conn_id);
-    }else{
+    }else
         echo "No ha sido posible conectar con el servidor";
+	}else{
+	    ?>
+        <script>
+            alert("Selecciona un archivo.")
+        </script>
+        <?php
     }
-    **/
+
+    die();
+		$publicidad =$_FILES["fileToUpload"]["name"];
 
         $clasePublicidad->setFechaDesde($fechaDesde);
         $clasePublicidad->setFechaHasta($fechaHasta);

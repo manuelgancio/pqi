@@ -35,7 +35,7 @@ $secciones = $seccion->listarSecciones();
 <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-    <a class="navbar-brand" href="<?= $PRESENTACION;?>/index.php"><img id="logo_navbar"src="<?= $IMG?>/logo.png" alt="logo"></a>
+    <a class="navbar-brand" href="<?= $PRESENTACION;?>/index.php"><img id="logo_navbar"src="<?= $CONT_ESTATICO?>/logo01.fw.png" alt="logo"></a>
       	<ul class="nav navbar-nav">
           <li><a href="<?= $PRESENTACION;?>/index.php"> Inicio</a></li>
       <?php foreach($secciones as $sec): ?>
@@ -44,7 +44,7 @@ $secciones = $seccion->listarSecciones();
 			</li>
       </ul>
       <ul class="nav navbar-nav">
-        <li><a href=""><span class="glyphicon glyphicon-blog"></span>Blog</a></li>
+        <li><a href="http://192.168.1.4"><span class="glyphicon glyphicon-blog"></span>Blog</a></li>
       </ul>
         <div id="notlogged">
             <ul class="nav navbar-nav navbar-right">

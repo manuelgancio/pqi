@@ -1,7 +1,7 @@
 <?php
 
 
-require('model.php');
+require_once('model.php');
 
 class claseSeccion extends Model{
 
@@ -56,53 +56,37 @@ class claseSeccion extends Model{
  
         $sqlseccion="select id_s, nombre from seccion;";
 			   
-			   
-
         $result = mysqli_query($this->_db,$sqlseccion);
-
-         while($row=mysqli_fetch_array($result)){
-
-
-                   
-
+        while($row=mysqli_fetch_array($result)){
             echo "<div class='section'>
             <div class='container'>
                 <div class='row'>
                     <div class='col-md-12'>
-                         
- 
-                        
                         <table class='table table-hover table-striped'>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <a href='#'><i class='fa fa-2x fa-fw fa-eye-slash'></i></a>
+                                        
                                         <a href='#'><i class='-alt fa fa-2x fa-eye fa-fw'></i></a>
                                     </td>
-                                    
                                     <td>
                                         <h4>
                                             <b> " . $row[1] . "</b>
-                                        </h4>
-                                        
+                                        </h4>  
                                     </td>
-                                    
                                     <td>
-                                            
-
-                                        <div class='btn-group'>
-                                            <button class='btn btn-default' value='left'>
-                                            <a data-toggle='modal' data-target='#eliminar'>
+                                        <div class='btn-group' style=' float: right;'>
+                                        <div>
+                                            <button class='btn btn-default' >
+                                            <a data-toggle='modal' data-target='#eliminar". $row[0] ."'>
                                             <i class='fa fa-fw s fa-remove'>
                                             </i><a href='../logica/eliminarSeccion.php?id=". $row[0] ."'>Eliminar</a></button>
                                             </a>
+                                        </div>
                                          <div>    
                                          
                                         </div>   
                                            
-                                        
-                                                                                     
-
                                         <div class='fade modal' id='eliminar'>
                                             <div class='modal-dialog'>
                                             <div class='modal-content'>
@@ -158,16 +142,10 @@ class claseSeccion extends Model{
 	
 	 public function ingresarSeccion(){
 
-        $query = "INSERT INTO seccion(id_s, nombre, contador, id_ed) VALUES (?,?,?,NULL)";
-        
-
-      
-        
-        $idS = "";
-        
+        $query = "INSERT INTO seccion(id_s, nombre, contador) VALUES (?,?,?)";
+        $idS = "";     
         $contador= "";
         
-
         $resultado = $this->_db->prepare($query);
         $resultado -> bind_param('sss',$idS, $this->nomSeccion, $contador);
         $resultado->execute() or die('error ');
@@ -183,7 +161,7 @@ class claseSeccion extends Model{
          $query1 = "DELETE FROM seccion WHERE seccion.id_s = ? ";
          $consulta = $this->_db->prepare($query1);
          $consulta ->bind_param('i', $idS);
-         $consulta->execute();
+         $consulta->execute() or die('<script type=\'text/javascript\'>alert(\'Si elimina esta seccion borrara todas las noticias ingresadas en la misma. Por su bien y el de su puesto laboral, elimine las noticias asociadas a la seccion y luego el rubro. \'); window.location.href = "../presentacion/abmSecciones.php"</script>');
          
 
         // $query2 = "DELETE FROM persona WHERE persona.id_p = ? ";

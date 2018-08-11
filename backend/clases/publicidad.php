@@ -62,18 +62,18 @@ class clasePublicidad extends Model{
 
      public function ingresarPublicidad(){
 
-        $query = "INSERT INTO publicidad( id_pub, fecha_d, fecha_h, publicacion, id_e) VALUES(?,?,?,?,?)";
+        $query = "INSERT INTO publicidad( id_pub, fecha_d, fecha_h, publicacion, id_e,id_seccion) VALUES(?,?,?,?,?,?)";
         $idPublicacion = "";
         $resultado = $this->_db->prepare($query);
-        $resultado -> bind_param('sssss',$idPublicacion, $this->fechaDesde, $this->fechaHasta, $this->publicacion, $this->idEmpleado );
-        $resultado->execute() or die('No hay chance');  
+        $resultado -> bind_param('ssssss',$idPublicacion, $this->fechaDesde, $this->fechaHasta, $this->publicacion, $this->idEmpleado,$this->idEspacio);
+        $resultado->execute() or die('Error al ingresar publicidad');  
         
         $idPub = $resultado -> insert_id;
 
         $query2 = "INSERT INTO hay( id_pub, id_esp) VALUES(?,?)";
         $resultado2 = $this->_db->prepare($query2);
         $resultado2 -> bind_param('ss',$idPub, $this->idEspacio );
-        $resultado2->execute() or die('No hay chance 2');
+        $resultado2->execute() or die('Error al ingresar publicidad:2');
 
         $idPub ="";
     echo "<script type=\'text/javascript\'>alert(\' Publicacion ingresada correctamente \');</script>";        
@@ -126,7 +126,7 @@ class clasePublicidad extends Model{
     
     }
     public function eliminarPublicidad($idPublicidad){
-
+      
       $query = "DELETE FROM hay WHERE hay.id_pub = ?";
       $consulta = $this->_db->prepare($query);
       $consulta ->bind_param('s',$idPublicidad);
@@ -164,7 +164,7 @@ class clasePublicidad extends Model{
         echo "
             <div class='col-sm-6 col-md-4 col-lg-3 mt-4' >
               <div class='card'>
-                <img class='card-img-top' src=". $row[2] .">
+                <img class='card-img-top' src= http://192.168.43.85/img_publicidad/". $row[2] .">
                   <div class='card-footer'>
                   <small>Desde: " . $row[0] . "</small><br>
                   <small>Hasta: " . $row[1] . "</small><br>

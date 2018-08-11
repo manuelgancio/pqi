@@ -1,7 +1,9 @@
 <html>
 <head>
 <title>Paqueteinformes.com - Bienvenidos!</title>
-<meta charset="ISO-8859-1">
+<!--<meta charset="ISO-8859-1">-->
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="paqueteinformes">
@@ -113,7 +115,8 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
 <div class="container">
     <div class="row">
         <div class="col-md-9 col-sm-12">
-            <img class="imgNoti" src="<?= $art['imagen'];?>" alt="Imágen">
+            <!--<img class="imgNoti" src="<?= $art['imagen'];?>" alt="Imágen">-->
+		<img class="imgNoti" src="<?= $CONT_ESTATICO . $art['imagen'];?>" alt="Imágen">
 		</div>
 
 <!--PUBLICIDAD VERTICAL -->
@@ -125,9 +128,11 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
             $p = new publicidad();
 
             $pub = $p->listarPubNoticiaXseccion($id_secion);
+//die(var_dump($pub));      
             if ($pub != NULL){
-                ?>
-				<img class="publiNotiV" src="<?php echo $pub;?>" alt="publicidad">
+          
+?>
+				<img class="publiNotiV" src="<?= $CONT_ESTATICO_PUB . $pub;?>" alt="publicidad">
 			</div>
             <?php
             }else{
@@ -170,7 +175,8 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
                     /* Alerts the results */
                     posting.done(function( data ) {
                         $('#btnLike').attr('disabled','-1');
-                        aviso('Like!','4000');
+                        /*aviso('Like!','4000'); */
+
                     });
                     });
                 </script>
@@ -180,7 +186,14 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
         <div class="row">
             <div class="txtNoti col-sm-12">
                 <p>
-                    <?php echo $art['contenido'];?>
+                    <?php 
+
+echo $art['contenido'];
+//$art_c= $art['contenido'];
+//$art_c = utf8_encode($art_c);
+
+
+?>
                 </p>
             </div>
         </div> <!--row-->
@@ -188,7 +201,7 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
 
 <!--PUBLICIDAD -->
 <div class="container">  
-    <div class="publiBanner">
+    <div class="">
         <?php 
         //LLamo a la clase publicidad
         require_once($CLASES_DIR . 'publicidad.class.php');
@@ -197,7 +210,7 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
         $banner = $publicidad->listarPubNoticia();
         if ($banner != null){
         ?>
-        <img class="" src="<?php echo $banner;?>">
+        <img class="img-banner-noti" alt="pub" src="<?= $CONT_ESTATICO_PUB . $banner;?>">
     </div>
     <?php
         }else{

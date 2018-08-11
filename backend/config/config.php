@@ -8,10 +8,14 @@
         ini_set('display_errors','on');
 
     $PATH = $_SERVER["DOCUMENT_ROOT"];
-    
-    echo $PATH;
 
-    $CONTENIDOESTATICO ='192.168.43.128/';
+
+    $IP_SERV = $_SERVER['SERVER_NAME'] ;
+    //echo $PATH;
+
+    //$CONT_ESTATICO ='192.168.43.85/img_publicidad/';
+$CONT_ESTATICO_PUB = 'http://192.168.43.85/img_publicidad/';
+    $IP_CONT_ESTATICO ='192.168.43.85';
 
     #PARA LLAMAR DESDE HTML#
     $PRESENTACION='/presentacion/';
@@ -27,7 +31,7 @@
     $CLASES_DIR = $PATH .'/clases/';
     $LOGICA_DIR = $PATH .'/logica/';
     $PERSISTENCIA_DIR = $PATH .'/persistencia/';
-    $CONFIG_DIR =$PATH .'/config/';
-
+    //$CONFIG_DIR =$PATH .'/config/';
+    $CONFIG_DIR = '/var/www/config/';
 
 include($CONFIG_DIR.'dbconfig.php');

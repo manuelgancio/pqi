@@ -70,10 +70,10 @@ session_start();
         //Redirect index
         ?>
         <script>
-        window.location.replace('../presentacion/index.php');
+	
+        window.location.replace ='../presentacion/index.php';
         console.log('usu registrado');
-        
-        
+          
         </script>
 
         <?php

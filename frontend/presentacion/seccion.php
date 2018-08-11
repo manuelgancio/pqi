@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>Paqueteinformes.com - Bienvenidos!</title>
-<meta charset="UTF-8">
+<meta charset="iso-8859-1">
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="paqueteinformes">
@@ -76,7 +76,7 @@ $offset = ($pagActual - 1) * $artXpag;
 ?>
 
 <div class="container">
-	<div class="publiBannerS">
+	<div class="">
         <?php
         //LLamo a la clase publicidad
         require_once($CLASES_DIR . 'publicidad.class.php');
@@ -84,7 +84,7 @@ $offset = ($pagActual - 1) * $artXpag;
         $pub = $p->listarPubSeccion($id_s);
         if($pub != false){//Cargo publicidad
         ?>
-            <img src="<?php echo $pub;?>" alt="publicidad">
+            <img class="banner_pub_sec"src="<?= $CONT_ESTATICO_PUB . $pub;?>" alt="publicidad">
         <?php
         }
         ?>
@@ -103,12 +103,13 @@ foreach ($articulos as $art){
     while($i <= 4){
     ?>
     <div class="articulo">
-        <div class="col-md-3 art">
+        <div class="col-md-3 col-sm-2 art">
             <a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>">
-                <div class=""><img class="img-art-seccion"alt="" src="<?=$art['imagen'];?>"></div>
+                <div class=""><img class="img-art-seccion" alt="" src="<?= $CONT_ESTATICO . $art['imagen'];?>"></div>
             </a>
+	
             <div class="descArt">
-                <a class="titulo" href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>"><?= $art['titulo']?></a>
+                <a id="nArt" href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>"><?= $art['titulo']?></a>
             </div>
             <div class="fechaArt">
                 <p><?php echo $art['fecha_a'];?></p>
@@ -135,7 +136,7 @@ foreach ($articulos as $art){
 </div>
 
 <div class="container">
-	<div class="publiBannerS">
+	<div class="">
     <?php
         //LLamo a la clase publicidad
         require_once($CLASES_DIR . 'publicidad.class.php');
@@ -144,7 +145,7 @@ foreach ($articulos as $art){
         $pub = $p->listarPubSeccion($id_s);
         if($pub != NULL){//Cargo publicidad
         ?>
-            <img src="<?php echo $pub;?>" alt="publicidad">
+            <img class="banner_pub_sec"src="<?= $CONT_ESTATICO_PUB . $pub;?>" alt="publicidad">
         <?php
         }
         ?>
