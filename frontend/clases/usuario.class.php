@@ -239,12 +239,32 @@ public function id_p(){
 
     return ($id_p);
 }
+public function bloqueado(){
+    $correo=$this->getCorreo();
+    //die(var_dump($correo));
+    //Verifico que el estado sea 1
+    $sql="SELECT `id_cl` FROM `cliente` where `corre_c` = ? and `edo_cl` = `1`";
+
+    $result = $this->_db->prepare($sql);
+    $result -> bind_param('s',$correo);
+    $result->execute();
+
+    $resultado = $result->get_result();
+    $row = $resultado->fetch_assoc();
+    die(var_dump($row));
+    if($row == NULL){ 
+        //Si no devuelve nada el usuario esta bloqueado         
+        return true;
+    }else{//El usuario no esta bloqueado
+        return false;
+    }
+}
 public function login(){
 //log in
     $correo=$this->getCorreo();
     $pwd=$this->getPass(); 
         
-    $sql="SELECT corre_c FROM cliente where corre_c = ?";
+    $sql="SELECT corre_c FROM cliente where corre_c = ? AND edo_cl = 1";
     
     $result = $this->_db->prepare($sql);
     $result -> bind_param('s',$correo);

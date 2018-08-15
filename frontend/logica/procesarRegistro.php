@@ -63,7 +63,7 @@ if(isset($_POST['btnRegistro'])){
         }
         ?>
         <script>
-            window.location.replace ("../presentacion/index.php?err=regOk");
+            window.location.replace ("../presentacion/index.php");
         </script>
         <?php
     }else{//El correo ya estaba registrado

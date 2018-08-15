@@ -41,7 +41,7 @@ if(isset($_POST['btnSuscripcion'])){
         ?>
         <script>
 
-            window.location.replace ("../presentacion/index.php?err=susOk");
+            window.location.replace ("../presentacion/index.php");
             //alert('La suscripción se realizó correctamente!');
             
         </script>
@@ -71,7 +71,7 @@ if (isset($_GET['f'])){
         $_SESSION['Suscripto'] = false;
         ?>
         <script>
-            window.location.replace ("../presentacion/index.php?err=susC");
+            window.location.replace ("../presentacion/index.php");
             //alert('Se cancelo su suscripciÃ³n!');
         </script>
         <?php

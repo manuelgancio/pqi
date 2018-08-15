@@ -110,14 +110,20 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
             </div>
         </div>
     </h3></div>
-                   
+
+    
+<meta property="og:url"                content="" />
+<meta property="og:type"               content="article" />
+<meta property="og:title"              content="<?= $art['titulo'];?>" />
+<meta property="og:description"        content="asdasdasdasdasd" />
+<meta property="og:image"              content="http://192.168.43.85/img_noticias/logo.png" />
 
 <div class="container">
     <div class="row">
         <div class="col-md-9 col-sm-12">
             <!--<img class="imgNoti" src="<?= $art['imagen'];?>" alt="Imágen">-->
 		<img class="imgNoti" src="<?= $CONT_ESTATICO . $art['imagen'];?>" alt="Imágen">
-		</div>
+	    </div>
 
 <!--PUBLICIDAD VERTICAL -->
 			
@@ -141,7 +147,7 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
                 <?php
             }
             ?>
-        </div>
+</div>
             <!--LIKE / SHARE-->
             <!--
         
@@ -182,22 +188,32 @@ if(isset($_GET['art'])){//Si recibo por get el id del articulo
                 </script>
 	          
 		<!-- TEXTO NOTICIA-->
-
+<div class="container">
         <div class="row">
-            <div class="txtNoti col-sm-12">
-                <p>
+            <div class="txtNoti col-md-9 col-sm-12">
+                <p class="">
                     <?php 
-
-echo $art['contenido'];
-//$art_c= $art['contenido'];
-//$art_c = utf8_encode($art_c);
-
-
-?>
+                    echo $art['contenido'];
+                    ?>
                 </p>
             </div>
-        </div> <!--row-->
+            <div class="col-md-3 suscNoti">
+                <img src="<?= $CONT_ESTATICO . 'paquete.png';?>" class="imgSuscNoti" alt="img">
+                <h3>Usted puede recibir las noticias en su correo!</h3>
+                <h4>Ventajas de la suscripci&oacuten;</h4>  
+                <article>
+                    <p></p>
+                    <p><h4><span class="glyphicon glyphicon-ok"></span> Recibir suplementos en tu correo!</h4></p>
+                    <p><h4><span class="glyphicon glyphicon-ok"></span> Realizar comentarios en las noticias!</h4></p>
+                    <h4><span class="glyphicon glyphicon-ok"></span> Utilizar las funciones Me Gusta y Compartir!</h4></p>
+                </article>
+
+                <!--<button style="margin:auto" class="btn btn-success" data-toggle="modal" data-target="#modalLogin">Registrarme y Suscribirme</button>-->
+            </div> <!--col-->
+        </div> 
 </div><!--container-->
+                </div>
+
 
 <!--PUBLICIDAD -->
 <div class="container">  

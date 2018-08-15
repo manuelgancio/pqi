@@ -25,35 +25,41 @@
 		if ($_GET['err'] == 'fecha'){
 			?>
 			<script>
-			error('No hay artículos en esa fecha.','7000');
+			error('No hay artï¿½culos en esa fecha.','7000');
 			</script>
 			<?php	
 		}elseif ($_GET['err'] == 'regOk'){
 			?>
 			<script>
-			aviso('Registro correcto! Ya puedes iniciar sesión.','7000');
+			aviso('Registro correcto! Ya puedes iniciar sesiï¿½n.','7000');
 			</script>
 			<?php	
 		}elseif($_GET['err'] == 'susOk'){
 			?>
 			<script>
-			aviso('La suscripciÃ³n se realizo con éxito.','7000');
+			aviso('La suscripciÃ³n se realizo con ï¿½xito.','7000');
 			</script>
 			<?php	
 		}elseif($_GET['err'] == 'susC'){
 			?>
 			<script>
-			aviso('Se cancelo la suscripción.','7000');
+			aviso('Se cancelo la suscripciï¿½n.','7000');
 			</script>
 			<?php	
 		}elseif($_GET['err'] == 'loginF'){
 			?>
 			<script>
-			error('Usuario o contraseña incorrecta.','7000');
+			error('Usuario o contraseï¿½a incorrecta.','7000');
 			</script>
 			<?php	
+		}elseif($_GET['err'] == 'loginB'){
+			?>
+			<script>
+			error('El usuario esta bloqueado.','7000');
+			</script>
+		<?php	
 		}
-	}
+}
 /*Fecha del dia
   Si paso fecha de edicion por get cargo articulos de esa fecha
   Si no esta la fecha por get uso la fecha del dia actual
@@ -207,7 +213,7 @@ $publicidad = $p->listarPubIndex();
 $i=1;
 $o=1;
 foreach ($articulos as $art){
-    while($i <= 3 && $o <=2){
+    while($i <= 3 && $o <=1){ //CANTIDAD DE FILAS 
     ?>
 		<div class="noticia col-sm-3">
 		<a href="<?= $PRESENTACION;?>/noticia.php?art=<?=$art['id_a']?>">

@@ -99,7 +99,7 @@
                             
                             <?php else:?>
                             </form>
-                            <button data-toggle="modal" data-target="#modalLogin" class="btn btn-success" id="btnComentarF" name="btnComentarF" onclick="errCom();">Enviar</button>
+                            <button data-toggle="modal" data-target="#modalLogin" class="btn btn-success" id="btnComentarF" name="btnComentarF" value="Enviar" onclick="errCom();">Enviar</button>
                             <?php endif;?>
                         
                         </div>

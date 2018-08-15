@@ -174,10 +174,20 @@ align-self:center;
     margin-right: auto;   
   
 }
+.suscNoti{
+    margin-top: 40px;
+    /*background-image: url("http://192.168.43.85/img_noticias/paquete.png");
+    background-repeat: no-repeat;*/
+}
+.imgSuscNoti{
+    width: 200px;
+    height: 200px;
+}
 .txtNoti {
-    width: 100%;
-    margin-right: auto;
-    align-self: center;
+    
+    
+    padding-right:90px;
+    align-self: left;
     margin-top: 40px;
 }
 .txtNoti p {
@@ -213,16 +223,12 @@ align-self:center;
 }
 /* SECCION */
 .descArt {
-        word-wrap: break-word;
-	font-size: 20px;
+    word-wrap: break-word;
+	font-size: 18px;
     font-weight: 90;
-	text-color:black;
-	text:black;
+	color:black;
 }
-#nArt{
-a:visited: green;
 
-}
 
 .fechaArt{
     margin-top: 0px;
